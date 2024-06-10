@@ -3,8 +3,8 @@
 # Directory of your Git repository
 REPO_DIR="/etc/nixos"
 
-# Commit message with timestamp and custom changes
-COMMIT_MSG="¯\_(ツ)_/¯ Edit: $(date '+%Y-%m-%d %H:%M:%S') - $@ "
+# Commit message with timestamp and custom changes in Australian format
+COMMIT_MSG="(ツ)_/¯ Edit: $(date '+%d-%m-%Y %H:%M:%S') - $@"
 
 # Navigate to the repository directory
 cd "$REPO_DIR" || exit

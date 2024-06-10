@@ -19,7 +19,7 @@
 
 #-------------- Hewlett-Packard HP EliteBook Folio 9470m ------------------
 #------------------ Intel® Core™ i7-3667U × 4 8GB  ------------------------
-#---------------- Intel® HD Graphics 4000 (IVB GT2) -------------------------
+#---------------- Intel® HD Graphics 4000 (IVB GT2) -----------------------
 
 {
   config,

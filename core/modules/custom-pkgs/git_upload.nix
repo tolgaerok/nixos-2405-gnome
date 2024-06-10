@@ -34,7 +34,9 @@ let
     git config --global credential.helper "cache --timeout=3600"
 
     if [[ $remote_url == *"git@github.com"* ]]; then
+        echo ""
         echo "Remote URL is set to SSH. Proceeding with the script..." | ${pkgs.lolcat}/bin/lolcat
+        echo ""
     else
         echo "Remote URL is not set to SSH. Please set up SSH key-based authentication for the remote repository."
         echo "If you haven't already, generate an SSH key pair:"

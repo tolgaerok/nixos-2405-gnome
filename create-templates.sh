@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define the template directory
+# Define the template directory..
 TEMPLATE_DIR="$HOME/Templates"
 
 # Create the template directory if it doesn't exist

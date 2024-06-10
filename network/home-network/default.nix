@@ -1,7 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
   #---------------------------------------------------------------------
-  # Personal samba-share && mount point
+  # Personal samba-share && mount point..
   #---------------------------------------------------------------------
 
 { 

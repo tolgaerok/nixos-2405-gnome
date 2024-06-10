@@ -3,7 +3,7 @@
 {
   imports = [
 
-    # Intialise tmpfs parameters
+    # Intialise tmpfs parameters.
     ../tmpfs/tmpfs.nix
 
   ];

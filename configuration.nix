@@ -474,7 +474,7 @@ in
       gnome.gnome-tweaks
       gnomeExtensions.blur-my-shell
       gnomeExtensions.dash-to-dock
-      gnomeExtensions.forge
+      # gnomeExtensions.forge
       gnomeExtensions.logo-menu
 
       # Development 

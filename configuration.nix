@@ -317,15 +317,8 @@ in
       warn-dirty = false;
       tarball-ttl = 300;
 
-      substituters = [
-        "https://cache.nixos.org"
-        "https://cache.nix.cachix.org"
-      ];
-
-      trusted-substituters = [
-        "https://cache.nixos.org"
-        "https://cache.nix.cachix.org"
-      ];
+      trusted-substituters = [ "http://cache.nixos.org" ];
+      substituters = [ "http://cache.nixos.org" ];
     };
 
     daemonCPUSchedPolicy = "idle";
@@ -457,6 +450,7 @@ in
       firefox
 
       # Personal
+      clementine
       docker
       ethtool
       gimp-with-plugins
@@ -497,7 +491,6 @@ in
     openssh.authorizedKeys.keyFiles = [
       # /home/${name}/.ssh/id_rsa.pub
       /home/${name}/.ssh/id_ed25519.pub
-
     ];
   };
 

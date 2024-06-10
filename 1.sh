@@ -4,7 +4,7 @@
 REPO_DIR="/etc/nixos"
 
 # Commit message with timestamp and custom changes in Australian format
-COMMIT_MSG="(ツ)_/¯ Edit: $(date '+%d-%m-%Y %H:%M:%S') - $@"
+COMMIT_MSG="(ツ)_/¯ Edit: $(date '+%d-%m-%Y %I:%M:%S %p') - $@"
 
 # Navigate to the repository directory
 cd "$REPO_DIR" || exit

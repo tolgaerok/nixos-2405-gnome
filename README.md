@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
   <h1 style="font-size: 24px; color: blue;">My NixOs 23.05 environment, KDE & Nvidia, AMD && Intel</h1>
 </div>
@@ -743,3 +744,7 @@ Happy coding! 😄
 </div>
 
 Back to [Index](#index)
+=======
+# nixos-2405-gnome
+NIXOS 24.05 GNOME
+>>>>>>> origin/main

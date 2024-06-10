@@ -50,8 +50,11 @@ let
     cd "$work_tree" || exit
 
     # Pull remote changes using merge
-    git pull origin main --no-rebase
-    echo "(ツ)_/¯   Pulled remote changes using merge" | ${pkgs.lolcat}/bin/lolcat
+    if git pull origin main --no-rebase; then
+        echo "(ツ)_/¯   Pulled remote changes using merge" | ${pkgs.lolcat}/bin/lolcat
+    else
+        echo "Failed to pull changes. Please resolve any conflicts manually."
+    fi
 
     # Add changes
     git add "$config_files"
@@ -66,8 +69,11 @@ let
     echo "(ツ)_/¯   Committed edits" | ${pkgs.lolcat}/bin/lolcat
 
     # Push changes to remote
-    git push origin main
-    echo "(ツ)_/¯   Pushed changes to remote repository @ $commit_time" | ${pkgs.lolcat}/bin/lolcat
+    if git push origin main; then
+        echo "(ツ)_/¯   Pushed changes to remote repository @ $commit_time" | ${pkgs.lolcat}/bin/lolcat
+    else
+        echo "Failed to push changes. Please ensure you have the necessary permissions and try again."
+    fi
 
     # Display Global settings
     git config --global --list

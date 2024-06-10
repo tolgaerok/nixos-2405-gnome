@@ -9,15 +9,15 @@ COMMIT_MSG="$(date '+%Y-%m-%d %H:%M:%S') - $@ ¯\_(ツ)_/¯"
 # Navigate to the repository directory
 cd "$REPO_DIR" || exit
 
-# Add all changes
-git add .
-
 # Check if there are changes to commit
-if git diff --cached --exit-code &>/dev/null; then
+if git status --porcelain | grep -q .; then
+    # Add all changes
+    git add .
+
     # Commit changes with custom message
     git commit -m "$COMMIT_MSG"
 
-    # Push changes to the main branch
+    # Push changes to the default branch (change 'main' to your default branch name if different)
     git push origin main
 else
     echo "No changes to commit."

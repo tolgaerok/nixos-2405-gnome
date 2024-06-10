@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
@@ -9,25 +14,24 @@ let
     # Tolga Erok. ¯\_(ツ)_/¯..
     # 20/8/23.
 
-    config_files="/etc/nixos"
-    work_tree="/etc/nixos"
     start_time=$(date +%s)
-    
-    # Check if the remote URL is set to SSH
-    remote_url=$(git remote get-url origin)
+    # Directory of your Git repository
+    REPO_DIR="/etc/nixos"
 
-    # Configure Git credential helper to cache credentials for 1 hour
-    git config --global credential.helper "cache --timeout=3600"
-
-    # Configure pull to always rebase
-    git config pull.rebase true
-    # git rm --cached .gitignore
+    # Commit message with timestamp and custom changes in Australian format..
+    COMMIT_MSG="(ツ)_/¯ Edit: $(date '+%d-%m-%Y %I:%M:%S %p')"
 
     # Add some tweaks
     git config --global core.compression 9
     git config --global core.deltaBaseCacheLimit 2g
     git config --global diff.algorithm histogram
     git config --global http.postBuffer 524288000
+
+    # Check if the remote URL is set to SSH
+    remote_url=$(git remote get-url origin)
+
+    # Configure Git credential helper to cache credentials for 1 hour
+    git config --global credential.helper "cache --timeout=3600"
 
     if [[ $remote_url == *"git@github.com"* ]]; then
         echo "Remote URL is set to SSH. Proceeding with the script..." | ${pkgs.lolcat}/bin/lolcat
@@ -46,50 +50,40 @@ let
         exit 1
     fi
 
-    # Navigate to the working tree directory
-    cd "$work_tree" || exit
+    # Navigate to the repository directory
+    cd "$REPO_DIR" || exit
 
-    # Pull remote changes using merge
-    if git pull origin main --no-rebase; then
-        echo "(ツ)_/¯   Pulled remote changes using merge" | ${pkgs.lolcat}/bin/lolcat
+    # Add all changes
+    git add .
+
+    # Print the status for debugging
+    echo "Git status before committing:"
+    git status
+
+    # Check if there are changes to commit
+    if git diff --cached --exit-code &>/dev/null; then
+        echo "No changes to commit."
     else
-        echo "Failed to pull changes. Please resolve any conflicts manually."
-    fi
+        echo "Changes detected, committing..."
+        # Commit changes with custom message
+        git commit -m "$COMMIT_MSG"
 
-    # Add changes
-    git add "$config_files"
-
-    commit_time=$(date +"%I:%M %p") # 12-hour format
-    git commit -m "(ツ)_/¯    Update @ $commit_time"
-    echo "(ツ)_/¯   Committed local changes" | ${pkgs.lolcat}/bin/lolcat
-
-    # Commit changes from deletions
-    git add --all
-    git commit -m "(ツ)_/¯  Edited commit @ $commit_time"
-    echo "(ツ)_/¯   Committed edits" | ${pkgs.lolcat}/bin/lolcat
-
-    # Push changes to remote
-    if git push origin main; then
-        echo "(ツ)_/¯   Pushed changes to remote repository @ $commit_time" | ${pkgs.lolcat}/bin/lolcat
-    else
-        echo "Failed to push changes. Please ensure you have the necessary permissions and try again."
-    fi
-
-    # Display Global settings
-    git config --global --list
+        # Push changes to the main branch
+        git push origin main
+    fi        
 
     end_time=$(date +%s)
     time_taken=$((end_time - start_time))
 
     notify-send --icon=ktimetracker --app-name="DONE" "Uploaded " "Completed:
-    
+
         (ツ)_/¯
     Time taken: $time_taken
     " -u normal
 
   '';
-
-in {
+in
+{
 
   #---------------------------------------------------------------------
   # Type: gitup in terminal to execute above bash script

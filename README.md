@@ -48,5 +48,5 @@
 
 Back to [Index](#index)
 # nixos-2405-gnome
-NIXOS 24.05 GNOME
+NIXOS 24.05 GNOME #
 

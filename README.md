@@ -12,8 +12,95 @@
 
 </div>
 
-# Custom hand coded scripts made for user convienence
+# NixOS Configuration for HP EliteBook Folio 9470m
+
+**Author:** Tolga Erok  
+**Date:** 10-6-2024  
+
+This configuration is designed for the HP EliteBook Folio 9470m, optimized for Intel-based laptops with similar specifications. It provides a comprehensive setup including GNOME as the desktop environment, performance tweaks, power-saving configurations, and essential services. 
+
+### Key Features
+
+1. **System Configuration**:
+   - **Kernel**: Zen kernel for better performance.
+   - **Locale**: Can be set to user specific location
+   - **Hostname**: Can be set to user specific liking
+
+2. **Bootloader**:
+   - Systemd-boot with EFI support.
+   - Plymouth boot splash screen with "breeze" theme.
+   - Silent boot with verbose initrd disabled.
+
+3. **Filesystem**:
+   - Uses tmpfs for `/run` and `/tmp` for better performance.
+   - Bind mounts for `DLNA`, `MyGit`, and `Universal` directories.
+
+4. **Services**:
+   - OpenSSH for remote access.
+   - Printing support via CUPS.
+   - Power-saving configurations for PCI and USB devices.
+   - Automatic network management with NetworkManager.
+
+5. **Systemd Services**:
+   - Custom services for bind mounts and ensuring correct directory ownership.
+   - Optimizations for I/O scheduler and system resources.
+
+6. **Security and Networking**:
+   - Simultaneous multithreading enabled.
+   - Network MTU settings optimized.
+   - Permit use of certain insecure packages.
+
+7. **User Configuration**:
+   - Can use custom user varible with various group memberships for access to different system features.
+   - Essential software packages including Firefox, GIMP, Docker, and VSCode.
+
+8. **Graphical Interface**:
+   - GNOME desktop environment with extensions like Dash to Dock and Blur My Shell.
+   - PipeWire for sound management, replacing PulseAudio.
+
+
+## Key Features:
+
+- **Optimized Boot Process:** Utilizes systemd-boot with a Plymouth boot splash for a smooth and visually appealing boot experience.
+- **Custom Kernel:** Incorporates a custom Linux kernel with specific optimizations and feature enhancements for improved hardware compatibility and performance.
+- **Power Management:** Implements various power-saving measures to extend battery life and reduce energy consumption, including CPU and GPU power management options.
+- **I/O Scheduler:** Enhances disk I/O performance with the Kyber I/O scheduler and fine-tuned kernel parameters.
+- **Security and Privacy:** Disables certain security mitigations for potential performance gains while maintaining system integrity.
+- **User-Friendly Configurations:** Sets up user accounts, directories, and permissions for convenience and security.
+- **Networking and Locale:** Configures network settings and locale preferences for seamless connectivity and internationalization.
+- **Audio and Graphics:** Enhances audio support with Pipewire and optimizes Intel HD Graphics for smoother multimedia playback and gaming experiences.
+- **System Services:** Enables and configures essential system services like SSH, printing, and time synchronization for seamless functionality.
+
+## Additional Optimizations:
+
+- **Temporary File Systems:** Utilizes tmpfs for critical system directories to minimize disk I/O and improve responsiveness.
+- **Garbage Collection:** Automates garbage collection to maintain efficient disk usage and system performance.
+- **Kernel Module Configuration:** Loads and configures specific kernel modules for optimal hardware support and performance.
+- **Environmental Settings:** Sets up environmental variables, session managers, and proxy configurations for enhanced usability and compatibility.
+- **X11 Settings:** Enables the X11 windowing system with customized keymap configurations for improved user interaction.
+
+
+
+### Instructions
+
+1. **Prerequisites**:
+   - Ensure your system is compatible with NixOS and the Zen kernel (kernel can be changed to user liking).
+
+2. **Setup**:
+   - Copy the provided configuration to your NixOS setup.
+   - Adjust user-specific paths and settings as needed.
+
+3. **Installation**:
+   - Follow the NixOS installation guide to set up the system with this configuration file.
+   - Rebuild the system using `sudo nixos-rebuild switch`.
+
+### Summary
+
+This configuration is tailored to enhance the performance and usability of my HP EliteBook Folio 9470m. It includes optimizations for power-saving, a smooth boot process, and a rich set of user applications and services to provide a robust and efficient Linux experience.
+
 #
+# Custom hand coded scripts made for user convienence
+
 
 ### my-nix
 - Quick access to the most commonly used nixos commands:

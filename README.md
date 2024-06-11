@@ -16,7 +16,7 @@
 
 
 ### my-nix
-Quick access to the most commonly used nixos commands:
+- Quick access to the most commonly used nixos commands:
 
 ![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be091c29-b0a4-43bf-aa96-7a7c685effd0)
 
@@ -27,24 +27,33 @@ my-nix
 
 
 ### gitup
-Quick upload of your git files to your repo:
+- Quick upload of your git files to your repo:
 
-![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/b5e75a9f-45c4-4ce7-9b32-7776757c9877)
+<div align="center">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/b5e75a9f-45c4-4ce7-9b32-7776757c9877" alt="image1" width="45%">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f" alt="image2" width="45%">
+</div>
 
-![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f)
 
 
 - In terminal, type:
 ```bash
 gitup
 ```
+### Rygel and DLNA installed and configured
+- Stream music or media files from your nixos platform easily as Ive configured and made DLNA and rygel to make this possible
+<div align="center">
+<img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/9c556ec2-dae7-414b-93ab-4a139960e85e" alt="Screenshot" width="35%">
+<img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/ff3784a8-57f7-4c09-969d-ef5880652451" alt="Screenshot" width="35%">
+</div>
 
 ### unmounter
-Quickly unmount your custom mnt point's
+- Quickly unmount your custom mnt point's
 
-![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be5e9bf0-75f4-41e4-97c0-8f1cc5d27448)
-
-![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/1528cfe6-77d5-4886-8d36-5bb949832a91)
+<div align="center">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be5e9bf0-75f4-41e4-97c0-8f1cc5d27448" alt="image1" width="45%">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/1528cfe6-77d5-4886-8d36-5bb949832a91" alt="image2" width="45%">
+</div>
 
 
 - In terminal, type:

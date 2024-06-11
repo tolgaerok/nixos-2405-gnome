@@ -7,7 +7,30 @@
 
 </div>
 
+# Custom hand coded inhouse scripts made for user convienence
 
+
+### my-nix
+Quick access to the most commonly used nixos commands:
+
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be091c29-b0a4-43bf-aa96-7a7c685effd0)
+
+- In terminal, type:
+```bash
+my-nix
+```
+
+
+### gitup
+Quick upload of your git files to your repo:
+
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/37765791-7286-435c-bf8d-8e84b8e4b2ac)
+
+
+- In terminal, type:
+```bash
+gitup
+```
 
 <div align="center">
   <table style="border-collapse: collapse; width: 100%; border: none;">

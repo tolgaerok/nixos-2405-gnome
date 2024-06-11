@@ -73,6 +73,9 @@ in
     plymouth.enable = true;       # Activates the Plymouth boot splash screen.
     plymouth.theme = "breeze";    # Sets the Plymouth theme to "breeze."
 
+    kernelPackages = kernel;            # load custom kernel from varibles above
+    supportedFilesystems = [ "ntfs" ];  # USB Drives might have this format
+
     kernelModules = [ "i915" "iwlmvm" "iwlwifi" "snd_hda_intel" ];
 
     extraModprobeConfig = lib.mkMerge [
@@ -81,17 +84,13 @@ in
       "options iwlwifi power_save=1 uapsd_disable=1 power_level=5" # Manages power-saving features for Intel Wi-Fi drivers.
       "options snd_hda_intel power_save=1 power_save_controller=Y" # Configures power-saving for Intel High Definition Audio (HDA) hardware.
     ];
-  };
 
-  boot.kernelPackages = kernel;
-
-  boot.kernelParams = [
-    "elevator=kyber" # Change to kyber scheduler
+    kernelParams = [
+    "elevator=kyber"  # Change to kyber scheduler
     "mitigations=off" # Disables certain security mitigations, potentially improving performance but reducing security.
-    "quiet" # Suppresses verbose kernel messages during boot, providing a quieter boot process.
-  ];
-
-  boot.supportedFilesystems = [ "ntfs" ]; # USB Drives might have this format
+    "quiet"           # Suppresses verbose kernel messages during boot, providing a quieter boot process.
+    ];
+  };  
 
   # silence ACPI "errors" at boot shown before NixOS stage 1 output (default is 4)
   boot.consoleLogLevel = 3;

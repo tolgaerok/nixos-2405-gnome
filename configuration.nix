@@ -52,6 +52,7 @@ in
 
     ./DE/gnome.nix
     ./core/modules
+    ./core/packages
     ./core/services
     ./hardware-configuration.nix
     ./network

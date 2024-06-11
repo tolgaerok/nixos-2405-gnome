@@ -7,7 +7,7 @@ with lib;
   # My personal software collection
   # ---------------------------------------------------------------------
 
- services.teamviewer.enable = true;
+ #services.teamviewer.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -166,13 +166,13 @@ with lib;
       # graalvm17-ce                    # High-Performance Polyglot VM
       # mosh                            # Mobile shell (ssh replacement)
       # sublime4                        # Sophisticated text editor for code, markup and prose
-      direnv                            # A shell extension that manages your environment
+      #direnv                            # A shell extension that manages your environment
       nix-direnv                        # A fast, persistent use_nix implementation for direnv
       nixfmt-classic                            # An opinionated formatter for Nix
       # nix-linter                        # to check for several common mistakes or stylistic errors in Nix expressions, such as unused arguments, empty let blocks, etcetera.
       nixos-option
-      vscode                            # Open source source code editor developed by Microsoft for Windows, Linux and macOS 
-      vscode-extensions.brettm12345.nixfmt-vscode
+      #vscode                            # Open source source code editor developed by Microsoft for Windows, Linux and macOS 
+      #vscode-extensions.brettm12345.nixfmt-vscode
       vscode-extensions.mkhl.direnv
 
       # ---------------------------------------------------------------------
@@ -268,7 +268,7 @@ with lib;
       # ---------------------------------------------------------------------
 
       vlc                            # Cross-platform media player and streaming server
-      youtube-dl                     # Command-line tool to download videos from YouTube.com and other sites
+      #youtube-dl                     # Command-line tool to download videos from YouTube.com and other sites
 
       # ---------------------------------------------------------------------
       # Picture manger
@@ -281,7 +281,7 @@ with lib;
       # Picture Editors
       # ---------------------------------------------------------------------
 
-      gimp-with-plugins              # The GNU Image Manipulation Program
+      #gimp-with-plugins              # The GNU Image Manipulation Program
 
       # ---------------------------------------------------------------------
       # Disc burner
@@ -295,7 +295,7 @@ with lib;
 
       # heroku                         # Everything you need to get started using Heroku
       # powershell                     # Powerful cross-platform (Windows, Linux, and macOS) shell and scripting language based on .NET
-      teamviewer                     # Desktop sharing application, providing remote support and online meetings
+      #teamviewer                     # Desktop sharing application, providing remote support and online meetings
       # anydesk
       sshpass                        # Non-interactive ssh password auth
 
@@ -315,17 +315,17 @@ with lib;
       ark                            # Graphical file compression/decompression utility
       filelight                      # Disk usage statistics
       kate                           # Advanced text editor
-      kcalc                          # Scientific calculator
-      kdiff3                         # Compares and merges 2 or 3 files or directories
-      krename                        # A powerful batch renamer for KDE
-      libsForQt5.kweather            # Weather application for Plasma Mobile
-      libsForQt5.kweathercore        # Library to facilitate retrieval of weather information including forecasts and alerts 
+      #kcalc                          # Scientific calculator
+      #kdiff3                         # Compares and merges 2 or 3 files or directories
+      #krename                        # A powerful batch renamer for KDE
+      #libsForQt5.kweather            # Weather application for Plasma Mobile
+      #libsForQt5.kweathercore        # Library to facilitate retrieval of weather information including forecasts and alerts 
       # libsForQt5.qt5.qttools       # A cross-platform application framework for C++
                                      # qhelpgenerator linguist qtplugininfo qdistancefieldgenerator pixeltool
                                      # qcollectiongenerator assistant qtdiag qdbusviewer lupdate qtpaths
                                      # qtattributionsscanner lconvert designer lupdate-pro lrelease qdbus lprodump lrelease-pro
 
-      libsForQt5.quazip             # Provides access to ZIP archives from Qt 5 programs
+      #libsForQt5.quazip             # Provides access to ZIP archives from Qt 5 programs
                                     # quazip
 
       # qt6.qttools                 # A cross-platform application framework for C++
@@ -440,9 +440,9 @@ with lib;
       lsd                           # The next gen ls command
       lsdvd                         # Display information about audio, video, and subtitle tracks on a DVD
       ncdu                          # Disk usage analyzer with an ncurses interface
-      neofetch                      # A fast, highly customizable system info script
+      #neofetch                      # A fast, highly customizable system info script
       pciutils                      # A collection of programs for inspecting and manipulating configuration of PCI devices
-      pfetch                        # A pretty system information tool written in POSIX sh
+      #pfetch                        # A pretty system information tool written in POSIX sh
       pmutils                       # A small collection of scripts that handle suspend and resume on behalf of HAL
       psmisc                        # A set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)
       rPackages.pkgconfig           # Set configuration options on a per-package basis. Options set by a given package only apply to that package, other packages are unaffected.
@@ -460,7 +460,7 @@ with lib;
       #---------------------------------------------------------------------
 
       # deepin.deepin-calculator      # An easy to use calculator for ordinary users
-      wpsoffice                     # Office suite, formerly Kingsoft Office
+      #wpsoffice                     # Office suite, formerly Kingsoft Office
 
       #---------------------------------------------------------------------
       # New additions:
@@ -476,10 +476,10 @@ with lib;
       # Extra Audio packages
       #-----------------------------------------------------------------
 
-      alsa-utils
-      pavucontrol
-      pulseaudio
-      pulsemixer
+      #alsa-utils
+      #pavucontrol
+      #pulseaudio
+      #pulsemixer
 
       #-----------------------------------------------------------------  
       # Extra Misc packages
@@ -496,11 +496,11 @@ with lib;
       # smartmontools
       # sysstat
       # uptimed 
-      #redhat-official-fonts
+      redhat-official-fonts
       appimage-run     
       bash
       bc
-      firefox
+      #firefox
       glxinfo
       google-chrome
       krita
@@ -508,46 +508,47 @@ with lib;
       libva-utils
       minidlna
       nftables
-      plasma-browser-integration
+      #plasma-browser-integration
       vim
-      blender
+      #blender
 
       # libsForQt5.kalendar
       #kdePackages.pim-data-exporter
       #pim-sieve-editor
 
-      korganizer
+      
 
       ghostscript
       ghostscript_headless
 
-      kdePackages.akonadi
-      kdePackages.akonadi-import-wizard
-      kdePackages.akonadi-mime
-      kdePackages.calendarsupport
-      kdePackages.kdepim-addons
-      kdePackages.kdepim-runtime
-      kdePackages.kontact
-      kdePackages.libkdepim      
-      kdePackages.pimcommon
+      #korganizer
+      #kdePackages.akonadi
+      #kdePackages.akonadi-import-wizard
+      #kdePackages.akonadi-mime
+      #kdePackages.calendarsupport
+      #kdePackages.kdepim-addons
+      #kdePackages.kdepim-runtime
+      #kdePackages.kontact
+      #kdePackages.libkdepim      
+      #kdePackages.pimcommon
 
-      libsForQt5.akonadi
-      libsForQt5.akonadi-calendar
-      libsForQt5.akonadi-calendar-tools
-      libsForQt5.akonadi-contacts
-      libsForQt5.akonadi-import-wizard
-      libsForQt5.akonadi-mime      
-      libsForQt5.akonadi-notes
-      libsForQt5.akonadi-search
-      libsForQt5.akonadiconsole
-      libsForQt5.kdepim-addons
-      libsForQt5.kdepim-runtime
-      libsForQt5.libkdepim
-      libsForQt5.merkuro
+      #libsForQt5.akonadi
+      #libsForQt5.akonadi-calendar
+      #libsForQt5.akonadi-calendar-tools
+      #libsForQt5.akonadi-contacts
+      #libsForQt5.akonadi-import-wizard
+      #libsForQt5.akonadi-mime      
+      #libsForQt5.akonadi-notes
+      #libsForQt5.akonadi-search
+      #libsForQt5.akonadiconsole
+      #libsForQt5.kdepim-addons
+      #libsForQt5.kdepim-runtime
+      #libsForQt5.libkdepim
+      #libsForQt5.merkuro
 
-      mesa
-      megasync
-      gnomeExtensions.mock-tray
+      #mesa
+      #megasync
+      #gnomeExtensions.mock-tray
     ];
   };
 } 

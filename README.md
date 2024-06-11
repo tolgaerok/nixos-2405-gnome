@@ -17,7 +17,7 @@
 **Author:** Tolga Erok  
 **Date:** 10-6-2024  
 
-This configuration is designed for the HP EliteBook Folio 9470m, optimized for Intel-based laptops with similar specifications. It provides a comprehensive setup including GNOME as the desktop environment, performance tweaks, power-saving configurations, and essential services. 
+This configuration is designed for the HP EliteBook Folio 9470m, optimized for Intel-based laptops with similar specifications. It provides a comprehensive setup including GNOME as the desktop environment, performance tweaks, power-saving configurations, and essential services.. 
 
 ### Key Features
 

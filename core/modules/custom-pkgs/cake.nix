@@ -55,7 +55,7 @@ let
     done
 
     sudo sysctl -p
-    
+
     # Exit with success status
     exit 0
 

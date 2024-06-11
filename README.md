@@ -192,6 +192,8 @@ This script helps manage NixOS configurations by easily syncing changes to a rem
 <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/9c556ec2-dae7-414b-93ab-4a139960e85e" alt="Screenshot" width="35%">
 <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/ff3784a8-57f7-4c09-969d-ef5880652451" alt="Screenshot" width="35%">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/9b05712f-a5c2-4271-9bc1-97599756e532" alt="Screenshot" width="75%">
+<img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/115ceb58-e91e-4734-8ec8-774f61857f4c" alt="Screenshot" width="75%">
+
 </div>
 
 - In terminal, type && enable rygel:

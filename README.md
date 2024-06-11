@@ -13,7 +13,7 @@
 </div>
 
 # Custom hand coded scripts made for user convienence
-
+#
 
 ### my-nix
 - Quick access to the most commonly used nixos commands:
@@ -25,7 +25,7 @@
 my-nix
 ```
 
-
+#
 ### gitup
 - Quick upload of your git files to your repo:
 
@@ -34,21 +34,28 @@ my-nix
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f" alt="image2" width="45%">
 </div>
 
-
-
 - In terminal, type:
 ```bash
 gitup
 ```
+#
 ### Rygel and DLNA installed and configured
 - Stream music or media files from your nixos platform easily as Ive configured and made DLNA and rygel to make this possible
 <div align="center">
 <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/9c556ec2-dae7-414b-93ab-4a139960e85e" alt="Screenshot" width="35%">
 <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/ff3784a8-57f7-4c09-969d-ef5880652451" alt="Screenshot" width="35%">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/9b05712f-a5c2-4271-9bc1-97599756e532" alt="Screenshot" width="75%">
 </div>
 
+- In terminal, type && enable rygel:
+
+```bash
+rygel-preferences 
+```
+#
 ### unmounter
 - Quickly unmount your custom mnt point's
+
 
 <div align="center">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be5e9bf0-75f4-41e4-97c0-8f1cc5d27448" alt="image1" width="45%">
@@ -60,6 +67,7 @@ gitup
 ```bash
 unmounter
 ```
+#
 
 <div align="center">
   <table style="border-collapse: collapse; width: 100%; border: none;">

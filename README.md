@@ -155,20 +155,36 @@ The script makes network optimization easy by deploying CAKE on NixOS systems, p
 
 #
 ### gitup
-- Quick upload of your git files to your repo:
 
 <div align="center">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/f387884a-82dd-4ab4-adb3-f76ee447aa7c" alt="image2" width="45%">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/b5e75a9f-45c4-4ce7-9b32-7776757c9877" alt="image1" width="45%">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f" alt="image2" width="45%">
-
-
 </div>
 
 - In terminal, type:
 ```bash
 gitup
 ```
+
+### Script Overview:
+This script automates the process of uploading changes from a NixOS configuration directory to a remote Git repository. It includes:
+
+1. **Setting Up Git Tweaks**: Configures Git settings for better performance and efficiency.
+2. **Checking Remote URL**: Verifies if the remote repository is configured for SSH authentication.
+3. **Preparing Changes**: Adds all changes in the NixOS configuration directory for commit.
+4. **Committing Changes**: Commits changes with a custom message including a timestamp.
+5. **Synchronizing with Remote**: Pulls changes from the remote repository to avoid conflicts and pushes changes to the main branch.
+
+### Important Highlights:
+- **SSH Authentication**: The script checks if the remote repository is set up for SSH authentication, which is recommended for secure communication.
+- **Custom Commit Message**: Each commit includes a timestamp and a custom message indicating the changes made.
+- **Efficient Git Configuration**: Configures Git with tweaks for better compression, caching, and delta handling.
+- **Synchronization**: Pulls changes from the remote repository before pushing to avoid conflicts and ensure the latest changes are incorporated.
+
+### Conclusion:
+This script helps manage NixOS configurations by easily syncing changes to a remote Git repository. It encourages good version control practices for NixOS setups.
+
 #
 ### Rygel and DLNA installed and configured
 - Stream music or media files from your nixos platform easily as Ive configured and made DLNA and rygel to make this possible

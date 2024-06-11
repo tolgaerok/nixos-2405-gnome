@@ -31,7 +31,6 @@
 with lib;
 
 let
-
   country = "Australia/Perth";
   hostname = "Folio-Nixos";
   kernel = pkgs.linuxPackages_zen;
@@ -140,6 +139,7 @@ in
       "rw"
     ]; # Read-write access
   };
+
 
   # -----------------------------------------------
   # Services
@@ -345,15 +345,25 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
 
   #---------------------------------------------------------------------
-  # Allow unfree packages
+  # Ozone-Wayland backend when running in a Wayland session. 
+  # This improves performance and compatibility, making your experience 
+  # smoother and more integrated with the Wayland compositor you are using.
   #---------------------------------------------------------------------
-  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1"; 
+    NIXPKGS_ALLOW_UNFREE = "1";   
+  };
+
+  #---------------------------------------------------------------------
+  # Allow unfree packages
+  #---------------------------------------------------------------------  
   nixpkgs.config.allowUnfree = true;
 
   # -----------------------------------------------
@@ -365,7 +375,15 @@ in
   #---------------------------------------------------------------------
   # Networking
   #---------------------------------------------------------------------
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
+
+    connectionConfig = {
+      "ethernet.mtu" = 1462;
+      "wifi.mtu" = 1462;
+    };
+  };
 
   # Define your hostname.
   networking.hostName = "${hostname}"; 
@@ -373,17 +391,12 @@ in
   # Enables wireless support via wpa_supplicant.
   # networking.wireless.enable = true;   
 
-  networking.networkmanager.connectionConfig = {
-    "ethernet.mtu" = 1462;
-    "wifi.mtu" = 1462;
-  };
-
+  
   #---------------------------------------------------------------------
   # Power management & Analyze power consumption on Intel-based laptops
   #---------------------------------------------------------------------  
   hardware.bluetooth.powerOnBoot = false;
-  networking.networkmanager.wifi.powersave = true;
-  
+    
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -501,31 +514,43 @@ in
       #  thunderbird
     ];
 
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYiegoBkxUkGUx7PP74yC8QPXIggidoJjGxF+VDZ67H kingtolga@gmail.com"
-    ];
+    openssh = {
+      authorizedKeys = {
+        
+        keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYiegoBkxUkGUx7PP74yC8QPXIggidoJjGxF+VDZ67H kingtolga@gmail.com"
+        ];
 
-    openssh.authorizedKeys.keyFiles = [
-      # /home/${name}/.ssh/id_rsa.pub
-      /home/${name}/.ssh/id_ed25519.pub
-    ];
+        keyFiles = [
+          # /home/${name}/.ssh/id_rsa.pub
+          /home/${name}/.ssh/id_ed25519.pub
+        ];
+        
+      };
+    };    
   };
 
   # -----------------------------------------------
   # X11 settings
   # -----------------------------------------------
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Enable the X11 windowing system && keymap.
+  services = {
+
+   # Enable the X11 windowing system.
+   xserver = {
+      enable = true;
+      xkb.layout = "au";
+      xkb.variant = "";
+    };
+  
+    # Enable libinput.
+    libinput.enable = true;
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
 
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "au";
-    xkb.variant = "";
-  };
 
   #---------------------------------------------------------------------
   # Audio settings
@@ -549,21 +574,18 @@ in
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # services.xserver.
 
   ###################################################################################################
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
+  
+  programs.mtr.enable = true;
+  
+  #programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

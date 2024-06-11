@@ -117,9 +117,10 @@ my-nix
 - Quick upload of your git files to your repo:
 
 <div align="center">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/f387884a-82dd-4ab4-adb3-f76ee447aa7c" alt="image2" width="45%">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/b5e75a9f-45c4-4ce7-9b32-7776757c9877" alt="image1" width="45%">
   <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f" alt="image2" width="45%">
-<img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/f387884a-82dd-4ab4-adb3-f76ee447aa7c" alt="image2" width="45%">
+
 
 </div>
 

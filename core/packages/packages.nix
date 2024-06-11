@@ -4,7 +4,7 @@ with lib;
 {
 
   # ---------------------------------------------------------------------
-  # My personal software collection
+  # My personal software collection ..
   # ---------------------------------------------------------------------
 
  #services.teamviewer.enable = true;

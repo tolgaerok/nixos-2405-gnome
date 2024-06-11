@@ -198,7 +198,7 @@ in
   #---------------------------------------------------------------------
   systemd = {
     services = {
-
+       
       bind-mount-DLNA = {
         description = "Bind mount /home/${name}/DLNA to /mnt/DLNA";
         after = [ "network.target" ];
@@ -289,7 +289,8 @@ in
     services."nix-daemon".serviceConfig = {
       Slice = "nix-daemon.slice";
       OOMScoreAdjust = 1000;
-    };
+    };    
+
   };
 
   #---------------------------------------------------------------------
@@ -360,18 +361,29 @@ in
   # -----------------------------------------------
   security.allowSimultaneousMultithreading = true;
 
+
   #---------------------------------------------------------------------
   # Networking
   #---------------------------------------------------------------------
-  networking.hostName = "${hostname}"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   networking.networkmanager.enable = true;
+
+  # Define your hostname.
+  networking.hostName = "${hostname}"; 
+
+  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;   
+
   networking.networkmanager.connectionConfig = {
     "ethernet.mtu" = 1462;
     "wifi.mtu" = 1462;
   };
 
+  #---------------------------------------------------------------------
+  # Power management & Analyze power consumption on Intel-based laptops
+  #---------------------------------------------------------------------  
+  hardware.bluetooth.powerOnBoot = false;
+  networking.networkmanager.wifi.powersave = true;
+  
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -567,5 +579,5 @@ in
   system.autoUpgrade.enable = true;
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05";
-  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
+  systemd.extraConfig = "DefaultTimeoutStopSec=10s";   
 }

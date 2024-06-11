@@ -9,6 +9,7 @@
     # ./trimmgenerations.nix
     ./auto-home-manager.nix
     ./check-updates.nix
+    ./cake.nix
     ./copy-back-up.nix
     ./create-git.nix
     ./create-smb-user.nix

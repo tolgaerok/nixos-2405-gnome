@@ -70,7 +70,12 @@ let
         # Commit changes with custom message
         git commit -m "$COMMIT_MSG"
 
+        # Pull changes from the remote repository to avoid conflicts
+        echo "Pulling changes from remote repository..."
+        git pull --rebase origin main
+
         # Push changes to the main branch
+        echo "Pushing changes to remote repository..."
         git push origin main
     fi        
 

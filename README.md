@@ -34,14 +34,17 @@ Quick upload of your git files to your repo:
 gitup
 ```
 
-### mounter
-Quickly mount your custom mnt point's
+### unmounter
+Quickly unmount your custom mnt point's
 
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/be5e9bf0-75f4-41e4-97c0-8f1cc5d27448)
+
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/1528cfe6-77d5-4886-8d36-5bb949832a91)
 
 
 - In terminal, type:
 ```bash
-mounter
+unmounter
 ```
 
 <div align="center">

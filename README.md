@@ -111,6 +111,47 @@ This configuration is tailored to enhance the performance and usability of my HP
 ```bash
 my-nix
 ```
+#
+### nixos-cake
+
+<div align="center">
+  <img src="https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/c10232ae-f06d-4ab4-ae31-2b35f9f4d25a" alt="image2" width="100%">
+</div>
+
+- In terminal, type:
+
+```bash
+nixos-cake
+```
+
+### Script Overview:
+The script automatically configures a network optimization tool called CAKE on network interfaces in NixOS. It does the following:
+
+1. **Identifies Interfaces**: Finds active network interfaces excluding the loopback interface.
+
+2. **Applies CAKE**: Sets up CAKE on each active interface, ensuring fair and efficient data transmission.
+
+3. **Updates System Settings**: Adjusts system settings to make CAKE the default queuing system for all new connections.
+
+4. **Checks Configuration**: Confirms that CAKE is correctly configured on each interface.
+
+### CAKE Overview:
+CAKE is a network optimization tool known for its simplicity, fairness, and low latency benefits.
+
+#### Pros:
+- **Low Latency**: Prioritizes fast response times, ideal for real-time applications.
+- **Fairness**: Ensures equal sharing of bandwidth among different connections.
+- **Ease of Use**: Simple to configure compared to other similar tools.
+- **Effective for All Traffic**: Works well for both uploading and downloading data.
+
+#### Cons:
+- **Resource Intensive**: Requires some processing power.
+- **Configuration Complexity**: May need some networking knowledge to configure properly.
+- **Not for Every Situation**: While generally beneficial, it may not suit every network setup.
+
+### Conclusion:
+The script makes network optimization easy by deploying CAKE on NixOS systems, providing faster, fairer data transmission. While CAKE offers many benefits, users should consider their network needs before implementing it.
+
 
 #
 ### gitup

@@ -24,12 +24,24 @@ my-nix
 ### gitup
 Quick upload of your git files to your repo:
 
-![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/37765791-7286-435c-bf8d-8e84b8e4b2ac)
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/b5e75a9f-45c4-4ce7-9b32-7776757c9877)
+
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/3f617ad1-e5cf-40ce-9a73-15c32a1bf91f)
 
 
 - In terminal, type:
 ```bash
 gitup
+```
+
+### mounter
+Quickly mount your custom mnt point's
+
+
+
+- In terminal, type:
+```bash
+mounter
 ```
 
 <div align="center">

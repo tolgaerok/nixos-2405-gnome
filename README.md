@@ -1,13 +1,18 @@
 <div align="center">
-  <h1 style="font-size: 24px; color: blue;">My NixOs 24.05 environment, GNOME Folio 9470M Laptop</h1>
+  <h1 style="font-size: 24px; color: blue;">My NixOs 24.05 GNOME Environment</h1>
+  
 </div>
 
 ![Screenshot from 2024-06-10 23-13-02](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/ada1db0b-4d12-4ea3-8660-7e90384d5d90)
 
+<div align="center">
+  
+  <h4 style="font-size: 22px; color: blue;">Folio 9470M Laptop </h1>
+</div>
 
 </div>
 
-# Custom hand coded inhouse scripts made for user convienence
+# Custom hand coded scripts made for user convienence
 
 
 ### my-nix

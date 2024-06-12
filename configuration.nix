@@ -4,7 +4,7 @@
 
 # Tolga Erok
 # 10-6-2024
-# My personal NIXOS 24-05 GNOME configuration
+# My personal NIXOS 24-05 GNOME configuration.
 #
 #              ¯\_(ツ)_/¯
 #   ███▄    █     ██▓   ▒██   ██▒    ▒█████       ██████

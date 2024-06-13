@@ -219,18 +219,19 @@ in
       };
 
       # Disable automatic startup for NetworkManager wait, systemd udev settle, and virtual terminals on tty1
-      "NetworkManager-wait-online".enable = false;
-      "systemd-udev-settle".enable = false;
-      "getty@tty1".enable = false;
-      "autovt@tty1".enable = false;
+      # Basically, Disable specific systemd services
+      "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
+      "systemd-udev-settle".enable = false;         # Disable the systemd-udev-settle service
+      "getty@tty1".enable = false;                  # Disable the getty@tty1 service
+      "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
     };
 
     # Define rules for managing directories, permissions, and file removal in system temporary directories
     tmpfiles.rules = [
-      "d /Universal 0755 ${name} ${name} -"
-      "D! /tmp 1777 root root 0"
-      "d /var/spool/samba 1777 root root -"
-      "r! /tmp/**/*"
+      "d /Universal 0755 ${name} ${name} -"   # Create /Universal with 0755 permissions, owned by ${name} user and group
+      "D! /tmp 1777 root root 0"              # Create /tmp with 1777 permissions, owned by root user and group, and clear it at boot
+      "d /var/spool/samba 1777 root root -"   # Create /var/spool/samba with 1777 permissions, owned by root user and group
+      "r! /tmp/**/*"                          # Recursively remove all files and directories in /tmp
     ];
 
     # For log keeping of erros
@@ -238,17 +239,21 @@ in
 
     # Define resource limits and OOM handling for the nix-daemon process group
     slices."nix-daemon".sliceConfig = {
-      MemoryHigh = "2G";
-      MemoryMax = "3G";
-      CPUQuota = "50%";
-      ManagedOOMMemoryPressure = "kill";
-      ManagedOOMMemoryPressureLimit = "95%";
+
+      # Define resource limits and management settings for systemd services
+      MemoryHigh = "2G";                        # Set the high memory limit to 2GB
+      MemoryMax = "3G";                         # Set the maximum memory limit to 3GB
+      CPUQuota = "50%";                         # Limit the CPU usage to 50%
+      ManagedOOMMemoryPressure = "kill";        # Configure OOM management to kill the service under high memory pressure
+      ManagedOOMMemoryPressureLimit = "95%";    # Trigger OOM management when memory pressure reaches 95%
     };
 
     # Associate nix-daemon systemd service with resource constraints and OOM settings
     services."nix-daemon".serviceConfig = {
-      Slice = "nix-daemon.slice";
-      OOMScoreAdjust = 1000;
+
+      # Define slice and OOM score adjustment for systemd services
+      Slice = "nix-daemon.slice";  # Assign the service to the nix-daemon.slice
+      OOMScoreAdjust = 1000;       # Set the OOM (Out of Memory) score adjustment to 1000
     };
   };
 
@@ -316,15 +321,15 @@ in
   # smoother and more integrated with the Wayland compositor you are using.
   #---------------------------------------------------------------------
   environment.sessionVariables = {
-    CLUTTER_BACKEND = "wayland";          # Specifies Wayland as the backend for Clutter.
-    MOZ_ENABLE_WAYLAND = "1";             # Enables Wayland support in Mozilla applications (e.g., Firefox).
-    NIXOS_OZONE_WL = "1";                 # Enables the Ozone Wayland backend for Chromium-based browsers.
-    NIXPKGS_ALLOW_UNFREE = "1";           # Allows the installation of packages with unfree licenses in Nixpkgs.
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";  # Disables window decorations in Qt applications when using Wayland.
-    SDL_VIDEODRIVER = "wayland";          # Sets the video driver for SDL applications to Wayland.
-    XDG_SESSION_TYPE = "wayland";         # Defines the session type as Wayland.
-};
-
+    CLUTTER_BACKEND = "wayland"; # Specifies Wayland as the backend for Clutter.
+    MOZ_ENABLE_WAYLAND = "1"; # Enables Wayland support in Mozilla applications (e.g., Firefox).
+    NIXOS_OZONE_WL = "1"; # Enables the Ozone Wayland backend for Chromium-based browsers.
+    NIXPKGS_ALLOW_UNFREE = "1"; # Allows the installation of packages with unfree licenses in Nixpkgs.
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"; # Disables window decorations in Qt applications when using Wayland.
+    SDL_VIDEODRIVER = "wayland"; # Sets the video driver for SDL applications to Wayland.
+    # XDG_CURRENT_DESKTOP = "wayland";      # Sets the current desktop environment to Wayland.
+    XDG_SESSION_TYPE = "wayland"; # Defines the session type as Wayland.
+  };
 
   #---------------------------------------------------------------------
   # Allow unfree packages

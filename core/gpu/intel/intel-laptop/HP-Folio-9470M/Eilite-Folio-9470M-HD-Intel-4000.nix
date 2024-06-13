@@ -42,17 +42,18 @@ in
     };
 
     services = {
-      acpid.enable = true;
-      fwupd.enable = true;
-      power-profiles-daemon.enable = false;
-      thermald.enable = true;
-      upower.enable = true;
+      acpid.enable = true;                  # Enable ACPI daemon for handling power events and managing power configurations
+      fwupd.enable = true;                  # Enable firmware updates using fwupd, a daemon to handle firmware updates on Linux systems
+      power-profiles-daemon.enable = false; # Disable the power-profiles-daemon, which manages power profiles
+      thermald.enable = true;               # Enable Intel's thermal daemon for managing thermal zones and cooling policies
+      upower.enable = true;                 # Enable UPower, a daemon for power management and battery monitoring
 
-      xserver = {
-        videoDrivers = [ "modesetting" ]; # Use the dedicated Intel driver
-        exportConfiguration = true;
-      };
-    };
+    xserver = {
+      videoDrivers = [ "modesetting" ];     # Use the modesetting driver for X server, which is often used with Intel GPUs
+      exportConfiguration = true;           # Export the X server configuration, making it available to other components
+  };
+};
+
 
     #---------------------------------------------------------------------
     # Update microcode when available
@@ -63,18 +64,21 @@ in
     # Hardware video acceleration and compatibility for Intel GPUs
     #---------------------------------------------------------------------
     hardware.opengl = {
-      enable = true;
-      driSupport = mkDefault true;
-      driSupport32Bit = mkDefault true;
-      extraPackages = with pkgs; [
-        intel-media-driver
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-gmmlib
-        # vulkan-validation-layers
-      ];
-    };
+      enable = true; # Enable OpenGL support
+
+      driSupport = mkDefault true;      # Enable Direct Rendering Infrastructure (DRI) support
+      driSupport32Bit = mkDefault true; # Enable 32-bit DRI support for compatibility with 32-bit applications
+
+    extraPackages = with pkgs; [
+      intel-media-driver  # Intel media driver for hardware acceleration
+      vaapiIntel          # VA-API (Video Acceleration API) driver for Intel GPUs
+      vaapiVdpau          # VDPAU (Video Decode and Presentation API for Unix) backend for VA-API
+      libvdpau-va-gl      # VDPAU driver that uses VA-API as backend
+      intel-gmmlib        # Intel Graphics Memory Management Library
+      # vulkan-validation-layers # (Commented out) Validation layers for Vulkan development
+  ];
+};
+
 
     #---------------------------------------------------------------------
     # Power management & Analyze power consumption on Intel-based laptops

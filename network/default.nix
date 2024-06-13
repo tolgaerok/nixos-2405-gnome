@@ -4,7 +4,7 @@
 
   imports = [
 
-    # Import miniDLNA
+    # Import miniDLNA..
     # ---------------------------------------------
     
     # ./plex.nix

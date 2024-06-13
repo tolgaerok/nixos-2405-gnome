@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -67,7 +72,7 @@ in
         vaapiVdpau
         libvdpau-va-gl
         intel-gmmlib
-        vulkan-validation-layers
+        # vulkan-validation-layers
       ];
     };
 
@@ -92,19 +97,20 @@ in
     # Enable TLP for better power management with Schedutil governor
     #---------------------------------------------------------------------
     services.tlp = {
-      enable = true;
+      enable = true; # Enable the TLP power management tool
+
       settings = {
-        DISK_DEVICES = "nvme0n1 nvme1n1 sda sdb";
-        AHCI_RUNTIME_PM_ON_AC = "on";
-        AHCI_RUNTIME_PM_ON_BAT = "auto";
-        RUNTIME_PM_ON_AC = "on";
-        RUNTIME_PM_ON_BAT = "auto";
-        NATACPI_ENABLE = 1;
-        SOUND_POWER_SAVE_ON_AC = 0;
-        SOUND_POWER_SAVE_ON_BAT = 1;
-        TPACPI_ENABLE = 1;
-        TPSMAPI_ENABLE = 1;
-        WOL_DISABLE = "Y";
+        DISK_DEVICES = "nvme0n1 nvme1n1 sda sdb"; # Specify disk devices to manage
+        AHCI_RUNTIME_PM_ON_AC = "on";             # Enable runtime power management for SATA disks when on AC power
+        AHCI_RUNTIME_PM_ON_BAT = "auto";          # Enable automatic runtime power management for SATA disks when on battery power
+        RUNTIME_PM_ON_AC = "on";                  # Enable runtime power management for PCIe devices when on AC power
+        RUNTIME_PM_ON_BAT = "auto";               # Enable automatic runtime power management for PCIe devices when on battery power
+        NATACPI_ENABLE = 1;                       # Enable ACPI calls for battery status and charge thresholds (1 = enabled)
+        SOUND_POWER_SAVE_ON_AC = 0;               # Disable power saving for sound devices when on AC power (0 = disabled)
+        SOUND_POWER_SAVE_ON_BAT = 1;              # Enable power saving for sound devices when on battery power (1 = enabled)
+        TPACPI_ENABLE = 1;                        # Enable ThinkPad-specific ACPI features (1 = enabled)
+        TPSMAPI_ENABLE = 1;                       # Enable ThinkPad-specific battery management via tp-smapi (1 = enabled)
+        WOL_DISABLE = "Y";                        # Disable Wake-on-LAN (Y = disabled)
       };
     };
   };

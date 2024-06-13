@@ -44,7 +44,7 @@ let
 
     if [[ $remote_url == *"git@github.com"* ]]; then
         echo ""
-        echo "Remote URL is set to SSH. Proceeding with the script..." | ${pkgs.lolcat}/bin/lolcat
+        echo "Remote URL is set to SSH. Proceeding with the script..." | lolcat
         echo ""
     else
         echo "Remote URL is not set to SSH. Please set up SSH key-based authentication for the remote repository."
@@ -63,6 +63,13 @@ let
 
     # Navigate to the repository directory
     cd "$REPO_DIR" || exit
+
+    # Check if a rebase is in progress
+    if [ -d "$REPO_DIR/.git/rebase-merge" ]; then
+        echo "A rebase is currently in progress. Please resolve it before running this script."
+        echo "You can either continue the rebase with 'git rebase --continue' or abort it with 'git rebase --abort'."
+        exit 1
+    fi
 
     # Print the current working directory for debugging
     echo "Current working directory: $(pwd)"
@@ -99,6 +106,7 @@ let
         (ツ)_/¯
     Time taken: $time_taken
     " -u normal
+
   '';
 in
 

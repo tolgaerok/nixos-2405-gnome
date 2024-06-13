@@ -425,19 +425,22 @@ in
 
       # Personal
       #docker
+      #notify-send
       clementine
       ethtool
       gimp-with-plugins
       git
-      gitup
+      git
+      git-up
       kate
+      libnotify
       libwps
+      lolcat
       mesa
       neofetch
+      notify
+      notify-desktop
       wpsoffice
-      git
-      lolcat
-      notify-send
 
       # Gnome related / extentions
       # gnomeExtensions.forge
@@ -464,8 +467,6 @@ in
       intel-media-driver
       intel-vaapi-driver
     ];
-<<<<<<< HEAD
-=======
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGg5V+YAm36cZcZBZz1fv7+0kP05DpoGs1EhcrlI09i kingtolga@gmail.com"
@@ -475,7 +476,6 @@ in
       #/home/tolga/.ssh/id_rsa.pub
       /home/tolga/.ssh/id_ed25519.pub
     ];
->>>>>>> e542439 ((ツ)_/¯ Edit: 13-06-2024 11:36:03 AM)
   };
 
   #---------------------------------------------------------------------

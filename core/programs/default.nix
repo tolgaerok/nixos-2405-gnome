@@ -11,7 +11,7 @@
     ./dconf
     ./gamemode
     #./git
-    ./internet
+    #./internet
     ./java
     ./konsole
     ./nix-program-settings

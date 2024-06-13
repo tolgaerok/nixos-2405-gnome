@@ -23,7 +23,7 @@
         lgens =       "sudo nix-env --profile /nix/var/nix/profiles/system --list-generations";
         neu =         "sudo nix-env --upgrade";
         nopt =        "sudo nix-store --optimise";
-        rbs =         "sudo nixos-rebuild switch";
+        rbs =         "sudo nixos-rebuild switch --upgrade-all";
         rebuild-all = "sudo nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot && sudo fstrim -av";
         switch =      "sudo nixos-rebuild switch -I nixos-config=$HOME/nixos/configuration.nix";
 

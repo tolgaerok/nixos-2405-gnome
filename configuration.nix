@@ -54,9 +54,11 @@ in
     ./core/boot/efi/efi.nix
     ./core/modules
     ./core/packages
+    ./core/programs
     ./core/services
     ./hardware-configuration.nix
     ./network
+    ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
   ];
 
   #---------------------------------------------------------------------
@@ -441,6 +443,7 @@ in
       notify
       notify-desktop
       wpsoffice
+      variety
 
       # Gnome related / extentions
       # gnomeExtensions.forge

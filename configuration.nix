@@ -57,6 +57,7 @@ in
     ./core/packages
     ./core/programs
     ./core/services
+    ./core/system
     ./hardware-configuration.nix
     ./network
   ];

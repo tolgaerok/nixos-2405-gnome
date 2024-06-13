@@ -8,7 +8,7 @@
 with lib;
 
 #---------------------------------------------------------------------
-# Works Well on various Intel Mesa HD GPU
+# Works Well on various Intel Mesa HD GPU 
 #---------------------------------------------------------------------
 
 {

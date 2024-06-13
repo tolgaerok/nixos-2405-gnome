@@ -2,7 +2,7 @@
 
   imports = [
 
-    # Configuration for Programs
+    # Configuration for Programs.
 
     # ./fish
     ./adb

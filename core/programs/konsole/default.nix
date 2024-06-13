@@ -71,7 +71,7 @@
         mv = "mv -iv";
 
         #---------------------------------------------------------------------
-        # GitHub related
+        # GitHub related.
         #---------------------------------------------------------------------
         gitfix = "git fetch origin main && git diff --exit-code origin/main";
 

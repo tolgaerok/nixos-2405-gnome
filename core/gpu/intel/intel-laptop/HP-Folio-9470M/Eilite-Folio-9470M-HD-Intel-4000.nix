@@ -90,7 +90,7 @@ with lib;
   # Allow brightness control by video group.
   hardware.acpilight.enable = true;
 
-  #-----------------------------------------------------------------------
+  #---------------------------------------------------------------------
   # Enable TLP for better power management with Schedutil governor
   #---------------------------------------------------------------------
   services.tlp = {

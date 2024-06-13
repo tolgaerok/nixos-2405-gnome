@@ -485,7 +485,7 @@ in
 
       # MegaSync related
       #gnomeExtensions.mock-tray
-      #megasync
+      megasync
 
       # Intel related
       intel-gmmlib

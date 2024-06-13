@@ -420,7 +420,7 @@ in
     packages = with pkgs; [
 
       # INternet related
-      # caprine-bin
+      # caprine-bin.
       firefox
 
       # Personal

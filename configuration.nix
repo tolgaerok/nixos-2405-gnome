@@ -148,7 +148,8 @@ in
   #----------------------------------------------------------------------
   systemd = {
     services = {
-
+      
+      # Mount to show in nautilus or else it will remain invisible
       bind-mount-DLNA = {
         description = "Bind mount /home/${name}/DLNA to /mnt/DLNA";
         after = [ "network.target" ];
@@ -160,6 +161,7 @@ in
         wantedBy = [ "multi-user.target" ];
       };
 
+      # Mount to show in nautilus or else it will remain invisible
       bind-mount-MyGit = {
         description = "Bind mount /home/${name}/DLNA to /mnt/MyGit";
         after = [ "network.target" ];
@@ -171,6 +173,7 @@ in
         wantedBy = [ "multi-user.target" ];
       };
 
+      # Mount to show in nautilus or else it will remain invisible
       chown-universal-directory = {
         description = "Ensure correct ownership of /Universal";
         after = [
@@ -185,6 +188,7 @@ in
         };
       };
 
+      # Custom I/O scheduler
       "io-scheduler" = {
         description = "Set I/O Scheduler on boot - Tolga Erok";
         wantedBy = [ "multi-user.target" ];
@@ -195,6 +199,7 @@ in
         enable = true;
       };
 
+      # Create missing home dir's and more
       check-create-user-home-dirs = {
         description = "Ensure user home directories are created and owned by the user";
         after = [ "network.target" ];
@@ -212,12 +217,14 @@ in
         enable = true;
       };
 
+      # Disable automatic startup for NetworkManager wait, systemd udev settle, and virtual terminals on tty1
       "NetworkManager-wait-online".enable = false;
       "systemd-udev-settle".enable = false;
       "getty@tty1".enable = false;
       "autovt@tty1".enable = false;
     };
 
+    # Define rules for managing directories, permissions, and file removal in system temporary directories
     tmpfiles.rules = [
       "d /Universal 0755 ${name} ${name} -"
       "D! /tmp 1777 root root 0"
@@ -225,8 +232,10 @@ in
       "r! /tmp/**/*"
     ];
 
+    # For log keeping of erros
     coredump.enable = true;
 
+    # Define resource limits and OOM handling for the nix-daemon process group
     slices."nix-daemon".sliceConfig = {
       MemoryHigh = "2G";
       MemoryMax = "3G";
@@ -235,6 +244,7 @@ in
       ManagedOOMMemoryPressureLimit = "95%";
     };
 
+    # Associate nix-daemon systemd service with resource constraints and OOM settings
     services."nix-daemon".serviceConfig = {
       Slice = "nix-daemon.slice";
       OOMScoreAdjust = 1000;

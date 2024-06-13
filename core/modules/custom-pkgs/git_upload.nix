@@ -9,6 +9,9 @@ let
 
   gitup = pkgs.writeScriptBin "gitup" ''
     #!/usr/bin/env bash
+    # Tolga Erok
+    # 10/6/2024
+    # git uploader version #2
 
     set -e
 

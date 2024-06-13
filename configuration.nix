@@ -141,9 +141,6 @@ in
   services.timesyncd.enable = true;
   # services.docker.enable = true;
 
-  # Add user into user groups
-  users.groups.${name} = { };
-
   #----------------------------------------------------------------------
   # SystemD settings
   #----------------------------------------------------------------------
@@ -405,7 +402,9 @@ in
   #---------------------------------------------------------------------
 
   # Add user into user groups
-  # users.groups.${name} = { };
+  users.groups.${name} = {
+    members = [ "rygel" ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${name}" = {
@@ -414,6 +413,7 @@ in
     extraGroups = [
       "${name}"
       "adbusers"
+      "rygel"
       "audio"
       "corectrl"
       "disk"

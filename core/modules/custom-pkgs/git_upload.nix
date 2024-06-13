@@ -10,8 +10,10 @@ let
   gitup = pkgs.writeScriptBin "gitup" ''
     #!/usr/bin/env bash
 
+    set -e
+
     # Personal nixos git folder uploader!!
-    # Tolga Erok. ¯\_(ツ)_/¯..
+    # Tolga Erok. ¯\\_(ツ)_/¯..
     # 20/8/23.
 
     start_time=$(date +%s)
@@ -27,8 +29,15 @@ let
     git config --global diff.algorithm histogram
     git config --global http.postBuffer 524288000
 
+    # Ensure the Git repository is initialized
+    if [ ! -d "$REPO_DIR/.git" ]; then
+        echo "Initializing Git repository in $REPO_DIR..."
+        git init "$REPO_DIR"
+        git remote add origin git@github.com:tolgaerok/nixos-2405-gnome.git
+    fi
+
     # Check if the remote URL is set to SSH
-    remote_url=$(git remote get-url origin)
+    remote_url=$(git -C "$REPO_DIR" remote get-url origin)
 
     # Configure Git credential helper to cache credentials for 1 hour
     git config --global credential.helper "cache --timeout=3600"
@@ -55,6 +64,9 @@ let
     # Navigate to the repository directory
     cd "$REPO_DIR" || exit
 
+    # Print the current working directory for debugging
+    echo "Current working directory: $(pwd)"
+
     # Add all changes
     git add .
 
@@ -63,12 +75,10 @@ let
     git status
 
     # Check if there are changes to commit
-    if git diff --cached --exit-code &>/dev/null; then
-        echo "No changes to commit."
-    else
+    if git status --porcelain | grep -qE '^\s*[MARCDU]'; then
         echo "Changes detected, committing..."
         # Commit changes with custom message
-        git commit -m "$COMMIT_MSG"
+        git commit -am "$COMMIT_MSG"
 
         # Pull changes from the remote repository to avoid conflicts
         echo "Pulling changes from remote repository..."
@@ -77,6 +87,8 @@ let
         # Push changes to the main branch
         echo "Pushing changes to remote repository..."
         git push origin main
+    else
+        echo "No changes to commit."
     fi        
 
     end_time=$(date +%s)
@@ -87,9 +99,9 @@ let
         (ツ)_/¯
     Time taken: $time_taken
     " -u normal
-
   '';
 in
+
 {
 
   #---------------------------------------------------------------------

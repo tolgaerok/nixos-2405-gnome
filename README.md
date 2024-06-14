@@ -3,7 +3,9 @@
   
 </div>
 
-![Screenshot from 2024-06-10 23-13-02](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/ada1db0b-4d12-4ea3-8660-7e90384d5d90)
+
+![image](https://github.com/tolgaerok/nixos-2405-gnome/assets/110285959/1d8a24e0-a126-4045-b6ef-a85be85cee97)
+
 
 <div align="center">
   

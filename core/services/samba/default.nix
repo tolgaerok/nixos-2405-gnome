@@ -2,7 +2,7 @@
 let
   # Tolga Erok
   # 30/10/2023
-  # samba credentials:  Terminal run ==>   create-smb-user
+  # samba credentials: Terminal run ==> create-smb-user
   #---------------------------------------------------------------------
 
   # Change to suit
@@ -10,7 +10,6 @@ let
   mySharedPath = "/home/${name}/Public"; # Change this path to your desired value
 
   sharedOptions = {
-
     # Common options
     "guest ok" = true;
     "read only" = false;
@@ -20,7 +19,6 @@ let
 
     browseable = true;
     writable = true;
-
   };
 
 in {
@@ -90,9 +88,8 @@ in {
       aio write size = 1
 
       # Enable VFS (Virtual File System) objects including ACL (Access Control List) xattr, Catia, and Streams xattr
-      vfs objects = acl_xattr catia streams_xattr      
-      vfs objects = catia streams_xattr
-      
+      vfs objects = acl_xattr catia streams_xattr
+
       # Set maximum IPC protocol to SMB3 for the client
       client ipc max protocol = SMB3
 
@@ -158,7 +155,6 @@ in {
         comment = "Public Share";
         "create mask" = "0777";
         "directory mask" = "0777";
-
       };
 
       #---------------------------------------------------------------------
@@ -171,7 +167,6 @@ in {
         "create mask" = "0644";
         "directory mask" = "0755";
         "guest ok" = false;
-
       };
 
       #---------------------------------------------------------------------
@@ -181,11 +176,10 @@ in {
       printers = sharedOptions // {
         comment = "All Printers";
         path = "/var/spool/samba";
-        public = true;
-        writable = false;
-        printable = true;
+        "public" = true;
+        "writable" = false;
+        "printable" = true;
         "create mask" = "0700";
-
       };
     };
 

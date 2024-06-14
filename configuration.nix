@@ -96,14 +96,28 @@ in
   # autosuspend USB devices && autosuspend PCI devices
   # -------------------------------------------------------------------
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="net", NAME=="enp*", RUN+="${pkgs.ethtool}/sbin/ethtool -s $name wol d"   # disable Ethernet Wake-on-LAN
+    # Disable Ethernet Wake-on-LAN
+    ACTION=="add", SUBSYSTEM=="net", NAME=="enp*", RUN+="${pkgs.ethtool}/sbin/ethtool -s \$name wol d"
+
+    # Disable serial ports ttyS1 to ttyS3
     KERNEL=="ttyS[1-3]", SUBSYSTEM=="tty", ACTION=="add", ATTR{enabled}="0"
-    ACTION=="add", SUBSYSTEM=="pci", TEST=="power/control", ATTR{power/control}="auto"                  # autosuspend PCI devices
-    ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="auto"                  # autosuspend USB devices
+
+    # Autosuspend PCI devices
+    ACTION=="add", SUBSYSTEM=="pci", TEST=="power/control", ATTR{power/control}="auto"
+
+    # Autosuspend USB devices
+    ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="auto"
+
+    # Set scheduler to 'none' for certain block devices with ext4 filesystem
     ACTION=="add|change", KERNEL=="sd[a-z]*[0-9]*|mmcblk[0-9]*p[0-9]*|nvme[0-9]*n[0-9]*p[0-9]*", ENV{ID_FS_TYPE}=="ext4", ATTR{../queue/scheduler}="none"
+
+    # Set group for hpet to 'audio'
     KERNEL=="hpet", GROUP="audio"
+
+    # Set group for rtc0 to 'audio'
     KERNEL=="rtc0", GROUP="audio"
-  '';
+'';
+
 
   #---------------------------------------------------------------------
   # Enable the OpenSSH daemon.

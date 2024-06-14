@@ -111,29 +111,29 @@ with lib;
     # ---------------------------------------------------------------------
     # Check for updates using espeak and nixos-check-updates
     # ---------------------------------------------------------------------
-    check-update = {
-      serviceConfig.Type = "oneshot";
-      path = [ pkgs.espeak-classic ];
-      script = ''
-        #!/bin/sh
-        espeak -v en+m7 -s 165 "PUNK! " --punct=","
-        nixos-check-updates
-      '';
-    };
+    #check-update = {
+    #  serviceConfig.Type = "oneshot";
+    #  path = [ pkgs.espeak-classic ];
+    #  script = ''
+    #    #!/bin/sh
+    #    espeak -v en+m7 -s 165 "PUNK! " --punct=","
+    #    nixos-check-updates
+    #  '';
+    #};
   };
 
   # ---------------------------------------------------------------------
   # Timer to periodically check for updates
   # ---------------------------------------------------------------------
-  systemd.timers.check-updates = {
-    wantedBy = [ "timers.target" ];
-    partOf = [ "check-update.service" ];
-    timerConfig = {
-      # Run every 10 seconds
-      OnCalendar = "*-*-* *-*-*:00/10:00:00";
-      Unit = "check-update.service";
-    };
-  };
+  #systemd.timers.check-updates = {
+  #  wantedBy = [ "timers.target" ];
+  #  partOf = [ "check-update.service" ];
+  #  timerConfig = {
+  #    # Run every 10 seconds
+  #    OnCalendar = "*-*-* *-*-*:00/10:00:00";
+  #    Unit = "check-update.service";
+  #  };
+  #};
 
   # ---------------------------------------------------------------------
   # Ensure the custom info script is executable and run during activation

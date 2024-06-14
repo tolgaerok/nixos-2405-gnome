@@ -46,7 +46,7 @@ with lib;
     ];
 
     kernelParams = [
-      "elevator=none"   # Change to kyber, mq-dealine or none scheduler
+      # "elevator=none"   # Change to kyber, mq-dealine or none scheduler
       "mitigations=off" # Disables certain security mitigations, potentially improving performance but reducing security.
       "quiet"           # Suppresses verbose kernel messages during boot, providing a quieter boot process.
     ];

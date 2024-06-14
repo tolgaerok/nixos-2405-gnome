@@ -15,7 +15,7 @@ in
   # X11 settings
   # -----------------------------------------------
 
-  # Enable the X11 windowing system && keymap.
+  # Enable the X11 windowing system and keymap.
   services = {
 
     # Enable the X11 windowing system.
@@ -39,13 +39,14 @@ in
     dbus.enable = true;
   };
 
+  # Enable and configure xdg portals
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     xdgOpenUsePortal = true;
 
     extraPortals = with pkgs; [
-      #xdg-desktop-portal-gtk
+      # xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
     ];
   };

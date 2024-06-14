@@ -67,6 +67,68 @@ in
   #---------------------------------------------------------------------
   boot.kernelPackages = kernel;
 
+  # Create custom auto start files
+  system.activationScripts = {
+    thank-you = {
+      text = ''
+        cat << EOF > /home/${name}/THANK-YOU
+        Tolga Erok
+        10-6-2024
+        My personal NIXOS 24-05 GNOME configuration.
+
+        Thank you for using my personal NixOS GNOME 24-05 configuration.
+        I hope you will enjoy my setup as much as I do.
+        If you encounter any issues, please contact me via email: kingtolga@gmail.com
+
+
+        ¯\_(ツ)_/¯  Date and time of system rebuild
+        --------------------------------------------
+        $(date '+%a - %b %d %l:%M %p')
+        EOF
+      '';
+    };
+
+    megasync-start = {
+      text = ''
+        cat << EOF > /home/${name}/.config/autostart/megasync.desktop
+        [Desktop Entry]
+        Type=Application
+        Version=1.0
+        GenericName=File Synchronizer
+        Name=MEGAsync
+        Comment=Easy automated syncing between your computers and your MEGA cloud drive.
+        TryExec=megasync
+        Exec=megasync
+        Icon=mega
+        Terminal=false
+        Categories=Network;System;
+        StartupNotify=false
+        X-GNOME-Autostart-Delay=1
+        EOF
+      '';
+    };
+
+    rygel-start = {
+      text = ''
+        cat << EOF > /home/${name}/.config/autostart/rygel-preferences.desktop
+        [Desktop Entry]
+        Type=Application
+        Version=1.0
+        GenericName=DLNA Media Server
+        Name=Rygel Preferences
+        Comment=Configure Rygel settings
+        TryExec=rygel-preferences
+        Exec=rygel-preferences
+        Icon=rygel
+        Terminal=false
+        Categories=Network;System;
+        StartupNotify=false
+        X-GNOME-Autostart-Delay=1
+        EOF
+      '';
+    };
+  };
+  
   # Add a file system entry for the "DLNA" directory bind mount
   fileSystems."/mnt/DLNA" = {
     device = "/home/${name}/DLNA";

@@ -34,9 +34,9 @@
       "rd.systemd.show_status=auto" # disable systemd status messages
       "rd.udev.log_level=3"         # lower the udev log level to show only errors or worse
       # "video=eDP-1:1920x1200@60"
-      #"fbcon=nodefer"               # prevent the kernel from blanking plymouth out of the fb
-      #"i915.modeset=1"
-      #"logo.nologo"                 # disable boot logo if any
+      # "fbcon=nodefer"               # prevent the kernel from blanking plymouth out of the fb
+      # "i915.modeset=1"
+      # "logo.nologo"                 # disable boot logo if any
     ];
     extraModulePackages = [ ];
 
@@ -102,5 +102,11 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  #---------------------------------------------------------------------
+  # Hardware Configuration
+  #---------------------------------------------------------------------
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    enableAllFirmware = true;
+  };
 }

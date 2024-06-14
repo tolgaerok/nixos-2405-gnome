@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -6,10 +11,10 @@ with lib;
 
   environment.systemPackages = [ pkgs.zram-generator ];
 
-  zramSwap = { # Source: https://docs.kernel.org/admin-guide/blockdev/zram.html
+  zramSwap = {
+    # Source: https://docs.kernel.org/admin-guide/blockdev/zram.html
 
-    enable =
-      true; # Set to true to enable Zram, false to disable ( I have it enabled purely because i run multiple virtual machines for testing )
+    enable = true; # Set to true to enable Zram, false to disable ( I have it enabled purely because i run multiple virtual machines for testing )
     #  algorithm = "lzo";   # Use LZO compression algorithm
     #  algorithm = "zstd";  # Use Zstandard (zstd) compression algorithm
     algorithm = "lz4"; # Use LZ4 compression algorithm
@@ -34,9 +39,7 @@ with lib;
     #   - Plenty of Physical RAM: With 28GB of RAM, I have ample memory. Zram's benefits may be minimal.
     #   - CPU Overhead: Zram uses CPU cycles for compression, which may not be justifiable on systems with ample RAM.
     # Zram Tmpfs Configuration
-
   };
-
 }
 # Extra Notes:
 
@@ -62,4 +65,3 @@ with lib;
 #};
 
 #You can copy and paste these configurations as needed.
-

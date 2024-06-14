@@ -102,6 +102,9 @@ let
     fi        
 
     end_time=$(date +%s)
+    
+    figlet git......uploaded
+
     time_taken=$((end_time - start_time))
 
     notify-send --icon=ktimetracker --app-name="DONE" "Uploaded " "Completed:

@@ -403,7 +403,7 @@ in
 
   # Add user into user groups
   users.groups.${name} = {
-    members = [ "rygel" ];
+    members = [ ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -413,7 +413,7 @@ in
     extraGroups = [
       "${name}"
       "adbusers"
-      "rygel"
+      # "rygel"
       "audio"
       "corectrl"
       "disk"

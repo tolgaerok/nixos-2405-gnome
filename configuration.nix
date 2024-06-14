@@ -318,13 +318,13 @@ in
   # smoother and more integrated with the Wayland compositor you are using.
   #---------------------------------------------------------------------
   environment.sessionVariables = {
+    # XDG_CURRENT_DESKTOP = "wayland";      # Sets the current desktop environment to Wayland.
     CLUTTER_BACKEND = "wayland"; # Specifies Wayland as the backend for Clutter.
     MOZ_ENABLE_WAYLAND = "1"; # Enables Wayland support in Mozilla applications (e.g., Firefox).
     NIXOS_OZONE_WL = "1"; # Enables the Ozone Wayland backend for Chromium-based browsers.
     NIXPKGS_ALLOW_UNFREE = "1"; # Allows the installation of packages with unfree licenses in Nixpkgs.
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"; # Disables window decorations in Qt applications when using Wayland.
     SDL_VIDEODRIVER = "wayland"; # Sets the video driver for SDL applications to Wayland.
-    # XDG_CURRENT_DESKTOP = "wayland";      # Sets the current desktop environment to Wayland.
     XDG_SESSION_TYPE = "wayland"; # Defines the session type as Wayland.
   };
 

@@ -28,7 +28,14 @@ in
     };
 
     # Enable libinput.
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      touchpad = {
+        disableWhileTyping = true;
+        naturalScrolling = true;
+      };
+    };
+
     dbus.enable = true;
   };
 
@@ -38,7 +45,7 @@ in
     xdgOpenUsePortal = true;
 
     extraPortals = with pkgs; [
-     #xdg-desktop-portal-gtk
+      #xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
     ];
   };

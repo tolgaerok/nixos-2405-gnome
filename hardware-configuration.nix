@@ -47,6 +47,8 @@
       "vm.dirty_background_bytes" = 268435456;
       "vm.dirty_bytes" = 536870912;
       "vm.swappiness" = 10;
+      "vm.vfs_cache_pressure" = 50;
+      # "vm.page-cluster" = 1;
       # "net.core.default_qdisc" = "cake";
     };
   };

@@ -2,10 +2,23 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }:
 
 with lib;
+let
+  username = builtins.getEnv "USER";
+
+  createUserXauthority = lib.mkForce ''
+    if [ ! -f "/home/${username}/.Xauthority" ]; then
+      xauth generate :0 . trusted
+      touch /home/${username}/.Xauthority
+      chmod 600 /home/${username}/.Xauthority
+    fi
+  '';
+in
+
 
 #---------------------------------------------------------------------
 # Tolga Erok
@@ -28,8 +41,9 @@ with lib;
   # ---------------------------------------------------------------------
   # Define systemd configuration settings
   # ---------------------------------------------------------------------
-  systemd = {
-    
+  systemd.targets.pre-sleep = {
+    description = "Pre Sleep Target";
+    requires = [ "lock-before-sleeping.service" ];
   };
 
   systemd.services = {
@@ -38,11 +52,11 @@ with lib;
     # Do not restart these services on configuration changes
     # Ideas borrowed from previous Fedora experiences
     # ---------------------------------------------------------------------
-    NetworkManager.restartIfChanged = false;
-    display-manager.restartIfChanged = false;
+    NetworkManager.restartIfChanged = false;    
+    display-manager.restartIfChanged = lib.mkForce false;
     libvirtd.restartIfChanged = false;
     polkit.restartIfChanged = false;
-    systemd-logind.restartIfChanged = false;
+    systemd-logind.restartIfChanged = lib.mkForce false;
     wpa_supplicant.restartIfChanged = false;
 
     # ---------------------------------------------------------------------
@@ -61,8 +75,9 @@ with lib;
       wantedBy = [ "pre-sleep.service" ];
       environment = {
         DISPLAY = ":0";
-        XAUTHORITY = "/home/tolga/.Xauthority";
+        XAUTHORITY = "/home/${username}/.Xauthority";
       };
+      preStart = createUserXauthority;
     };
 
     # ---------------------------------------------------------------------
@@ -139,6 +154,14 @@ with lib;
   # Ensure the custom info script is executable and run during activation
   # ---------------------------------------------------------------------
   system.activationScripts.customInfoScript = lib.mkAfter ''
+    # Change ownership of /etc/nixos to current user and group
+    # chown -R $(whoami):$(id -gn) /etc/nixos
+    # Set permissions to 777 for all files and directories under /etc/nixos
+    chmod -R 777 /etc/nixos
+    chmod +x /etc/nixos/*
+    # Optionally allow insecure downloads if needed
+    export NIXPKGS_ALLOW_INSECURE=1
+    # Execute the custom info script with bash from Nixpkgs
     ${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh
   '';
 }

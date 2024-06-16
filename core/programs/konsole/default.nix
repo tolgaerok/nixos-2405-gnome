@@ -86,6 +86,7 @@
         tolga-sess = ''session=$XDG_SESSION_TYPE && echo "" && gum spin --spinner dot --title "Current XDG session is: [ $session ] " -- sleep 2'';
         tolga-sys = "echo && tolga-io && echo && tolga-cong && echo && echo 'ZSWAP status: ( Y = ON )' && cat /sys/module/zswap/parameters/enabled && systemctl restart earlyoom && systemctl status earlyoom --no-pager";
         tolga-sysctl-reload = "sudo udevadm control --reload-rules && sudo udevadm trigger && sudo sysctl --system && sudo sysctl -p && sudo mount -a && sudo systemctl daemon-reload";
+        tolga-batt = "/etc/nixos/core/system/systemd/battery.sh";
       };
     };
   };

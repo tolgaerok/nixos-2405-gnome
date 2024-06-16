@@ -7,6 +7,7 @@
     #---------------------------------------------------------------------
 
     # ./trimmgenerations.nix
+    ./clean-gen.nix
     ./auto-home-manager.nix
     ./check-updates.nix
     ./cake.nix

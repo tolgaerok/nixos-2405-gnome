@@ -108,6 +108,26 @@ in
       '';
     };
 
+    variety-start = {
+      text = ''
+        cat << EOF > /home/${name}/.config/autostart/variety.desktop
+        [Desktop Entry]
+        Name=Variety
+        Comment=Variety Wallpaper Changer
+        Categories=GNOME;GTK;Utility;
+        Exec=/bin/bash -c "sleep 1 && /nix/store/dgyjabijdnzpb4qfgk1kldbpmn6i6ss4-variety-0.8.12/bin/variety --profile /home/tolga/.config/variety/"
+        MimeType=text/uri-list;x-scheme-handler/variety;x-scheme-handler/vrty;
+        Icon=variety
+        Terminal=false
+        Type=Application
+        StartupNotify=false
+        Actions=Next;Previous;PauseResume;History;Preferences;
+        Keywords=Wallpaper;Changer;Change;Download;Downloader;Variety;
+        StartupWMClass=Variety
+        EOF
+      '';
+    };
+
     rygel-start = {
       text = ''
         cat << EOF > /home/${name}/.config/autostart/rygel-preferences.desktop
@@ -127,6 +147,7 @@ in
         EOF
       '';
     };
+
   };
   
   # Add a file system entry for the "DLNA" directory bind mount
@@ -517,14 +538,15 @@ in
 
       # Personal
       acpi
-      gnome.gvfs
-      gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
       clementine
       ethtool
+      flameshot
       gimp-with-plugins
       git
       git
       git-up
+      gnome.gvfs
+      gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
       kate
       libnotify
       libwps
@@ -533,8 +555,8 @@ in
       neofetch
       notify
       notify-desktop
-      wpsoffice
       variety
+      wpsoffice
 
       # Gnome related / extentions
       gnome-extension-manager
@@ -596,12 +618,11 @@ in
 
   programs.mtr.enable = true;
 
+  # Enable UPNP for gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
   programs.gnupg.agent = {
      enable = true;
     # enableSSHSupport = true;
   };
-
-  # services.openssh.enable = true;  
 
   # networking.firewall.enable = false;
 

@@ -9,18 +9,18 @@
   imports = [
 
     
-    #./audio
-    #./bluetooth
-    #./env
-    #./fonts
-    #./multi-threading
-    #./network
-    #./system
-    #./unfree-insecure
+    ./audio
+    ./bluetooth
     ./documentation
+    ./env
     ./filesystem-support
     ./firewall
+    #./fonts
+    ./multi-threading
+    ./network
+    ./system
     ./systemd
+    ./unfree-insecure
     ./zram
 
 

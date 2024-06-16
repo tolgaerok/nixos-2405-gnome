@@ -282,7 +282,7 @@ in
           Type = "oneshot";
           ExecStart = ''
             ${pkgs.bash}/bin/bash -c 'if id -u ${name} >/dev/null 2>&1 && id -g ${name} >/dev/null 2>&1; then \
-              for dir in Documents Downloads Music Pictures Videos MyGit DLNA Applications; do \
+              for dir in Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do \
                 mkdir -p /home/${name}/$dir && chown ${name}:${name} /home/${name}/$dir; \
               done; \
             fi'
@@ -380,14 +380,6 @@ in
   #---------------------------------------------------------------------
   nixpkgs.config.joypixels.acceptLicense = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-  ];
-
   #---------------------------------------------------------------------
   # Ozone-Wayland backend when running in a Wayland session. 
   # This improves performance and compatibility, making your experience 
@@ -395,13 +387,14 @@ in
   #---------------------------------------------------------------------
   environment.sessionVariables = {
     # XDG_CURRENT_DESKTOP = "wayland";      # Sets the current desktop environment to Wayland.
-    CLUTTER_BACKEND = "wayland"; # Specifies Wayland as the backend for Clutter.
-    MOZ_ENABLE_WAYLAND = "1"; # Enables Wayland support in Mozilla applications (e.g., Firefox).
-    NIXOS_OZONE_WL = "1"; # Enables the Ozone Wayland backend for Chromium-based browsers.
-    NIXPKGS_ALLOW_UNFREE = "1"; # Allows the installation of packages with unfree licenses in Nixpkgs.
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"; # Disables window decorations in Qt applications when using Wayland.
-    SDL_VIDEODRIVER = "wayland"; # Sets the video driver for SDL applications to Wayland.
-    XDG_SESSION_TYPE = "wayland"; # Defines the session type as Wayland.
+    # XDG_SESSION_TYPE = "wayland";         # Defines the session type as Wayland.
+
+    CLUTTER_BACKEND = "wayland";                # Specifies Wayland as the backend for Clutter.
+    MOZ_ENABLE_WAYLAND = "1";                   # Enables Wayland support in Mozilla applications (e.g., Firefox).
+    NIXOS_OZONE_WL = "1";                       # Enables the Ozone Wayland backend for Chromium-based browsers.
+    NIXPKGS_ALLOW_UNFREE = "1";                 # Allows the installation of packages with unfree licenses in Nixpkgs.
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";  # Disables window decorations in Qt applications when using Wayland.
+    SDL_VIDEODRIVER = "wayland";                # Sets the video driver for SDL applications to Wayland.
   };
 
   #---------------------------------------------------------------------
@@ -520,12 +513,12 @@ in
     packages = with pkgs; [
 
       # INternet related
-      # caprine-bin.
       firefox
 
       # Personal
-      #docker
-      #notify-send
+      acpi
+      gnome.gvfs
+      gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
       clementine
       ethtool
       gimp-with-plugins
@@ -544,14 +537,13 @@ in
       variety
 
       # Gnome related / extentions
-      # gnomeExtensions.forge
-      #gnomeExtensions.blur-my-shell
       gnome-extension-manager
       gnome.dconf-editor
       gnome.gnome-disk-utility
       gnome.gnome-tweaks
       gnomeExtensions.dash-to-dock
       gnomeExtensions.logo-menu
+      gnome.rygel
 
       # Development 
       direnv
@@ -560,7 +552,6 @@ in
       vscode-extensions.brettm12345.nixfmt-vscode
 
       # MegaSync related
-      #gnomeExtensions.mock-tray
       megasync
 
       # Intel related
@@ -577,7 +568,10 @@ in
       #/home/tolga/.ssh/id_rsa.pub
       /home/tolga/.ssh/id_ed25519.pub
     ];
+    
   };
+
+  services.gvfs.enable = true;
 
   #---------------------------------------------------------------------
   # Audio settings
@@ -600,24 +594,15 @@ in
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.
-
-  ###################################################################################################
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-
   programs.mtr.enable = true;
 
-  #programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+     enable = true;
+    # enableSSHSupport = true;
+  };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+  # services.openssh.enable = true;  
+
   # networking.firewall.enable = false;
 
   #---------------------------------------------------------------------
@@ -628,5 +613,5 @@ in
   system.autoUpgrade.enable = true;
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05";
-  #systemd.extraConfig = "DefaultTimeoutStopSec=10s";   
+  
 }

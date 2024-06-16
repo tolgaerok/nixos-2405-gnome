@@ -15,9 +15,7 @@ with lib;
       # ---------------------------------------------------------------------
       # Andriod software
       # ---------------------------------------------------------------------
-      acpi
-      # battery
-      sutils
+
       android-file-transfer  # Reliable MTP client with minimalistic UI         
                              # provides: aft-mtp-cli android-file-transfer aft-mtp-mount
 

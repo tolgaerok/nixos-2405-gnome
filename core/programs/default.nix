@@ -2,7 +2,7 @@
 
   imports = [
 
-    # Configuration for Programs.
+    # Configuration for Programs
 
     # ./fish
     ./adb
@@ -11,7 +11,7 @@
     ./dconf
     ./gamemode
     #./git
-    #./internet
+    ./internet
     ./java
     ./konsole
     ./nix-program-settings

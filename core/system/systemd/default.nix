@@ -8,6 +8,7 @@
 
 with lib;
 let
+  # Ensure username is set properly
   username = builtins.getEnv "USER";
 
   createUserXauthority = lib.mkForce ''
@@ -15,10 +16,10 @@ let
       xauth generate :0 . trusted
       touch /home/${username}/.Xauthority
       chmod 600 /home/${username}/.Xauthority
+      chown ${username}:${username} /home/${username}/.Xauthority
     fi
   '';
 in
-
 
 #---------------------------------------------------------------------
 # Tolga Erok
@@ -52,7 +53,7 @@ in
     # Do not restart these services on configuration changes
     # Ideas borrowed from previous Fedora experiences
     # ---------------------------------------------------------------------
-    NetworkManager.restartIfChanged = false;    
+    NetworkManager.restartIfChanged = false;
     display-manager.restartIfChanged = lib.mkForce false;
     libvirtd.restartIfChanged = false;
     polkit.restartIfChanged = false;
@@ -63,16 +64,20 @@ in
     # Helper service to lock screen before sleeping
     # ---------------------------------------------------------------------
     lock-before-sleeping = {
-      restartIfChanged = false;
-      unitConfig = {
-        Description = "Helper service to bind locker to sleep.target";
-      };
+      restartIfChanged = true;
+      description = "Helper service to lock screen before sleeping";
+      after = [ "sleep.target" ];
+      before = [
+        "pre-sleep.service"
+        "suspend.target"
+        "hibernate.target"
+        "hybrid-sleep.target"
+      ];
+      wantedBy = [ "sleep.target" ];
       serviceConfig = {
         ExecStart = "${pkgs.slock}/bin/slock";
         Type = "simple";
       };
-      before = [ "pre-sleep.service" ];
-      wantedBy = [ "pre-sleep.service" ];
       environment = {
         DISPLAY = ":0";
         XAUTHORITY = "/home/${username}/.Xauthority";
@@ -96,7 +101,7 @@ in
           echo "¯\_(ツ)_/¯  Flathub repo added and configured successfully ==>  [✔] "
         else
           echo "¯\_(ツ)_/¯  Error: Failed to configure Flathub repo ==>  [✘]"
-          exit 1;  # Exit with an error code to indicate failure
+          exit 1  # Exit with an error code to indicate failure
         fi
       '';
     };
@@ -154,14 +159,6 @@ in
   # Ensure the custom info script is executable and run during activation
   # ---------------------------------------------------------------------
   system.activationScripts.customInfoScript = lib.mkAfter ''
-    # Change ownership of /etc/nixos to current user and group
-    # chown -R $(whoami):$(id -gn) /etc/nixos
-    # Set permissions to 777 for all files and directories under /etc/nixos
-    chmod -R 777 /etc/nixos
-    chmod +x /etc/nixos/*
-    # Optionally allow insecure downloads if needed
-    export NIXPKGS_ALLOW_INSECURE=1
-    # Execute the custom info script with bash from Nixpkgs
     ${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh
   '';
 }

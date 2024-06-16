@@ -26,6 +26,7 @@ in
     #---------------------------------------------------------------------
     environment.systemPackages = with pkgs; [
       acpi
+      battery
       cpufrequtils
       cpupower-gui
       ethtool

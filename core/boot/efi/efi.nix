@@ -12,9 +12,10 @@ with lib;
   #---------------------------------------------------------------------
   boot = {
     loader = {
-      efi.canTouchEfiVariables = true;  # Enables the ability to modify EFI variables.
-      systemd-boot.enable = true;       # Activates the systemd-boot bootloader.
-      systemd-boot.consoleMode = "max";
+      efi.canTouchEfiVariables = true;      # Enables the ability to modify EFI variables.
+      systemd-boot.consoleMode = "max";     # Sets the console mode to the highest resolution supported by the firmware.
+      systemd-boot.enable = true;           # Activates the systemd-boot bootloader.
+      systemd-boot.memtest86.enable = true; # Enables the MemTest86+ option in the systemd-boot menu.
     };
 
     # Enables systemd services in the initial ramdisk (initrd).

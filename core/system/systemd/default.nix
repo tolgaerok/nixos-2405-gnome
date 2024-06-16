@@ -8,7 +8,7 @@
 
 with lib;
 let
-  # Ensure username is set properly
+  # Grab username and set properly
   username = builtins.getEnv "USER";
 
   createUserXauthority = lib.mkForce ''

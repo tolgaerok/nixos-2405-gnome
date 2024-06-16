@@ -76,12 +76,14 @@
     "/" = {
       device = "/dev/disk/by-uuid/81da14b4-f15b-4ab4-b0f1-d6c06c42709e";
       fsType = "ext4";
+      # extraArgs = [ "-f" "--compression=lz4" "--discard"  ];
       options = [
         "defaults"            # Applies the default options for mounting.
         "discard"             # Enables the TRIM command for SSDs.
         "noatime"             # Disables updating access times for files.
         "nodiratime"          # Disables updating directory access times.
         "relatime"            # Minimizes the performance impact compared to atime.
+        # "compression=lz4"
         # "data=ordered"      # Ensures data ordering for reliability and performance.
         # "discard=async"     # Maintains SSD performance over time.
         # "errors=remount-ro" # Remounts the file system as read-only in case of errors.
@@ -126,6 +128,7 @@
   # Hardware Configuration
   #---------------------------------------------------------------------
   hardware = {
+    #bolt.enable = true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     enableAllFirmware = true;
   };

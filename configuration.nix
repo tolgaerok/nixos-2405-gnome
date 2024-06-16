@@ -25,16 +25,19 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }:
 
 with lib;
 
 let
-
+  latest-std-kernel = pkgs.linuxPackages_latest;
+  latest-xanmod-kernel = pkgs.linuxPackages_xanmod_latest;
+  zen-std-kernel = pkgs.linuxPackages_zen;
+  
   country = "Australia/Perth";
   hostname = "Folio-Nixos";
-  kernel = pkgs.linuxPackages_zen;
   locale = "en_AU.UTF-8";
   name = "tolga";
 in
@@ -65,7 +68,7 @@ in
   #---------------------------------------------------------------------
   # BCustom kernel selection from user
   #---------------------------------------------------------------------
-  boot.kernelPackages = kernel;
+  boot.kernelPackages = latest-std-kernel;
 
   # Create custom auto start files
   system.activationScripts = {
@@ -225,6 +228,7 @@ in
         udisks2
       ];
     };
+    hardware.bolt.enable = true;
   };
 
   services = {
@@ -243,6 +247,22 @@ in
   #----------------------------------------------------------------------
   systemd = {
     services = {
+
+      # Enables Multi-Gen LRU and sets minimum TTL for memory management
+      mglru = {
+        enable = true;
+        wantedBy = [ "basic.target" ];
+          script = ''
+            ${pkgs.coreutils-full}/bin/echo 1000 > /sys/kernel/mm/lru_gen/min_ttl_ms
+          '';
+        serviceConfig = {
+          Type = "oneshot";
+        };
+        unitConfig = {
+          ConditionPathExists = "/sys/kernel/mm/lru_gen/enabled";
+          Description = "Configure Enable Multi-Gen LRU";
+        };
+      };
 
       # Mount to show in nautilus or else it will remain invisible
       bind-mount-DLNA = {
@@ -308,6 +328,7 @@ in
               done; \
             fi'
           '';
+
         };
         enable = true;
       };
@@ -322,11 +343,13 @@ in
 
     # Define rules for managing directories, permissions, and file removal in system temporary directories
     tmpfiles.rules = [
-      "d /Universal 0755 ${name} ${name} -"   # Create /Universal with 0755 permissions, owned by ${name} user and group
       "D! /tmp 1777 root root 0"              # Create /tmp with 1777 permissions, owned by root user and group, and clear it at boot
+      "d /Universal 0755 ${name} ${name} -"   # Create /Universal with 0755 permissions, owned by ${name} user and group
+      "d /nix/var/nix/profiles/per-user/${name} 0755 ${name} root -"  # Create /nix/var/nix/profiles/per-user/${username} with 0755 permissions, owned by ${username} user and root group
       "d /var/spool/samba 1777 root root -"   # Create /var/spool/samba with 1777 permissions, owned by root user and group
       "r! /tmp/**/*"                          # Recursively remove all files and directories in /tmp
     ];
+
 
     # For log keeping of erros
     coredump.enable = true;
@@ -450,7 +473,7 @@ in
   #---------------------------------------------------------------------
   # Power management & Analyze power consumption on Intel-based laptops
   #---------------------------------------------------------------------  
-  hardware.bluetooth.powerOnBoot = false;
+  hardware.bluetooth.powerOnBoot = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -537,6 +560,8 @@ in
       firefox
 
       # Personal
+      bcachefs-tools
+      keyutils
       acpi
       clementine
       ethtool
@@ -546,6 +571,7 @@ in
       git
       git-up
       gnome.gvfs
+      gnome.rygel
       gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
       kate
       libnotify
@@ -558,14 +584,20 @@ in
       variety
       wpsoffice
 
-      # Gnome related / extentions
+      # Gnome related / extentions       
+      #gnomeExtensions.emoji-copy
+      #unstable.gnomeExtensions.workspace-switcher-manager
       gnome-extension-manager
+      gnome-usage
       gnome.dconf-editor
       gnome.gnome-disk-utility
       gnome.gnome-tweaks
+      gnomeExtensions.appindicator
       gnomeExtensions.dash-to-dock
+      gnomeExtensions.just-perfection
       gnomeExtensions.logo-menu
-      gnome.rygel
+      gnomeExtensions.wifi-qrcode
+      gnomeExtensions.wireless-hid
 
       # Development 
       direnv

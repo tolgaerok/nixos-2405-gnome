@@ -63,8 +63,10 @@
   services = {
     gnome.rygel = {
       enable = true;
+      # friendly_name = "NixOS-Rygel";
     };
   };
+  
 
   networking.firewall = {
     allowedTCPPorts = [ 8200 ];

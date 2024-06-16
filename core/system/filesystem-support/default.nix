@@ -7,6 +7,7 @@
 
     "exfat"
     "ntfs"
+    "bcachefs"
     # "zfs"
 
  ];

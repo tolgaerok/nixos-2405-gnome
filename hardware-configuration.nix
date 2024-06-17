@@ -11,7 +11,8 @@
 }:
 
 let  
-  name = "tolga";  
+  name = "tolga";
+  extraBackends = [ pkgs.epkowa ];  
 in
 
 {
@@ -153,11 +154,14 @@ in
   # Hardware Configuration
   #---------------------------------------------------------------------
   hardware = {    
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware; 
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;      
+    bluetooth.powerOnBoot = false;      # Power management & Analyze power consumption on Intel-based laptops
+    pulseaudio.enable = false; 
 
-    # Power management & Analyze power consumption on Intel-based laptops 
-    bluetooth.powerOnBoot = false;
-    
-    pulseaudio.enable = false;  
+    sane = {
+      enable = true;                    #   Scanner and printing drivers
+      extraBackends = extraBackends;    #   Scanner and printing drivers
+    };
+     
   };
 }

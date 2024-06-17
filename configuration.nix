@@ -56,7 +56,7 @@ in
     ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
     ./core/packages
     ./core/programs
-    ./core/services
+    ./core/services/services.nix
     ./core/system
     ./hardware-configuration.nix
     ./network
@@ -70,16 +70,16 @@ in
   # ----------------------------------------------
   # Services
   # -----------------------------------------------   
-  services = {
-    timesyncd.enable = true;
-    gvfs.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-  };
+  #services = {
+  #  timesyncd.enable = true;
+  #  gvfs.enable = true;
+  #  pipewire = {
+  #    enable = true;
+  #    alsa.enable = true;
+  #    alsa.support32Bit = true;
+  #    pulse.enable = true;
+  #  };
+  #};
 
   #---------------------------------------------------------------------
   # Ozone-Wayland backend when running in a Wayland session. 
@@ -120,6 +120,7 @@ in
       };
     };    
     hostName = "${hostname}";
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   # -----------------------------------------------
@@ -232,6 +233,7 @@ in
         gnomeExtensions.logo-menu
         gnomeExtensions.wifi-qrcode
         gnomeExtensions.wireless-hid
+        gnome.simple-scan
 
         # Development 
         direnv
@@ -271,7 +273,8 @@ in
   # Enable UPNP for gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
   programs = {
     gnupg.agent.enable = true; 
-    mtr.enable = true;   
+    mtr.enable = true; 
+    ssh.startAgent = true;  
   };
 
   #---------------------------------------------------------------------

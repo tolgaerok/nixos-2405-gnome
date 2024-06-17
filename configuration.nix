@@ -115,7 +115,6 @@ in
     firewall.allowedTCPPorts = [ 22 ];    # Allow incoming TCP traffic on port 22 (SSH).
   };
 
-
   # -----------------------------------------------
   # Locale settings
   # -----------------------------------------------

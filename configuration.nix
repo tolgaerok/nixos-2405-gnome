@@ -41,22 +41,19 @@ let
   locale = "en_AU.UTF-8";
   name = "tolga";
 in
+
 {
 
   imports = [
-
-    # ./DE/kde.nix
-    # ./core
-
-    # ./core/modules/system-tweaks/kernel-tweaks/8GB-SYSTEM/8GB-SYSTEM.nix
-    # ./core/modules/system-tweaks/kernel-upgrades/latest-standard.nix
-    ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
+    # ./DE/kde.nix    
+    # ./core/modules/system-tweaks/kernel-tweaks/8GB-SYSTEM/8GB-SYSTEM.nix     
     # ./user/tolga/home-network/mnt-samba.nix
 
     ./DE/gnome46.nix
     ./core/boot/efi/efi.nix
     ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
     ./core/modules
+    ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
     ./core/packages
     ./core/programs
     ./core/services
@@ -251,13 +248,16 @@ in
         intel-vaapi-driver
       ];
 
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGg5V+YAm36cZcZBZz1fv7+0kP05DpoGs1EhcrlI09i kingtolga@gmail.com"
-      ];
-
-      openssh.authorizedKeys.keyFiles = [
-        /home/${name}/.ssh/id_ed25519.pub
-      ];
+      openssh = { 
+        authorizedKeys = {
+          keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGg5V+YAm36cZcZBZz1fv7+0kP05DpoGs1EhcrlI09i kingtolga@gmail.com"
+          ];
+          keyFiles = [
+            /home/${name}/.ssh/id_ed25519.pub
+          ];
+        };      
+      };
     };
   };
 

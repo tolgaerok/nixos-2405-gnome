@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 
 {
@@ -16,35 +21,30 @@ with lib;
 
       permittedInsecurePackages = [
         "electron-12.2.3"
-        "electron-24.8.6"
         "openssl-1.1.1u"
         "openssl-1.1.1v"
-        "python-2.7.18.6"
-        "qtwebkit-5.212.0-alpha4"
-
+        #"electron-24.8.6"
+        #"python-2.7.18.6"
+        #"qtwebkit-5.212.0-alpha4"
       ];
 
-      allowUnfreePredicate = pkg:
+      allowUnfreePredicate =
+        pkg:
         builtins.elem (lib.getName pkg) [
-          "nvidia-settings"
-          "nvidia-x11"
-          "vscode"
+          #"nvidia-settings"
+          #"nvidia-x11"
+          #"vscode"
           # "spotify"
           # "steam"
           # "steam-original"
           # "steam-run"
 
           # they got fossed recently so idk
-          "Anytype"
-
+          #"Anytype"
         ];
 
       # Accept the joypixels license
       joypixels.acceptLicense = true;
-
     };
-
   };
-
 }
-

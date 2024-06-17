@@ -10,6 +10,10 @@
   ...
 }:
 
+let  
+  name = "tolga";  
+in
+
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -95,6 +99,27 @@
       fsType = "vfat";
       options = [ "nofail" ];
     };
+
+    # Add a file system entry for the "DLNA" directory bind mount
+    "/mnt/DLNA" = {
+      device = "/home/${name}/DLNA";
+      fsType = "none";
+      options = [
+        "bind"
+        "rw"
+      ]; # Read-write access
+    };
+
+    # Add a file system entry for the "MyGit" directory bind mount
+    "/mnt/MyGit" = {
+      device = "/home/${name}/MyGit";
+      fsType = "none";
+      options = [
+        "bind"
+        "rw"
+      ]; # Read-write access
+    };
+
   };
 
   powerManagement = {
@@ -127,9 +152,12 @@
   #---------------------------------------------------------------------
   # Hardware Configuration
   #---------------------------------------------------------------------
-  hardware = {
-    #bolt.enable = true;
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    enableAllFirmware = true;
+  hardware = {    
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware; 
+
+    # Power management & Analyze power consumption on Intel-based laptops 
+    bluetooth.powerOnBoot = false;
+    
+    pulseaudio.enable = false;  
   };
 }

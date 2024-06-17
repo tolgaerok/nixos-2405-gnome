@@ -54,6 +54,9 @@ in
     ];
 
     extraModprobeConfig = lib.mkMerge [
+      # Control and optimize how an application utilizes the processor resources based on i7-3667U
+      "options nptl Thread.ProcessorCount=4 Thread.MaxProcessorCount=4 Thread.MinFreeProcessorCount=1 Thread.JobThreadPriority=0"
+      
       "options i915 enable_dc=4 enable_fbc=1 enable_guc=2 enable_psr=1 disable_power_well=1"    # Configuration for Intel integrated graphics.
       "options iwlmvm power_scheme=3"                               # Sets a power-saving scheme for Intel Wi-Fi drivers.
       "options iwlwifi power_save=1 uapsd_disable=1 power_level=5"  # Manages power-saving features for Intel Wi-Fi drivers.

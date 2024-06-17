@@ -17,9 +17,16 @@
 #     ░   ░ ░     ▒ ░    ░    ░     ░ ░ ░ ▒     ░  ░  ░
 #           ░     ░      ░    ░         ░ ░           ░
 
-#-------------- Hewlett-Packard HP EliteBook Folio 9470m ------------------
-#------------------ Intel® Core™ i7-3667U × 4 8GB  ------------------------
-#---------------- Intel® HD Graphics 4000 (IVB GT2) ----------------------
+# LAPTOP:           HP EliteBook Folio 9470m
+# CPU:              Intel Core i7-3678U x 4 (2.1 GHz )
+# GRAPHICS:         Intel HD Graphics 4000 (32MB Video Memory)
+# MEMORY:           8GB RAM (Upgradable to 16GB) (1600 MHz DDR3 SDRAM)
+# STORAGE:          500GB SSD Drive, Samsung EVO 870
+# DISPLAY:          14-inch display (1366x768 pixels)
+# PORTS:            Smart Card Reader, Headphone/Mic, Ethernet, DisplayPort, VGA, 3 x USB 3.0 Ports, SD/MMC Memory Reader
+# NETWORK:          Wi-Fi: 802.11a/b/g/n (Intel Centrino Advanced-N 6235)
+# Bluetooth:        Bluetooth 4.0+HS
+# CARD SLOTS:       SD/MMC memory reader
 
 {
   config,
@@ -63,23 +70,9 @@ in
   ];
 
   #---------------------------------------------------------------------
-  # BCustom kernel selection from user
+  # Custom kernel selection from user
   #---------------------------------------------------------------------
-  boot.kernelPackages = latest-std-kernel;   
-
-  # ----------------------------------------------
-  # Services
-  # -----------------------------------------------   
-  #services = {
-  #  timesyncd.enable = true;
-  #  gvfs.enable = true;
-  #  pipewire = {
-  #    enable = true;
-  #    alsa.enable = true;
-  #    alsa.support32Bit = true;
-  #    pulse.enable = true;
-  #  };
-  #};
+  boot.kernelPackages = latest-std-kernel;     
 
   #---------------------------------------------------------------------
   # Ozone-Wayland backend when running in a Wayland session. 
@@ -102,8 +95,8 @@ in
   # Enables simultaneous use of processor threads.
   # -----------------------------------------------
   security = {
-    allowSimultaneousMultithreading = true;
-    rtkit.enable = true; 
+    allowSimultaneousMultithreading = true;   # Allow simultaneous multithreading (SMT).
+    rtkit.enable = true;                      # Enable RealtimeKit (rtkit) for managing real-time priorities.
   };
 
   #---------------------------------------------------------------------
@@ -112,16 +105,16 @@ in
   networking = {
     networkmanager = {
       enable = true;
-      wifi.powersave = true;
-
-      connectionConfig = {
-        "ethernet.mtu" = 1462;
-        "wifi.mtu" = 1462;
+      wifi.powersave = true;              # Enable power-saving mode for Wi-Fi.
+      connectionConfig = { 
+        "ethernet.mtu" = 1462;            # Set MTU for Ethernet connections.
+        "wifi.mtu" = 1462;                # Set MTU for Wi-Fi connections.
       };
-    };    
-    hostName = "${hostname}";
-    firewall.allowedTCPPorts = [ 22 ];
+    };
+    hostName = "${hostname}";             # Set the hostname for the system.
+    firewall.allowedTCPPorts = [ 22 ];    # Allow incoming TCP traffic on port 22 (SSH).
   };
+
 
   # -----------------------------------------------
   # Locale settings
@@ -270,11 +263,11 @@ in
   # Enable sound with pipewire.
   sound.enable = true;   
 
-  # Enable UPNP for gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
+  # Enable UPNP for gupnp-tools # UPNP tools USAGE: gupnp-universal-cp
   programs = {
-    gnupg.agent.enable = true; 
-    mtr.enable = true; 
-    ssh.startAgent = true;  
+    gnupg.agent.enable = true;  # Enable the GnuPG agent service for managing GPG keys.
+    mtr.enable = true;          # Enable the MTR (My Traceroute) network diagnostic tool.
+    ssh.startAgent = true;      # Enable the SSH agent for managing SSH keys.
   };
 
   #---------------------------------------------------------------------
@@ -282,9 +275,9 @@ in
   # necessary
   #---------------------------------------------------------------------
   system = {
-    autoUpgrade.allowReboot = false;  # Very annoying if set to true
-    autoUpgrade.enable = true;
-    copySystemConfiguration = true;
-    stateVersion = "23.05";  # Update this to match your system's current version.
+    autoUpgrade.allowReboot = false;    # Prevent automatic reboots after system upgrades.
+    autoUpgrade.enable = true;          # Enable automatic system upgrades.
+    copySystemConfiguration = true;     # Copy the current system configuration to /etc/nixos after rebuilds.
+    stateVersion = "23.05";             # Specify the NixOS release version to maintain compatibility.
   };  
 }

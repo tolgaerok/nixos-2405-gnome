@@ -27,9 +27,8 @@ in
 
 #---------------------------------------------------------------------
 # Tolga Erok
-# 25/10/23
-# My personal flathub automator and buffer to stop KDE Plasma
-# locking up and black-screen of death 
+# 15-Jun-2024
+# My personal systemD scripts
 #
 # ¯\_(ツ)_/¯
 #---------------------------------------------------------------------
@@ -40,7 +39,7 @@ in
   ];
 
   services.flatpak.enable = true;
-
+  
   # ---------------------------------------------------------------------
   # Add a systemd tmpfiles rule that creates a directory /var/spool/samba 
   # with permissions 1777 and ownership set to root:root. 
@@ -49,11 +48,11 @@ in
 
     # Define rules for managing directories, permissions, and file removal in system temporary directories
     tmpfiles.rules = [
-      "D! /tmp 1777 root root 0" # Create /tmp with 1777 permissions, owned by root user and group, and clear it at boot
+      "D! /tmp 1777 root root 0"            # Create /tmp with 1777 permissions, owned by root user and group, and clear it at boot
       "d /Universal 0755 ${name} ${name} -" # Create /Universal with 0755 permissions, owned by ${name} user and group
-      "d /nix/var/nix/profiles/per-user/${name} 0755 ${name} root -" # Create /nix/var/nix/profiles/per-user/${username} with 0755 permissions, owned by ${username} user and root group
+      "d /nix/var/nix/profiles/per-user/${name} 0755 ${name} root -"  # Create /nix/var/nix/profiles/per-user/${username} with 0755 permissions, owned by ${username} user and root group
       "d /var/spool/samba 1777 root root -" # Create /var/spool/samba with 1777 permissions, owned by root user and group
-      "r! /tmp/**/*" # Recursively remove all files and directories in /tmp
+      "r! /tmp/**/*"                        # Recursively remove all files and directories in /tmp
     ];
 
     # Default timeout for stopping services managed by systemd to 10 seconds
@@ -68,11 +67,11 @@ in
     slices."nix-daemon".sliceConfig = {
 
       # Define resource limits and management settings for systemd services
-      MemoryHigh = "2G"; # Set the high memory limit to 2GB
-      MemoryMax = "3G"; # Set the maximum memory limit to 3GB
-      CPUQuota = "50%"; # Limit the CPU usage to 50%
-      ManagedOOMMemoryPressure = "kill"; # Configure OOM management to kill the service under high memory pressure
-      ManagedOOMMemoryPressureLimit = "95%"; # Trigger OOM management when memory pressure reaches 95%
+      MemoryHigh = "2G";                      # Set the high memory limit to 2GB
+      MemoryMax = "3G";                       # Set the maximum memory limit to 3GB
+      CPUQuota = "50%";                       # Limit the CPU usage to 50%
+      ManagedOOMMemoryPressure = "kill";      # Configure OOM management to kill the service under high memory pressure
+      ManagedOOMMemoryPressureLimit = "95%";  # Trigger OOM management when memory pressure reaches 95%
     };
 
     # Associate nix-daemon systemd service with resource constraints and OOM settings
@@ -80,7 +79,7 @@ in
 
       # Define slice and OOM score adjustment for systemd services
       Slice = "nix-daemon.slice"; # Assign the service to the nix-daemon.slice
-      OOMScoreAdjust = 1000; # Set the OOM (Out of Memory) score adjustment to 1000
+      OOMScoreAdjust = 1000;      # Set the OOM (Out of Memory) score adjustment to 1000
     };
   };
 
@@ -201,10 +200,10 @@ in
     };
 
     # Disable specific systemd services
-    "NetworkManager-wait-online".enable = false; # Disable the NetworkManager-wait-online service
-    "systemd-udev-settle".enable = false; # Disable the systemd-udev-settle service
-    "getty@tty1".enable = false; # Disable the getty@tty1 service
-    "autovt@tty1".enable = false; # Disable the autovt@tty1 service
+    "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
+    "systemd-udev-settle".enable = false;         # Disable the systemd-udev-settle service
+    "getty@tty1".enable = false;                  # Disable the getty@tty1 service
+    "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
 
     # Configure the flathub remote
     configure-flathub-repo = {

@@ -36,9 +36,7 @@ in
 {
   imports = [
     #  ./tmpfs-mount.service
-  ];
-
-  services.flatpak.enable = true;
+  ];  
   
   # ---------------------------------------------------------------------
   # Add a systemd tmpfiles rule that creates a directory /var/spool/samba 
@@ -171,33 +169,33 @@ in
     };
 
     # Custom I/O scheduler
-    "io-scheduler" = {
-      description = "Set I/O Scheduler on boot - Tolga Erok";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"Configuring I/O Scheduler to: \"; echo \"none\" | ${pkgs.coreutils}/bin/tee /sys/block/sda/queue/scheduler; printf \"I/O Scheduler has been set to ==>  \"; cat /sys/block/sda/queue/scheduler; echo \"\"'";
-      };
-      enable = true;
-    };
+    #"io-scheduler" = {
+    #  description = "Set I/O Scheduler on boot - Tolga Erok";
+    #  wantedBy = [ "multi-user.target" ];
+    #  serviceConfig = {
+    #    Type = "oneshot";
+    #    ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"Configuring I/O Scheduler to: \"; echo \"none\" | ${pkgs.coreutils}/bin/tee /sys/block/sda/queue/scheduler; printf \"I/O Scheduler has been set to ==>  \"; cat /sys/block/sda/queue/scheduler; echo \"\"'";
+    #  };
+    #  enable = true;
+    #};
 
     # Create missing home directories and set ownership
-    check-create-user-home-dirs = {
-      description = "Ensure user home directories are created and owned by the user";
-      after = [ "network.target" ];
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = ''
-          ${pkgs.bash}/bin/bash -c 'if id -u ${name} >/dev/null 2>&1 && id -g ${name} >/dev/null 2>&1; then \
-            for dir in Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do \
-              mkdir -p /home/${name}/$dir && chown ${name}:${name} /home/${name}/$dir; \
-            done; \
-          fi'
-        '';
-      };
-      enable = true;
-    };
+    #check-create-user-home-dirs = {
+    #  description = "Ensure user home directories are created and owned by the user";
+    #  after = [ "network.target" ];
+    #  wantedBy = [ "default.target" ];
+    #  serviceConfig = {
+    #    Type = "oneshot";
+    #    ExecStart = ''
+    #      ${pkgs.bash}/bin/bash -c 'if id -u ${name} >/dev/null 2>&1 && id -g ${name} >/dev/null 2>&1; then \
+    #        for dir in Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do \
+    #          mkdir -p /home/${name}/$dir && chown ${name}:${name} /home/${name}/$dir; \
+    #        done; \
+    #      fi'
+    #    '';
+    #  };
+    #  enable = true;
+    #};
 
     # Disable specific systemd services
     "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
@@ -250,7 +248,7 @@ in
 
     # Test (create directories)
     text = ''
-      for dir in MUM DAD WORK SNU; do
+      for dir in MUM DAD WORK SNU Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do
         mkdir -p /home/${name}/$dir
         chown ${name}:${name} /home/${name}/$dir
       done

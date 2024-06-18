@@ -20,6 +20,9 @@ in
 
   boot = {
     initrd = {
+    #---------------------------------------------------------------------
+    # Initrd configuration, enables systemd services in the initial ramdisk (initrd).
+    #---------------------------------------------------------------------  
       systemd.enable = true;    # Enables systemd in the initrd for a modern boot process
       verbose = false;          # Silent boot, change to true if you want detailed boot messages
       availableKernelModules = [
@@ -38,11 +41,7 @@ in
 
     };
 
-    kernelParams = [
-        "mitigations=off"   # Disables certain security mitigations, potentially improving performance but reducing security.
-        "quiet"             # Suppresses verbose kernel messages during boot, providing a quieter boot process.
-        # "elevator=none"   # Change to kyber, mq-deadline, or none scheduler
-      ];
+    kernelParams = [  ];
 
     kernelModules = [
       "i915"                      # Kernel module for Intel integrated graphics.

@@ -21,7 +21,14 @@ in
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
+      displayManager.gdm = {
+        enable = true;
+        settings = {
+          daemon = {
+            WaylandEnable = true;
+          };
+        };
+      };
       desktopManager.gnome.enable = true;
       xkb.layout = "au";
       xkb.variant = "";
@@ -46,7 +53,7 @@ in
     xdgOpenUsePortal = true;
 
     extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk
+      #xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
     ];
   };

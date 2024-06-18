@@ -1,7 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 
 {
+  environment.systemPackages = with pkgs; [ nix-ld ];
 
   programs = {
 
@@ -23,7 +29,6 @@ with lib;
       enable = true;
       nix-direnv.enable = true;
     };
-
   };
 
   programs.nix-ld = {
@@ -51,7 +56,6 @@ with lib;
       vulkan-loader
       gdk-pixbuf
       xorg.libX11
-
     ];
   };
 }

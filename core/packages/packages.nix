@@ -23,7 +23,7 @@ with lib;
                              # provides: lpadd append2simg lpmake mke2fs.android mkdtboimg simg2img lpdump lpunpack ext2simg 
                              # e2fsdroid adb unpack_bootimg repack_bootimg avbtool img2simg fastboot mkbootimg lpflash
 
-      droidcam               # Linux client for DroidCam app
+      # droidcam               # Linux client for DroidCam app
       scrcpy                 # Display and control Android devices over USB or TCP/IP
       # waydroid             # Waydroid is a container-based approach to boot a full Android system on a regular GNU/Linux system
 

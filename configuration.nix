@@ -72,7 +72,12 @@ in
   #---------------------------------------------------------------------
   # Custom kernel selection from user
   #---------------------------------------------------------------------
-  boot.kernelPackages = latest-std-kernel;     
+  boot.kernelPackages = latest-std-kernel; 
+
+  services.nextdns = {
+    enable = true;
+    arguments = ["-config" "nixThinkpad-8f1153.dns.nextdns.io"];
+  };    
 
   #---------------------------------------------------------------------
   # Ozone-Wayland backend when running in a Wayland session. 
@@ -148,7 +153,7 @@ in
     extraUsers.${name} = {
       name = "${name}";
       group = "${name}";  
-    };
+    };  
 
     users."${name}" = {
       isNormalUser = true;

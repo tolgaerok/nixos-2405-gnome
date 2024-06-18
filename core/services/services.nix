@@ -39,7 +39,10 @@ in
     timesyncd.enable = true;
 
     # GVFS: GNOME Virtual File System support
-    gvfs.enable = true;
+    gvfs = {
+      enable = true;
+      package = lib.mkForce pkgs.gnome3.gvfs;
+    };
 
     # PipeWire: Manages audio and media
     pipewire = {

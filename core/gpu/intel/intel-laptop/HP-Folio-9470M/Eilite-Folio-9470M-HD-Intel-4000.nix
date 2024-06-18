@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
@@ -15,7 +16,8 @@ in
 # Works Well on various Intel Mesa HD GPUs
 #---------------------------------------------------------------------
 
-{
+{  
+
   options.drivers.intel = {
     enable = mkEnableOption "Enable Intel Graphics Drivers";
   };
@@ -50,7 +52,7 @@ in
       upower.enable = true;                 # Enable UPower, a daemon for power management and battery monitoring
 
     xserver = {
-      videoDrivers = [ "modesetting" ];     # Use the modesetting driver for X server, which is often used with Intel GPUs
+      videoDrivers = [ "i915" ];     # Use the modesetting driver for X server, which is often used with Intel GPUs
       exportConfiguration = true;           # Export the X server configuration, making it available to other components
   };
 };
@@ -59,7 +61,7 @@ in
     #---------------------------------------------------------------------
     # Update microcode when available
     #---------------------------------------------------------------------
-    hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
+    # hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
     #---------------------------------------------------------------------
     # Hardware video acceleration and compatibility for Intel GPUs
@@ -115,6 +117,7 @@ in
         SOUND_POWER_SAVE_ON_BAT = 1;              # Enable power saving for sound devices when on battery power (1 = enabled)
         TPACPI_ENABLE = 1;                        # Enable ThinkPad-specific ACPI features (1 = enabled)
         TPSMAPI_ENABLE = 1;                       # Enable ThinkPad-specific battery management via tp-smapi (1 = enabled)
+        USB_AUTOSUSPEND = 1;
         WOL_DISABLE = "Y";                        # Disable Wake-on-LAN (Y = disabled)
       };
     };

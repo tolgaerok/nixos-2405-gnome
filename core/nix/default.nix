@@ -12,9 +12,7 @@ let
 in
 {
 
-  imports = [
-    ./nixpkgs-config
-  ];
+  imports = [ ./nixpkgs-config ];
 
   #---------------------------------------------------------------------  
   # Nix-specific settings and garbage collection options - 
@@ -25,6 +23,10 @@ in
   # System optimisations
   #---------------------------------------------------------------------
   nix = {
+    package = pkgs.nixVersions.latest;
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
     settings = {
       allowed-users = [
         "@wheel"
@@ -41,7 +43,9 @@ in
       sandbox = "relaxed";
 
       # Accelerate package building (optimized for 8GB RAM and dual-core processor with Hyper-Threading)
-      max-jobs = 4;  # Set to 4 as the i7-3667U has 2 cores with 4 threads.
+      max-jobs = 4; # Set to 4 as the i7-3667U has 2 cores with 4 threads.
+      supportedFeatures = [ "big-parallel" ];
+      speedFactor = 2;
 
       trusted-users = [
         "${name}"

@@ -248,6 +248,14 @@ in
       ${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh
     '';
 
+    # Test (create directories)
+    text = ''
+      for dir in MUM DAD WORK SNU; do
+        mkdir -p /home/${name}/$dir
+        chown ${name}:${name} /home/${name}/$dir
+      done
+    '';
+
     # Create custom auto start files
     thank-you = {
       text = ''

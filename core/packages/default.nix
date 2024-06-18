@@ -7,7 +7,5 @@
 
   imports = [
     ./packages.nix
-
   ];
-
 }

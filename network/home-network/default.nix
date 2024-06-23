@@ -10,7 +10,7 @@
     device = "//192.168.0.17";
     fsType = "cifs";
     options = let
-      automountOpts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,x-systemd.requires=network.target";
+      automountOpts = "cache=loose,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,x-systemd.requires=network.target";
 
       # Replace with your actual user ID, use `id -u <YOUR USERNAME>` to get your user ID  
       uid = "1000"; 

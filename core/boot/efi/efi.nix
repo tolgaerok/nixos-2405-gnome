@@ -33,16 +33,23 @@ in
     };
 
     kernelParams = [
-      "loglevel=3"
-      "mitigations=off"   # Disables certain security mitigations, potentially improving performance but reducing security.
-      "quiet"             # Suppresses verbose kernel messages during boot, providing a quieter boot process.
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "splash"
-      "udev.log_level=3"
-      "vt.global_cursor_default=0"
-      # "elevator=none"   # Change to kyber, mq-deadline, or none scheduler
-      # "systemd.show_status=auto"
+      "elevator=kyber"           # Change IO scheduler to Kyber
+      "io_delay=none"            # Disable I/O delay accounting
+      "iomem=relaxed"            # Allow more relaxed I/O memory access
+      "irqaffinity=0-3"          # Set IRQ affinity to CPUs 0-3 (Intel Core i7-3667U specific)
+      "loglevel=3"               # Set kernel log level to 3 (default)
+      "mitigations=off"          # Disable CPU mitigations for security vulnerabilities
+      "noirqdebug"               # Disable IRQ debugging
+      "pti=off"                  # Disable Kernel Page Table Isolation (PTI)
+      "quiet"                    # Suppress verbose kernel messages during boot
+      "rd.systemd.show_status=false"  # Disable systemd boot status display
+      "rd.udev.log_level=3"      # Set udev logging level to 3
+      "rootdelay=0"              # No delay when mounting root filesystem
+      "splash"                   # Enable graphical boot splash screen
+      "threadirqs"               # Enable threaded interrupt handling
+      "udev.log_level=3"         # Set udev logging level to 3
+      "vt.global_cursor_default=0"  # Disable blinking cursor in text mode
+      # "systemd.show_status=auto"   # Commented out, not used in this configuration
     ];
 
     # plymouth

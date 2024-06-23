@@ -11,9 +11,14 @@
   networking = {
     networkmanager = {
       enable = true;
+
+      # NextDns config
       appendNameservers = [
-        "1.1.1.1"
-        "8.8.8.8"
+        "DNS=45.90.28.0#48b246.dns.nextdns.io"
+        "DNS=2a07:a8c0::#48b246.dns.nextdns.io"
+        "DNS=45.90.30.0#48b246.dns.nextdns.io"
+        "DNS=2a07:a8c1::#48b246.dns.nextdns.io"
+        "DNSOverTLS=yes"
       ];
       connectionConfig = {
         "ethernet.mtu" = 1462;
@@ -34,7 +39,7 @@
 
     extraHosts = ''
       127.0.0.1       localhost
-      127.0.0.1       HP-G1-800
+      127.0.0.1       nixosFolio
       192.168.0.1     router
       192.168.0.2     DIGA            # Smart TV
       192.168.0.5     folio-F39       # HP Folio

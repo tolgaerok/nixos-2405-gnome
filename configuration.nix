@@ -72,12 +72,7 @@ in
   #---------------------------------------------------------------------
   # Custom kernel selection from user
   #---------------------------------------------------------------------
-  boot.kernelPackages = latest-std-kernel; 
-
-  services.nextdns = {
-    enable = true;
-    arguments = ["-config" "nixThinkpad-8f1153.dns.nextdns.io"];
-  };    
+  boot.kernelPackages = latest-std-kernel;   
 
   #---------------------------------------------------------------------
   # Ozone-Wayland backend when running in a Wayland session. 

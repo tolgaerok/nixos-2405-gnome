@@ -113,6 +113,11 @@ in
     #  };
     #};
 
+    # Prefetch updates
+    update-prefetch = {
+      enable = true;
+    };
+
     # Enables Multi-Gen LRU and sets minimum TTL for memory management
     mglru = {
       enable = true;

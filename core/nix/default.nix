@@ -43,7 +43,8 @@ in
       sandbox = "relaxed";
 
       # Accelerate package building (optimized for 8GB RAM and dual-core processor with Hyper-Threading)
-      max-jobs = 4; # Set to 4 as the i7-3667U has 2 cores with 4 threads.
+      max-jobs = lib.mkDefault 4;    # Set to 4 as the i7-3667U has 2 cores with 4 threads.
+      buildCores = lib.mkDefault 4;
       supportedFeatures = [ "big-parallel" ];
       speedFactor = 2;
 

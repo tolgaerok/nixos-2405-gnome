@@ -115,7 +115,7 @@ in
 
     # Prefetch updates
     update-prefetch = {
-      enable = true;
+      enable = false;
     };
 
     # Enables Multi-Gen LRU and sets minimum TTL for memory management

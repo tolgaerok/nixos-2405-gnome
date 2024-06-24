@@ -39,27 +39,27 @@ in {
   # Create systemd service and timer for nixos-archive
   #---------------------------------------------------------------------
 
-  systemd = {
-    services.nixos-archive = {
-      description = "NixOS backups";
-      serviceConfig = {
-        ExecStart = "${nixos-archive}/bin/nixos-archive >> /home/tolga/test.log 2>&1";
-        Type = "oneshot";
-      };
-      path = [ nixos-archive ];
-    };
+  #systemd = {
+  #  services.nixos-archive = {
+  #    description = "NixOS backups";
+  #    serviceConfig = {
+  #      ExecStart = "${nixos-archive}/bin/nixos-archive >> /home/tolga/test.log 2>&1";
+  #      Type = "oneshot";
+  #    };
+  #    path = [ nixos-archive ];
+  #  };
 
-    timers.nixos-archive = {
-      description = "Run nixos-archive hourly";
-      timerConfig = {
-        OnCalendar = "hourly";
-      };
-      wantedBy = [ "timers.target" ];
-    };
-  };
+  #  timers.nixos-archive = {
+  #    description = "Run nixos-archive hourly";
+  #    timerConfig = {
+  #      OnCalendar = "hourly";
+  #    };
+  #    wantedBy = [ "timers.target" ];
+  #  };
+  #};
 
   # Disable cron jobs if not needed
-  services.cron = {
-    enable = false;
-  };
+  #services.cron = {
+  #  enable = false;
+  #};
 }

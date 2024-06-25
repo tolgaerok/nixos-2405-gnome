@@ -214,6 +214,7 @@ in
         # Gnome related / extensions
         # gnomeExtensions.emoji-copy
         # unstable.gnomeExtensions.workspace-switcher-manager
+        gnome.gnome-software
         gnome-extension-manager
         gnome-usage
         gnome.dconf-editor

@@ -1,30 +1,28 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-
   imports = [
-
     # Import miniDLNA
-    # ---------------------------------------------
     # ./plex.nix
     ./miniDLNA.nix
-
   ];
 
   #--------------------------------------------------------------------- 
   # Enable networking
   #---------------------------------------------------------------------
   networking = {
-    # wireless = {
-    #  enable = true;
-    #  userControlled.enable = true;
-    #  networks = { "OPTUS_B27161" = { psk = "izardleary84422"; }; };
-    # };
-
     networkmanager = {
       enable = true;
       # Append Cloudflare and Google DNS servers
-      appendNameservers = [ "1.1.1.1" "8.8.8.8" ];
+      appendNameservers = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
 
       #--------------------------------------------------------------------- 
       # Prevent fragmentation and reassembly, which can improve network performance
@@ -33,30 +31,13 @@
         "ethernet.mtu" = 1462;
         "wifi.mtu" = 1462;
       };
-
     };
 
-    timeServers = [
-      "0.nixos.pool.ntp.org"
-      "1.nixos.pool.ntp.org"
-      "2.nixos.pool.ntp.org"
-      "3.nixos.pool.ntp.org"
-      "time.google.com"
-      "time2.google.com"
-      "time3.google.com"
-      "time4.google.com"
-    ];
+    timeServers = lib.mkDefault [ "pool.ntp.org" ];
 
-    # defaultGateway = "192.168.0.1";
-    # interfaces.enp3s0.ipv4.addresses = [{
-    #  address = "192.168.0.13";
-    #  prefixLength = 24;
-    # }];
-
-    # terminal: arp -a
     extraHosts = ''
       127.0.0.1	      localhost
-      127.0.0.1       HP-G1-800
+      127.0.0.1       FolioNixOS
       192.168.0.1     router
       192.168.0.2     DIGA            # Smart TV
       192.168.0.5     folio-F39       # HP Folio
@@ -77,43 +58,16 @@
       ff02::2         ip6-allrouters
       ff02::3         ip6-allhosts
     '';
-
   };
 
   # Install network time protocol
   environment.systemPackages = with pkgs; [
     ntp
     gnome.rygel
-
   ];
 
   services.gnome.rygel.enable = true;
-  
+
   # Wifi network monitor connector
   services.dbus.packages = [ pkgs.miraclecast ];
-
 }
-
-# wireless = {
-# via wpa_supplicant.
-#      enable = false;
-#      iwd = {
-#        enable = false;
-#       settings = {
-#          Network = {
-#            EnableIPv6 = true;
-#            RoutePriorityOffset = 300;
-#          };
-#         Settings = {
-#          AutoConnect = true;
-#         };
-#       };
-#      };
-#    };
-## Configure network proxy if necessary.
-# proxy = {
-#   default = "http://user:password@proxy:port/";
-#   noProxy = "127.0.0.1,localhost,internal.domain";
-# };
-#  };
-

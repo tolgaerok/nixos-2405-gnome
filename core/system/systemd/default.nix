@@ -35,7 +35,7 @@ in
 
 {
   imports = [
-    #  ./tmpfs-mount.service
+    # ./tmpfs-mount.service
   ];  
   
   # ---------------------------------------------------------------------
@@ -93,7 +93,7 @@ in
     systemd-logind.restartIfChanged = false;
     wpa_supplicant.restartIfChanged = false;
 
-    #lock-before-sleeping = {
+    # lock-before-sleeping = {
     #  restartIfChanged = false;
     #  unitConfig = {
     #    Description = "Helper service to bind locker to sleep.target";
@@ -111,11 +111,11 @@ in
     #    DISPLAY = ":0";
     #    XAUTHORITY = "/home/${username}/.Xauthority";
     #  };
-    #};
+    # };
 
-    # Prefetch updates
+    # Prefetch updates, Improves Update Efficiency
     update-prefetch = {
-      enable = false;
+      enable = true;
     };
 
     # Enables Multi-Gen LRU and sets minimum TTL for memory management
@@ -174,7 +174,7 @@ in
     };
 
     # Custom I/O scheduler
-    #"io-scheduler" = {
+    # "io-scheduler" = {
     #  description = "Set I/O Scheduler on boot - Tolga Erok";
     #  wantedBy = [ "multi-user.target" ];
     #  serviceConfig = {
@@ -182,10 +182,10 @@ in
     #    ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"Configuring I/O Scheduler to: \"; echo \"none\" | ${pkgs.coreutils}/bin/tee /sys/block/sda/queue/scheduler; printf \"I/O Scheduler has been set to ==>  \"; cat /sys/block/sda/queue/scheduler; echo \"\"'";
     #  };
     #  enable = true;
-    #};
+    # };
 
     # Create missing home directories and set ownership
-    #check-create-user-home-dirs = {
+    # check-create-user-home-dirs = {
     #  description = "Ensure user home directories are created and owned by the user";
     #  after = [ "network.target" ];
     #  wantedBy = [ "default.target" ];
@@ -200,7 +200,7 @@ in
     #    '';
     #  };
     #  enable = true;
-    #};
+    # };
 
     # Disable specific systemd services
     "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
@@ -227,14 +227,14 @@ in
       '';
     };
 
-    #customInfoScript = {
+    # customInfoScript = {
     #  description = "Custom Info Script";
     #  after = [ "multi-user.target" ];
     #  wantedBy = [ "multi-user.target" ];
     #  serviceConfig = {
     #    ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh";
     #  };
-    #};
+    # };
 
     # Modify autoconnect priority of the connection to tolgas home network
     modify-autoconnect-priority = {
@@ -294,7 +294,7 @@ in
         Terminal=false
         Categories=Network;System;
         StartupNotify=false
-        X-GNOME-Autostart-Delay=1
+        X-GNOME-Autostart-Delay=2
         EOF
       '';
     };
@@ -306,7 +306,7 @@ in
         Name=Variety
         Comment=Variety Wallpaper Changer
         Categories=GNOME;GTK;Utility;
-        Exec=/bin/bash -c "sleep 1 && /nix/store/dgyjabijdnzpb4qfgk1kldbpmn6i6ss4-variety-0.8.12/bin/variety --profile /home/tolga/.config/variety/"
+        Exec=variety %U
         MimeType=text/uri-list;x-scheme-handler/variety;x-scheme-handler/vrty;
         Icon=variety
         Terminal=false
@@ -315,6 +315,26 @@ in
         Actions=Next;Previous;PauseResume;History;Preferences;
         Keywords=Wallpaper;Changer;Change;Download;Downloader;Variety;
         StartupWMClass=Variety
+
+        [Desktop Action Next]
+        Exec=variety --next
+        Name=Next
+
+        [Desktop Action Previous]
+        Exec=variety --previous
+        Name=Previous
+
+        [Desktop Action PauseResume]
+        Exec=variety --toggle-pause
+        Name=Pause / Resume
+
+        [Desktop Action History]
+        Exec=variety --history
+        Name=History
+
+        [Desktop Action Preferences]
+        Exec=variety --preferences
+        Name=Preferences
         EOF
       '';
     };

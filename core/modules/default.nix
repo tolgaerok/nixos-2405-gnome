@@ -8,7 +8,7 @@
 
   imports = [
     # ./apple-fonts
-    # ./vm
+     ./vm
     ./appimage-registration   # Credits to Brian Francisco
     ./custom-pkgs             # personal coded scriptBin's
     ./iphone/iphone.nix

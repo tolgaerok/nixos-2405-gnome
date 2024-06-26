@@ -20,9 +20,9 @@ with lib;
     swtpm
     virt-manager
     virt-viewer
+    # virtualbox
     win-spice
     win-virtio
-    virtualbox
 
   ];
 

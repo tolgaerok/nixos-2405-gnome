@@ -80,8 +80,11 @@ in
       intel-gmmlib        # Intel Graphics Memory Management Library
       # vulkan-validation-layers # (Commented out) Validation layers for Vulkan development
   ];
+   
 };
 
+    # environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+    environment.sessionVariables = { LIBVA_DRIVER_NAME = "i965"; }; # Force Intel i965 driver
 
     #---------------------------------------------------------------------
     # Power management & Analyze power consumption on Intel-based laptops
@@ -122,4 +125,6 @@ in
       };
     };
   };
+   
+
 }

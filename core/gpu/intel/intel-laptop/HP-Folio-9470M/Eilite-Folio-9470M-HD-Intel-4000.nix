@@ -78,7 +78,6 @@ in
       vaapiVdpau          # VDPAU (Video Decode and Presentation API for Unix) backend for VA-API
       libvdpau-va-gl      # VDPAU driver that uses VA-API as backend
       intel-gmmlib        # Intel Graphics Memory Management Library
-      # vulkan-validation-layers # (Commented out) Validation layers for Vulkan development
   ];
    
 };

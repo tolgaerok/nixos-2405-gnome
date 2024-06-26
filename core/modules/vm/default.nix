@@ -1,9 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 {
-
   #---------------------------------------------------------------------
   # Install necessary packages
   #---------------------------------------------------------------------
@@ -23,7 +27,6 @@ with lib;
     # virtualbox
     win-spice
     win-virtio
-
   ];
 
   #---------------------------------------------------------------------
@@ -41,31 +44,32 @@ with lib;
         package = pkgs.qemu_kvm;
         runAsRoot = false;
       };
-
     };
+
     spiceUSBRedirection.enable = true;
   };
 
-  environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
+  environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";
   services.spice-vdagentd.enable = true;
   systemd.services.libvirtd.restartIfChanged = false;
 
-  # vmVariant configuration is added only when building VM with nixos-rebuild
-
-  # build-vm
-  virtualisation = {
-    vmVariant = {
-      virtualisation = {
-        cores = 7;
-        memorySize = 8192; # Use 8GB memory (value is in MB)
-      };
-
-      docker = {
-        enable = false;
-        enableOnBoot = false;
-        autoPrune = { enable = true; };
+  #---------------------------------------------------------------------
+  # VM variant configuration - config MEM & Cores
+  #---------------------------------------------------------------------
+  virtualisation.vmVariant = {
+    virtualisation = {
+      cores = 4;
+      memory = {
+        startup = 4096; # 4GB startup memory
+        minimum = 2048; # 2GB minimum memory
+        maximum = 6384; # 6GB maximum memory
       };
     };
-  };
 
+    docker = {
+      enable = false;
+      enableOnBoot = false;
+      autoPrune.enable = true;
+    };
+  };
 }

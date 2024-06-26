@@ -28,7 +28,7 @@ in
     #---------------------------------------------------------------------
     environment.systemPackages = with pkgs; [
       acpi
-      battery
+      sutils
       cpufrequtils
       cpupower-gui
       ethtool
@@ -110,7 +110,7 @@ in
 
       settings = {
         DISK_DEVICES = "nvme0n1 nvme1n1 sda sdb"; # Specify disk devices to manage
-        AHCI_RUNTIME_PM_ON_AC = "on";             # Enable runtime power management for SATA disks when on AC power
+        AHCI_RUNTIME_PM_ON_AC = "auto";             # Enable runtime power management for SATA disks when on AC power
         AHCI_RUNTIME_PM_ON_BAT = "auto";          # Enable automatic runtime power management for SATA disks when on battery power
         RUNTIME_PM_ON_AC = "on";                  # Enable runtime power management for PCIe devices when on AC power
         RUNTIME_PM_ON_BAT = "auto";               # Enable automatic runtime power management for PCIe devices when on battery power
@@ -121,6 +121,9 @@ in
         TPSMAPI_ENABLE = 1;                       # Enable ThinkPad-specific battery management via tp-smapi (1 = enabled)
         USB_AUTOSUSPEND = 1;
         WOL_DISABLE = "Y";                        # Disable Wake-on-LAN (Y = disabled)
+        START_CHARGE_THRESH_BAT0 = "35";
+        STOP_CHARGE_THRESH_BAT0 = "81";
+        
       };
     };
   };

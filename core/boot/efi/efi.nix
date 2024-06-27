@@ -11,6 +11,7 @@ in
   imports = [
     # Intialise tmpfs parameters.
     ../tmpfs/tmpfs.nix
+    ../numlock
   ];
 
   # Various plymouth themes

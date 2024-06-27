@@ -1,0 +1,1 @@
+clear && echo "Battery: $(acpi -b | awk '{print $3}')" && echo "" && echo "Battery Percentage: $(acpi -b | awk '{print $4}')" && echo "" && echo "Remaining Time: $(acpi -b | awk '{print $5, $6, $7 == "until" ? "until fully charged" : $7}')"

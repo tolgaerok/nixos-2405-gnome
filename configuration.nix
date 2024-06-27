@@ -58,7 +58,9 @@ in
 
     ./DE/gnome46.nix
     ./core/boot/efi/efi.nix
-    ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
+    # ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix  
+    ./core/gpu/intel/intel-laptop/generic.nix
+
     ./core/modules
     ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
     ./core/packages
@@ -79,11 +81,14 @@ in
   # This improves performance and compatibility, making your experience 
   # smoother and more integrated with the Wayland compositor you are using.
   #---------------------------------------------------------------------
-  environment.sessionVariables = {
+
+  ###---------- Intel i965 session ----------###
+  environment.variables = {
     # XDG_CURRENT_DESKTOP = "wayland";      # Sets the current desktop environment to Wayland.
     # XDG_SESSION_TYPE = "wayland";         # Defines the session type as Wayland.
-
+    # __GLX_VENDOR_LIBRARY_NAME = "mesa";         # Specifies the GLX vendor library to use, ensuring Mesa's library is used
     CLUTTER_BACKEND = "wayland";                # Specifies Wayland as the backend for Clutter.
+    LIBVA_DRIVER_NAME = "i965";                 # Force Intel i965 driver
     MOZ_ENABLE_WAYLAND = "1";                   # Enables Wayland support in Mozilla applications (e.g., Firefox).
     NIXOS_OZONE_WL = "1";                       # Enables the Ozone Wayland backend for Chromium-based browsers.
     NIXPKGS_ALLOW_UNFREE = "1";                 # Allows the installation of packages with unfree licenses in Nixpkgs.

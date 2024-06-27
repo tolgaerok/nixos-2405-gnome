@@ -7,5 +7,6 @@
 
   imports = [
     ./packages.nix
+    # ./w11-icons.nix
   ];
 }

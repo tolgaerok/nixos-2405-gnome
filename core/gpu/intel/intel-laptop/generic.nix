@@ -21,10 +21,12 @@ in
     # OpenGL
     hardware.opengl = {
       extraPackages = with pkgs; [
+        intel-gmmlib
         intel-media-driver
+        intel-vaapi-driver
+        libvdpau-va-gl
         vaapiIntel
         vaapiVdpau
-        libvdpau-va-gl
       ];
     };
   };

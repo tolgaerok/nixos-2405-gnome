@@ -14,7 +14,7 @@
 with lib;
 let
   username = builtins.getEnv "USER";
-  name = "tolga";
+  name = "tolga";  
 
   createUserXauthority = lib.mkForce ''
     if [ ! -f "/home/${name}/.Xauthority" ]; then
@@ -37,7 +37,7 @@ in
   imports = [
     # ./tmpfs-mount.service
   ];  
-  
+
   # ---------------------------------------------------------------------
   # Add a systemd tmpfiles rule that creates a directory /var/spool/samba 
   # with permissions 1777 and ownership set to root:root. 
@@ -257,7 +257,7 @@ in
         mkdir -p /home/${name}/$dir
         chown ${name}:${name} /home/${name}/$dir
       done
-    '';
+    '';    
 
     # Create custom auto start files
     thank-you = {

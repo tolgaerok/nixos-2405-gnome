@@ -1,6 +1,20 @@
 { config, pkgs, ... }:
 
 let
+
+  installMyFontsScript = ''
+    mkdir -p $out/share/fonts
+    wget -q https://github.com/tolgaerok/apple-fonts/archive/refs/heads/main.zip
+    wget -q https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip
+    unzip -o main.zip -d $out/share/fonts
+    unzip -o WPS-FONTS.zip -d $out/share/fonts
+    fc-cache -f -v
+    rm main.zip
+    rm WPS-FONTS.zip
+  '';
+
+  installMyFonts = pkgs.writeScriptBin "install-my-fonts" installMyFontsScript;
+
   # Create custom varible to house my WPS fonts!
   myfontFiles = pkgs.fetchzip {
     url = "https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip";
@@ -23,9 +37,9 @@ let
 in
 {
   imports = [
-    ./apple-fonts.nix
+    # ./apple-fonts.nix
   ];
-  
+
   # Fonts
   fonts.packages = with pkgs; [
     myfonts # my additional WPS fonts
@@ -49,7 +63,13 @@ in
     }) { inherit pkgs; };
   };
 
-  environment.systemPackages = with pkgs; [ nur.repos.sagikazarmark.sf-pro ];
+  environment.systemPackages = with pkgs; [
+    nur.repos.sagikazarmark.sf-pro
+    wget
+    unzip
+    fontconfig
+    installMyFonts  # Apple && WPS from my repo
+  ];
 }
 
 # notes: to find out your sha256

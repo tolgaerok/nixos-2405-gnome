@@ -4,9 +4,9 @@
 let
   # Fetch Apple San Francisco and New York fonts..
   apple-san-francisco-new-york = pkgs.fetchzip {
-    url = "https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip";
+    url = "https://github.com/tolgaerok/apple-fonts/archive/refs/heads/main.zip";
     sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";
-    stripRoot = true;
+    stripRoot = false;
   };
 
   # Create a derivation for the Apple fonts
@@ -25,7 +25,7 @@ let
   myfontFiles = pkgs.fetchzip {
     url = "https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip";
     sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";
-    stripRoot = true;
+    stripRoot = false;
   };
 
   # Create a derivation for the WPS fonts

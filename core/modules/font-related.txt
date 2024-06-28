@@ -2,8 +2,8 @@ nix-build -E '
  with import <nixpkgs> {}; 
   let 
     apple-san-francisco-new-york = pkgs.fetchzip {
-      url = "https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip"; 
-      sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z"; 
+    url = "https://github.com/tolgaerok/apple-fonts/archive/refs/heads/main.zip"; 
+    sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";
       stripRoot = false; 
     }; 
   apple-fonts = pkgs.stdenv.mkDerivation {
@@ -12,9 +12,60 @@ nix-build -E '
     buildInputs = [ ];
       buildCommand = "
         mkdir -p \$out/share/fonts/apple/
-        cp -R \$src/* \$out/share/fonts
+        cp -R \$src/* \$out/share/fonts/apple/
       "; 
     }; 
   in 
   apple-fonts
  '
+
+
+
+
+
+
+ {
+  config,
+  pkgs,
+  lib,
+  username,
+
+  ...
+}:
+
+# ----------------------------------------------------------------------
+# SystemD settings
+# ----------------------------------------------------------------------
+
+with lib;
+let
+  
+  installFontsScript = ''
+    mkdir -p $out/share/fonts
+    wget -q https://github.com/tolgaerok/apple-fonts/archive/refs/heads/main.zip
+    unzip -o main.zip -d $out/share/fonts
+    fc-cache -f -v
+    rm main.zip
+  '';
+
+  installFonts = pkgs.writeScriptBin "install-apple-fonts" installFontsScript;
+  
+in
+
+# ---------------------------------------------------------------------
+# Tolga Erok
+# 15-Jun-2024
+# My personal systemD scripts
+#
+# ¯\_(ツ)_/¯
+# ---------------------------------------------------------------------
+
+{
+  
+  environment.systemPackages = with pkgs; [
+    wget
+    unzip
+    fontconfig
+    installFonts
+  ];
+}

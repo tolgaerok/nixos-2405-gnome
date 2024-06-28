@@ -7,7 +7,7 @@
   #---------------------------------------------------------------------
 
   imports = [
-    # ./apple-fonts
+    
     ./appimage-registration # Credits to Brian Francisco
     ./basic-fonts.nix
     ./custom-pkgs # personal coded scriptBin's
@@ -15,6 +15,6 @@
     ./openRGB
     ./smart-drv-mon
     ./vm
-    #./test.nix
+    
   ];
 }

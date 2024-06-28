@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  # Create custom varible to house my WPS fonts
+  # Create custom varible to house my WPS fonts!
   myfontFiles = pkgs.fetchzip {
     url = "https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip";
     sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";

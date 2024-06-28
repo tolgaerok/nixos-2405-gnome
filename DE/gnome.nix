@@ -12,7 +12,7 @@ let
       galliumDrivers = [
         "zink"
         "iris"
-        "i915"
+        "i965"
         "swrast"
         "auto"
       ];

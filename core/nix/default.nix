@@ -24,8 +24,12 @@ in
   #---------------------------------------------------------------------
   nix = {
     package = pkgs.nixVersions.latest;
+    distributedBuilds = true;
+    # optional, useful when the builder has a faster internet connection than yours
     extraOptions = ''
       builders-use-substitutes = true
+      experimental-features = nix-command flakes
+      extra-platforms = x86_64-linux i686-linux aarch64-linux riscv64-linux
     '';
     settings = {
       allowed-users = [
@@ -33,7 +37,7 @@ in
         "${name}"
       ];
       auto-optimise-store = true;
-
+      system-features = [ "i686-linux" "x86_64-linux" "big-parallel" "kvm" ];
       experimental-features = [
         "flakes"
         "nix-command"
@@ -48,7 +52,6 @@ in
       supportedFeatures = [ "big-parallel" ];    # Enable support for big parallel builds
       speedFactor = 3;                           # Set speed factor to 2 for build performance optimization
 
-
       trusted-users = [
         "${name}"
         "@wheel"
@@ -60,7 +63,6 @@ in
       warn-dirty = false;         # Disable warning for dirty builds (when sources have uncommitted changes)
       tarball-ttl = 300;          # Set the time-to-live (in seconds) for cached tarballs to 300 seconds (5 minutes)
 
-
       trusted-substituters = [ "http://cache.nixos.org" ];  # List of trusted substituters, where binaries can be fetched securely
       substituters = [ "http://cache.nixos.org" ];          # List of substituters, where binaries can be fetched (may include untrusted sources)
 
@@ -69,13 +71,11 @@ in
     daemonCPUSchedPolicy = "idle";     # Set CPU scheduling policy for daemon processes to idle
     daemonIOSchedPriority = 7;         # Set I/O scheduling priority for daemon processes to 7
 
-
     gc = {
       automatic = true;                  # Enable automatic execution of the task
       dates = "weekly";                  # Schedule the task to run weekly
       randomizedDelaySec = "14m";        # Introduce a randomized delay of up to 14 minutes before executing the task
       options = "--delete-older-than 10d";  # Specify options for the task: delete files older than 10 days
-
     };
   };
 }

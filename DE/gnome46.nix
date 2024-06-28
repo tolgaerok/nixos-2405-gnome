@@ -4,12 +4,13 @@
   lib,
   ...
 }:
-
 with lib;
-
+with builtins;
 let
+  cfg = config.sys.desktop;
 in
 {
+
   # -----------------------------------------------
   # X11 settings
   # -----------------------------------------------
@@ -19,7 +20,7 @@ in
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-      
+
       displayManager.gdm = {
         enable = true;
         wayland = true; # Enable Wayland for GDM
@@ -45,7 +46,16 @@ in
 
     dbus.enable = true;
   };
-
+  hardware = {
+    opengl = {
+      enable = true;
+    };
+  };
+  programs = {
+    xwayland = {
+      enable = true;
+    };
+  };
   # Enable and configure xdg portals
   xdg.portal = {
     enable = true;
@@ -53,7 +63,7 @@ in
     xdgOpenUsePortal = true;
 
     extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk
+     # xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
     ];
   };

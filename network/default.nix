@@ -9,6 +9,11 @@
   imports = [ ./miniDLNA.nix ];
 
   networking = {
+    dhcpcd = {
+      wait = "background";
+      extraConfig = "noarp";
+    };
+
     networkmanager = {
       enable = true;
 
@@ -71,7 +76,6 @@
       # friendly_name = "NixOS-Rygel";
     };
   };
-  
 
   networking.firewall = {
     allowedTCPPorts = [ 8200 ];

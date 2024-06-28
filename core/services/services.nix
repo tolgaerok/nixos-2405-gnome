@@ -69,6 +69,8 @@ in
 
       # Extra udev rules for various hardware configurations
       extraRules = ''
+        ACTION=="add|change", SUBSYSTEM=="bdi", ATTR{min_ratio}="2", ATTR{max_ratio}="50"
+        
         # Disable Ethernet Wake-on-LAN
         ACTION=="add", SUBSYSTEM=="net", NAME=="enp*", RUN+="${pkgs.ethtool}/sbin/ethtool -s \$name wol d"
 

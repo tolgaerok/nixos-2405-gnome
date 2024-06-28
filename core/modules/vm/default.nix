@@ -9,10 +9,8 @@ with lib;
 
 {
 
-  imports = [
-    ./vmguest.nix
-  ];
-  
+  imports = [ ./vmguest.nix ];
+
   #---------------------------------------------------------------------
   # Install necessary packages
   #---------------------------------------------------------------------
@@ -53,7 +51,11 @@ with lib;
 
     spiceUSBRedirection.enable = true;
   };
-
+  environment.etc = {
+    "ovmf/edk2-x86_64-secure-code.fd" = {
+      source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-x86_64-secure-code.fd";
+    };
+  };
   environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";
   services.spice-vdagentd.enable = true;
   systemd.services.libvirtd.restartIfChanged = false;

@@ -29,7 +29,7 @@ in
         "ahci"            # For SATA devices, likely needed.
         "battery"         # For battery management, likely needed for a laptop.
         "ehci_pci"        # Kernel module for PCIe USB 2.0 controllers.
-        "i915"            # For Intel integrated graphics, likely needed.
+        # "i915"            # For Intel integrated graphics, likely needed.
         "nvme"            # For NVMe SSDs, check your hardware.
         "rtsx_pci_sdmmc"  # For Realtek card reader, check your hardware.
         "sd_mod"          # For SCSI disk devices, likely needed.
@@ -44,8 +44,8 @@ in
     kernelParams = [  ];
 
     kernelModules = [
-      "i915"                      # Kernel module for Intel integrated graphics.
-      "i915.modeset=1"            # Enables modesetting for the Intel i915 driver.
+      "i965"                      # Kernel module for Intel integrated graphics.
+      "i965.modeset=1"            # Enables modesetting for the Intel i915 driver.
       "kvm-intel"                 # Kernel module for Intel hardware virtualization support (KVM).
       # "fbcon=nodefer"           # Prevents the kernel from blanking Plymouth out of the framebuffer.
       # "logo.nologo"             # Disables boot logo if any.
@@ -56,7 +56,7 @@ in
       # Control and optimize how an application utilizes the processor resources based on i7-3667U
       "options nptl Thread.ProcessorCount=4 Thread.MaxProcessorCount=4 Thread.MinFreeProcessorCount=1 Thread.JobThreadPriority=0"
       
-      "options i915 enable_dc=4 enable_fbc=1 enable_guc=2 enable_psr=1 disable_power_well=1"    # Configuration for Intel integrated graphics.
+      "options i965 enable_dc=4 enable_fbc=1 enable_guc=2 enable_psr=1 disable_power_well=1"    # Configuration for Intel integrated graphics.
       "options iwlmvm power_scheme=3"                               # Sets a power-saving scheme for Intel Wi-Fi drivers.
       "options iwlwifi power_save=1 uapsd_disable=1 power_level=5"  # Manages power-saving features for Intel Wi-Fi drivers.
       "options snd_hda_intel power_save=1 power_save_controller=Y"  # Configures power-saving for Intel High Definition Audio (HDA) hardware.
@@ -65,15 +65,19 @@ in
     extraModulePackages = [ ];
 
     kernel.sysctl = {
+      "kernel.panic" = "60";
       "kernel.pty.max" = 24000;                       # Sets the maximum number of pseudo-terminal (pty) devices.
       "kernel.sysrq" = 1;                             # Enables the SysRq key, which can be used for various low-level system commands.
       "net.ipv4.tcp_congestion_control" = "westwood"; # Sets the TCP congestion control algorithm to Westwood for IPv4 in the Linux kernel.
       "vm.dirty_background_bytes" = 268435456;        # Sets the amount of dirty memory at which background writeback starts (256 MB).
       "vm.dirty_bytes" = 536870912;                   # Sets the amount of dirty memory at which a process generating dirty memory will itself start writeback (512 MB).
+      "vm.dirty_ratio" = "25"; # 25% of all memory optionally as write cache
+      "vm.max_map_count" = 1000000;
       "vm.swappiness" = 10;                           # Reduces the tendency of the kernel to swap out inactive memory pages.
       "vm.vfs_cache_pressure" = 50;                   # Controls the tendency of the kernel to reclaim the memory which is used for caching of directory and inode objects.
       # "net.core.default_qdisc" = "cake";            # Sets the default queuing discipline (qdisc) for network interfaces to CAKE for improved network fairness and latency.
       # "vm.page-cluster" = 1;                        # Controls the number of pages read in a single attempt, impacting swap read-ahead. 
+
     };
 
   };
@@ -151,7 +155,7 @@ in
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
+  nixpkgs.config.allowUnfree = true;
   #---------------------------------------------------------------------
   # Hardware Configuration
   #---------------------------------------------------------------------
@@ -159,6 +163,9 @@ in
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;      
     bluetooth.powerOnBoot = false;      # Power management & Analyze power consumption on Intel-based laptops
     pulseaudio.enable = false; 
+    enableAllFirmware = true;
+    # bluetooth.enable = false;
+    usb-modeswitch.enable = true;
 
     sane = {
       enable = true;                    #   Scanner and printing drivers

@@ -26,7 +26,7 @@ in
         intel-vaapi-driver
         libvdpau-va-gl
         vaapiIntel
-        vaapiVdpau
+        vaapiVdpau 
       ];
     };
   };

@@ -42,18 +42,18 @@ in
 
   # Fonts
   fonts.packages = with pkgs; [
-    myfonts # my additional WPS fonts
+    # nerdfonts
+    corefonts
+    fira-code
+    fira-code-symbols
+    font-awesome
     jetbrains-mono
+    liberation_ttf
+    myfonts # my additional WPS fonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
     proggyfonts
-    # nerdfonts
-    corefonts
-    font-awesome
   ];
 
   # The Nix User Repositories (NUR) is a community-driven collection of packages
@@ -64,11 +64,11 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    nur.repos.sagikazarmark.sf-pro
-    wget
-    unzip
     fontconfig
     installMyFonts  # Apple && WPS from my repo
+    nur.repos.sagikazarmark.sf-pro
+    unzip
+    wget
   ];
 }
 

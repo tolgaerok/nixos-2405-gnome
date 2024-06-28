@@ -2,60 +2,36 @@
 
 let
   # Create custom varible to house my WPS fonts!
-  myfontFiles = pkgs.fetchzip {
-    url = "https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip";
+  apple-san-francisco-new-york = pkgs.fetchzip {
+    url = "https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip";
     sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";
     stripRoot = false;
   };
 
   # myfonts will be the WPS fonts
-  myfonts = pkgs.stdenv.mkDerivation {
-    name = "Additional WPS Fonts";
-    src = myfontFiles;
+  apple-fonts = pkgs.stdenv.mkDerivation {
+    name = "Apple-New-York";
+    src = apple-san-francisco-new-york;
     buildInputs = [ ];
 
-    # mkdir will be: /nix/store/xxxxxxx-Additional-WPS-Fonts
+    # mkdir will be: /nix/store/xxxxxxx-Apple-New-York
     buildCommand = ''
       mkdir -p $out/share/fonts
-      cp -R $src $out/share/fonts
+      cp -R $src $out/share/fonts/newyork/
     '';
   };
 in
 {
-  imports = [
-    ./apple-fonts.nix
-  ];
-  
   # Fonts
   fonts.packages = with pkgs; [
-    myfonts # my additional WPS fonts
-    jetbrains-mono
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    proggyfonts
-    # nerdfonts
-    corefonts
-    font-awesome
+    apple-fonts # my additional apple fonts
   ];
-
-  # The Nix User Repositories (NUR) is a community-driven collection of packages
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    }) { inherit pkgs; };
-  };
-
-  environment.systemPackages = with pkgs; [ nur.repos.sagikazarmark.sf-pro ];
 }
 
 # notes: to find out your sha256
-# nix-prefetch-url --unpack https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip
-# path is '/nix/store/jywgj34lbk28llp6mb2xfwzc81drkf8z-WPS-FONTS.zip'
-# sha256 = 02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z
+# nix-prefetch-url --unpack https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip
+# path is '/nix/store/lrr4c50fq6758nmq9nm1is9nn3id7h84-master.zip'
+# 02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z
 
 # LOCATE YOUR CUSTOM font loctation
 # nix-build -E '

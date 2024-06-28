@@ -1,0 +1,20 @@
+nix-build -E '
+ with import <nixpkgs> {}; 
+  let 
+    apple-san-francisco-new-york = pkgs.fetchzip {
+      url = "https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip"; 
+      sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z"; 
+      stripRoot = false; 
+    }; 
+  apple-fonts = pkgs.stdenv.mkDerivation {
+    name = "Apple-New-York";
+    src = apple-san-francisco-new-york;
+    buildInputs = [ ];
+      buildCommand = "
+        mkdir -p \$out/share/fonts/apple/
+        cp -R \$src/* \$out/share/fonts
+      "; 
+    }; 
+  in 
+  apple-fonts
+ '

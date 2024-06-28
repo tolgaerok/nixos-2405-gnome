@@ -2,7 +2,7 @@
 # my custom fonts
 
 let
-  # Fetch Apple San Francisco and New York fonts
+  # Fetch Apple San Francisco and New York fonts..
   apple-san-francisco-new-york = pkgs.fetchzip {
     url = "https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip";
     sha256 = "02imcxnzhmpvhchxmgpfx4af806p7kwx306fspk14s9g1zx7af9z";

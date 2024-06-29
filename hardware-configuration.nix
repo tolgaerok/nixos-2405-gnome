@@ -29,7 +29,6 @@ in
         "ahci"            # For SATA devices, likely needed.
         "battery"         # For battery management, likely needed for a laptop.
         "ehci_pci"        # Kernel module for PCIe USB 2.0 controllers.
-        # "i915"            # For Intel integrated graphics, likely needed.
         "nvme"            # For NVMe SSDs, check your hardware.
         "rtsx_pci_sdmmc"  # For Realtek card reader, check your hardware.
         "sd_mod"          # For SCSI disk devices, likely needed.
@@ -37,6 +36,7 @@ in
         "uas"             # Kernel module for USB Attached SCSI.
         "usb_storage"     # For USB storage devices, likely needed.
         "xhci_pci"        # For USB 3.0 controllers, likely needed.
+        # "i915"            # For Intel integrated graphics, likely needed.
       ];
 
     };
@@ -154,17 +154,18 @@ in
     # interfaces.wlo1.useDHCP = lib.mkDefault true;
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   #---------------------------------------------------------------------
   # Hardware Configuration
   #---------------------------------------------------------------------
   hardware = {    
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;      
-    bluetooth.powerOnBoot = false;      # Power management & Analyze power consumption on Intel-based laptops
-    pulseaudio.enable = false; 
-    enableAllFirmware = true;
     # bluetooth.enable = false;
+    bluetooth.powerOnBoot = false;      # Power management & Analyze power consumption on Intel-based laptops
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;      
+    enableAllFirmware = true;
+    pulseaudio.enable = false; 
     usb-modeswitch.enable = true;
 
     sane = {

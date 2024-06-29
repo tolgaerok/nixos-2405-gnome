@@ -60,8 +60,7 @@ in
     ./DE/gnome46.nix
     ./core/boot/efi/efi.nix     
     # ./core/gpu/intel/intel-laptop/generic.nix
-    ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix 
-
+    ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
     ./core/modules
     ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
     ./core/packages

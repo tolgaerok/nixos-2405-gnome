@@ -115,7 +115,7 @@ in
         PLATFORM_PROFILE_ON_AC = "balanced";
 
         # SATA power management
-        AHCI_RUNTIME_PM_ON_AC = "auto";             # Enable runtime power management for SATA disks when on AC power
+        AHCI_RUNTIME_PM_ON_AC = "auto";           # Enable runtime power management for SATA disks when on AC power
         AHCI_RUNTIME_PM_ON_BAT = "auto";          # Enable automatic runtime power management for SATA disks when on battery power
 
         # PCIe runtime power management

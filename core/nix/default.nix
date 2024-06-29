@@ -63,8 +63,8 @@ in
       warn-dirty = false;         # Disable warning for dirty builds (when sources have uncommitted changes)
       tarball-ttl = 300;          # Set the time-to-live (in seconds) for cached tarballs to 300 seconds (5 minutes)
 
-      trusted-substituters = [ "http://cache.nixos.org" ];  # List of trusted substituters, where binaries can be fetched securely
-      substituters = [ "http://cache.nixos.org" ];          # List of substituters, where binaries can be fetched (may include untrusted sources)
+      #trusted-substituters = [ "http://cache.nixos.org" ];  # List of trusted substituters, where binaries can be fetched securely
+      #substituters = [ "http://cache.nixos.org" ];          # List of substituters, where binaries can be fetched (may include untrusted sources)
 
     };
 

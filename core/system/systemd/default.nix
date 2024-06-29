@@ -54,7 +54,11 @@ in
     ];
 
     # Default timeout for stopping services managed by systemd to 10 seconds
-    extraConfig = "DefaultTimeoutStopSec=10s";
+    extraConfig = ''
+      DefaultLimitNOFILE=1048576
+      DefaultTimeoutStopSec=10s
+    '';
+
 
     # When a program crashes, systemd will create a core dump file, typically in the /var/lib/systemd/coredump/ directory.
     coredump.enable = true;
@@ -115,7 +119,7 @@ in
 
     # Prefetch updates, Improves Update Efficiency
     update-prefetch = {
-      enable = true;
+      enable = false;
     };
 
     # Enables Multi-Gen LRU and sets minimum TTL for memory management
@@ -245,13 +249,17 @@ in
     };
   };
 
-  # Ensure the script is executable and run the script as part of the activation
+  #---------------------------------------------
+  # Custom OverView script shown after rebuilds
+  #---------------------------------------------  
   system.activationScripts = {
     customInfoScript = lib.mkAfter ''
       ${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh
     '';
 
-    # Test (create directories)
+    #---------------------------------------------
+    # Create personal directories
+    #---------------------------------------------
     text = ''
       for dir in MUM DAD WORK SNU Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do
         mkdir -p /home/${name}/$dir
@@ -259,7 +267,9 @@ in
       done
     ''; 
 
-    # Create custom auto start files
+    #---------------------------------------------
+    # Create Thank-you
+    #---------------------------------------------
     thank-you = {
       text = ''
         cat << EOF > /home/${name}/THANK-YOU
@@ -279,6 +289,9 @@ in
       '';
     };
 
+    #---------------------------------------------
+    # Create AutoStart shortcuts
+    #---------------------------------------------
     megasync-start = {
       text = ''
         cat << EOF > /home/${name}/.config/autostart/megasync.desktop

@@ -207,7 +207,7 @@ in
         git-up
         gnome.gvfs
         gnome.rygel
-        gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
+        gupnp-tools         # UPNP tools USAGE: gupnp-universal-cp
         kate
         keyutils
         libnotify
@@ -215,6 +215,7 @@ in
         lolcat        
         mesa
         neofetch
+        nix-prefetch-git
         notify
         notify-desktop
         variety

@@ -1,13 +1,13 @@
 { stdenvNoCC, fetchFromGitHub }:
 
 stdenvNoCC.mkDerivation {
-  pname = "apple-fonts";
+  pname = "my-fonts";
   version = "1.0-stable-29-jun-2024";
 
   src = fetchFromGitHub {
     owner = "tolgaerok";
     repo = "apple-fonts";
-    rev = "fd93227bf50a81a025a406952e388348fae707f1"; # Updated commit hash
+    rev = "fd93227bf50a81a025a406952e388348fae707f1";             # Updated commit hash
     hash = "sha256-IBnV/+9QITFSLePuQ/XkFjiGfH5tTnQFSMKvUL8t4Ms="; # Updated sha256 hash
   };
 
@@ -22,3 +22,5 @@ stdenvNoCC.mkDerivation {
     runHook postInstall
   '';
 }
+
+# nix-prefetch-git https://github.com/tolgaerok/apple-fonts

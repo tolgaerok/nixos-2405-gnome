@@ -204,9 +204,9 @@ in
 
     # Disable specific systemd services
     "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
-    "systemd-udev-settle".enable = false;         # Disable the systemd-udev-settle service
-    "getty@tty1".enable = false;                  # Disable the getty@tty1 service
     "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
+    "getty@tty1".enable = false;                  # Disable the getty@tty1 service
+    "systemd-udev-settle".enable = false;         # Disable the systemd-udev-settle service
 
     # Configure the flathub remote
     configure-flathub-repo = {
@@ -258,7 +258,10 @@ in
         chown ${name}:${name} /home/${name}/$dir
       done
     '';    
-
+ "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
+    "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
+    "getty@tty1".enable = false;                  # Disable the getty@tty1 service
+    "systemd-udev-settle".enable = false; 
     # Create custom auto start files
     thank-you = {
       text = ''

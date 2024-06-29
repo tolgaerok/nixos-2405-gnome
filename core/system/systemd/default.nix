@@ -257,11 +257,8 @@ in
         mkdir -p /home/${name}/$dir
         chown ${name}:${name} /home/${name}/$dir
       done
-    '';    
- "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
-    "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
-    "getty@tty1".enable = false;                  # Disable the getty@tty1 service
-    "systemd-udev-settle".enable = false; 
+    ''; 
+
     # Create custom auto start files
     thank-you = {
       text = ''

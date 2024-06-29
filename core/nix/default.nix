@@ -24,7 +24,7 @@ in
     extraOptions = ''
       builders-use-substitutes = true
       experimental-features = nix-command flakes
-      extra-platforms = x86_64-linux i686-linux aarch64-linux riscv64-linux
+      extra-platforms = x86_64-linux i686-linux aarch64-linux
       verbose = true
     '';
 
@@ -34,7 +34,9 @@ in
         "${name}"
       ];
       auto-optimise-store = true;
+      supportedFeatures = [ "big-parallel" ];    # Enable support for big parallel builds
       system-features = [ "i686-linux" "x86_64-linux" "big-parallel" "kvm" ];
+
       experimental-features = [
         "flakes"
         "nix-command"
@@ -45,9 +47,8 @@ in
       sandbox = "relaxed";     # Sandbox mode for running tasks, allowing broader system access for flexibility
 
       # Accelerate package building (optimized for 8GB RAM and dual-core processor with Hyper-Threading)
-      max-jobs = lib.mkDefault 1;                # Set to 4 as the i7-3667U has 2 cores with 4 threads
-      buildCores = lib.mkDefault 1;              # Specify 4 build cores for parallel building
-      supportedFeatures = [ "big-parallel" ];    # Enable support for big parallel builds
+      buildCores = lib.mkDefault 4;              # Specify 4 build cores for parallel building
+      max-jobs = lib.mkDefault 4;                # Set to 4 as the i7-3667U has 2 cores with 4 threads
       speedFactor = 2;                           # Set speed factor to 2 for build performance optimization
 
       trusted-users = [
@@ -58,8 +59,8 @@ in
 
       keep-derivations = true;    # Keep derivations (intermediate build artifacts) after build completion
       keep-outputs = true;        # Keep build outputs (resulting artifacts) after build completion
-      warn-dirty = false;         # Disable warning for dirty builds (when sources have uncommitted changes)
       tarball-ttl = 300;          # Set the time-to-live (in seconds) for cached tarballs to 300 seconds (5 minutes)
+      warn-dirty = false;         # Disable warning for dirty builds (when sources have uncommitted changes)
 
     };
 
@@ -69,8 +70,8 @@ in
     gc = {
       automatic = true;                  # Enable automatic execution of the task
       dates = "weekly";                  # Schedule the task to run weekly
-      randomizedDelaySec = "14m";        # Introduce a randomized delay of up to 14 minutes before executing the task
       options = "--delete-older-than 10d";  # Specify options for the task: delete files older than 10 days
+      randomizedDelaySec = "14m";        # Introduce a randomized delay of up to 14 minutes before executing the task
     };
   };
 }

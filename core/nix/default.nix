@@ -5,32 +5,29 @@
   ...
 }:
 with lib;
-
 let
-
   name = "tolga";
 in
 {
-
-  imports = [ ./nixpkgs-config ];
-
-  #---------------------------------------------------------------------  
-  # Nix-specific settings and garbage collection options - 
-  # Mostly research from NixOS wiki
-  #---------------------------------------------------------------------  
+  imports = [ 
+    ./nixpkgs-config 
+  ];
 
   #---------------------------------------------------------------------
   # System optimisations
   #---------------------------------------------------------------------
-  nix = {
+  nix = {    
     package = pkgs.nixVersions.latest;
     distributedBuilds = true;
-    # optional, useful when the builder has a faster internet connection than yours
+
+    # optional, useful when the builder has a faster internet connection 
     extraOptions = ''
       builders-use-substitutes = true
       experimental-features = nix-command flakes
       extra-platforms = x86_64-linux i686-linux aarch64-linux riscv64-linux
+      verbose = true
     '';
+
     settings = {
       allowed-users = [
         "@wheel"
@@ -43,14 +40,15 @@ in
         "nix-command"
         "repl-flake"
       ];
+
       cores = 0;               # Number of CPU cores allocated for the task (0 means all available cores)
       sandbox = "relaxed";     # Sandbox mode for running tasks, allowing broader system access for flexibility
 
       # Accelerate package building (optimized for 8GB RAM and dual-core processor with Hyper-Threading)
-      max-jobs = lib.mkDefault 3;                # Set to 4 as the i7-3667U has 2 cores with 4 threads
-      buildCores = lib.mkDefault 3;              # Specify 4 build cores for parallel building
+      max-jobs = lib.mkDefault 1;                # Set to 4 as the i7-3667U has 2 cores with 4 threads
+      buildCores = lib.mkDefault 1;              # Specify 4 build cores for parallel building
       supportedFeatures = [ "big-parallel" ];    # Enable support for big parallel builds
-      speedFactor = 3;                           # Set speed factor to 2 for build performance optimization
+      speedFactor = 2;                           # Set speed factor to 2 for build performance optimization
 
       trusted-users = [
         "${name}"
@@ -62,9 +60,6 @@ in
       keep-outputs = true;        # Keep build outputs (resulting artifacts) after build completion
       warn-dirty = false;         # Disable warning for dirty builds (when sources have uncommitted changes)
       tarball-ttl = 300;          # Set the time-to-live (in seconds) for cached tarballs to 300 seconds (5 minutes)
-
-      #trusted-substituters = [ "http://cache.nixos.org" ];  # List of trusted substituters, where binaries can be fetched securely
-      #substituters = [ "http://cache.nixos.org" ];          # List of substituters, where binaries can be fetched (may include untrusted sources)
 
     };
 

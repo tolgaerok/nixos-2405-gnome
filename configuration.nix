@@ -57,6 +57,8 @@ in
     # ./core/modules/system-tweaks/kernel-tweaks/8GB-SYSTEM/8GB-SYSTEM.nix     
     # ./user/tolga/home-network/mnt-samba.nix 
 
+    ./cachix.nix
+    
     ./DE/gnome46.nix
     ./core/boot/efi/efi.nix     
     # ./core/gpu/intel/intel-laptop/generic.nix

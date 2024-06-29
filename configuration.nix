@@ -191,15 +191,18 @@ in
 
       packages = with pkgs; [
         # Internet related
+        # brave
         firefox
+        google-chrome
 
         # Personal
-        bcachefs-tools
-        keyutils
         acpi
+        bcachefs-tools
         clementine
+        duf
         ethtool
         flameshot
+        fortune
         gimp-with-plugins
         git
         git-up
@@ -207,9 +210,10 @@ in
         gnome.rygel
         gupnp-tools   # UPNP tools USAGE: gupnp-universal-cp
         kate
+        keyutils
         libnotify
         libwps
-        lolcat
+        lolcat        
         mesa
         neofetch
         notify
@@ -220,19 +224,19 @@ in
         # Gnome related / extensions
         # gnomeExtensions.emoji-copy
         # unstable.gnomeExtensions.workspace-switcher-manager
-        gnome.gnome-software
         gnome-extension-manager
         gnome-usage
         gnome.dconf-editor
         gnome.gnome-disk-utility
+        gnome.gnome-software
         gnome.gnome-tweaks
+        gnome.simple-scan
         gnomeExtensions.appindicator
         gnomeExtensions.dash-to-dock
         gnomeExtensions.just-perfection
         gnomeExtensions.logo-menu
         gnomeExtensions.wifi-qrcode
         gnomeExtensions.wireless-hid
-        gnome.simple-scan
 
         # Development 
         direnv
@@ -245,12 +249,12 @@ in
         
         # Extra laptop packages    
         acpi
-        sutils
         cpufrequtils
         cpupower-gui
         ethtool
         powerstat
         powertop
+        sutils
         tlp
       ];    
 

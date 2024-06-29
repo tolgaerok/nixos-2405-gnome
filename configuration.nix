@@ -51,17 +51,14 @@ in
 
 {
 
-  imports = [
-
+  imports = [    
     # ./DE/kde.nix    
+    # ./core/gpu/intel/intel-laptop/generic.nix
     # ./core/modules/system-tweaks/kernel-tweaks/8GB-SYSTEM/8GB-SYSTEM.nix     
     # ./user/tolga/home-network/mnt-samba.nix 
-
-    ./cachix.nix
-    
     ./DE/gnome46.nix
+    ./cachix.nix
     ./core/boot/efi/efi.nix     
-    # ./core/gpu/intel/intel-laptop/generic.nix
     ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
     ./core/modules
     ./core/modules/system-tweaks/storage-tweaks/SSD/SSD-tweak.nix
@@ -222,6 +219,7 @@ in
         notify-desktop
         variety
         wpsoffice
+        zstd
 
         # Gnome related / extensions
         # gnomeExtensions.emoji-copy

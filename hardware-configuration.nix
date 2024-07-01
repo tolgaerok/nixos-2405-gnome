@@ -41,7 +41,7 @@ in
 
     };
 
-    kernelParams = [  ];
+    kernelParams = [ "mem_sleep_default=deep" ];
 
     kernelModules = [
       "i965"                      # Kernel module for Intel integrated graphics.

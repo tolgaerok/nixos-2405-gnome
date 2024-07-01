@@ -20,7 +20,7 @@ in
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-
+    
       displayManager.gdm = {
         enable = true;
         wayland = true; # Enable Wayland for GDM
@@ -30,6 +30,7 @@ in
           };
         };
       };
+      videoDrivers = [ "modesetting" ];
       desktopManager.gnome.enable = true;
       xkb.layout = "au";
       xkb.variant = "";

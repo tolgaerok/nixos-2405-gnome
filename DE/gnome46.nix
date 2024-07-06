@@ -57,7 +57,7 @@ in
       enable = true;
     };
   };
-  # Enable and configure xdg portals
+  # Enable and configure xdg portals.
   xdg.portal = {
     enable = true;
     wlr.enable = true;

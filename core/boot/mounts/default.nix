@@ -37,9 +37,13 @@ in
   systemd.services.addBookmark = {
     description = "Add SMB bookmark to GTK 3.0 bookmarks";  # Description of the systemd service
 
-    # Overwrite the bookmarks file with the new bookmark entry (>) do not append (>>)
+    # Add the bookmark entry only if it doesn't already exist
     script = ''
-      echo "${protocol}${device} ${description}" > ${config.users.users.${name}.home}/.config/gtk-3.0/bookmarks
+      bookmark="${protocol}${device} ${description}"
+      bookmark_file=${config.users.users.${name}.home}/.config/gtk-3.0/bookmarks
+      if ! grep -Fxq "$bookmark" "$bookmark_file"; then
+        echo "$bookmark" >> "$bookmark_file"
+      fi
     '';
 
     wantedBy = [ "multi-user.target" ];   # Target to start the service

@@ -15,7 +15,9 @@ with lib;
   # Install necessary packages
   #---------------------------------------------------------------------
   environment.systemPackages = with pkgs; [
+    # virtualbox
     OVMFFull
+    bridge-utils
     gnome.adwaita-icon-theme
     kvmtool
     libvirt
@@ -25,9 +27,10 @@ with lib;
     spice-protocol
     spice-vdagent
     swtpm
+    virglrenderer
     virt-manager
     virt-viewer
-    # virtualbox
+    virtiofsd
     win-spice
     win-virtio
   ];
@@ -37,8 +40,9 @@ with lib;
   #---------------------------------------------------------------------
   virtualisation = {
     libvirtd = {
-      enable = false;
+      enable = true;
       onBoot = "ignore";
+      onShutdown = "shutdown";
 
       qemu = {
         swtpm.enable = true;

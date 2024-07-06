@@ -63,9 +63,15 @@ in
     wlr.enable = true;
     xdgOpenUsePortal = true;
 
-    extraPortals = with pkgs; [
-     # xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+    extraPortals = [
+      # pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal
     ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-gtk      
+      pkgs.xdg-desktop-portal
+    ];
+
+    
   };
 }

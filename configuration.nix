@@ -42,6 +42,8 @@ let
   latest-std-kernel = pkgs.linuxPackages_latest;
   latest-xanmod-kernel = pkgs.linuxPackages_xanmod_latest;
   zen-std-kernel = pkgs.linuxPackages_zen;
+
+  inherit (import ./core/varibles) gitEmail gitUsername;
   
   country = "Australia/Perth";
   hostname = "Folio-Nixos";
@@ -145,6 +147,8 @@ in
   # User account settings
   #---------------------------------------------------------------------
   users = {
+    mutableUsers = true;
+    
     groups.${name} = {
       members = [ ];
     };
@@ -155,8 +159,9 @@ in
     };  
 
     users."${name}" = {
+      homeMode = "755";
       isNormalUser = true;
-      description = "${name}";
+      description = "${name}";      
       extraGroups = [
         "${name}"
         "adbusers"
@@ -186,6 +191,8 @@ in
         "wheel" # Enable ‘sudo’ for the user.
         "code"
       ];
+      shell = pkgs.bash;
+      ignoreShellProgramCheck = true;
 
       packages = with pkgs; [
         # Internet related

@@ -71,7 +71,7 @@ in
       # Define resource limits and management settings for systemd services
       MemoryHigh = "2G";                      # Set the high memory limit to 2GB
       MemoryMax = "3G";                       # Set the maximum memory limit to 3GB
-      CPUQuota = "80%";                       # Limit the CPU usage to 50%
+      CPUQuota = "95%";                       # Limit the CPU usage to 50%
       ManagedOOMMemoryPressure = "kill";      # Configure OOM management to kill the service under high memory pressure
       ManagedOOMMemoryPressureLimit = "95%";  # Trigger OOM management when memory pressure reaches 95%
     };
@@ -96,26 +96,6 @@ in
     polkit.restartIfChanged = false;
     systemd-logind.restartIfChanged = false;
     wpa_supplicant.restartIfChanged = false;
-
-    # lock-before-sleeping = {
-    #  restartIfChanged = false;
-    #  unitConfig = {
-    #    Description = "Helper service to bind locker to sleep.target";
-    #  };
-
-    #  serviceConfig = {
-    #    ExecStart = "${pkgs.slock}/bin/slock";
-    #    Type = "simple";
-    #  };
-
-    # before = [ "pre-sleep.service" ];
-    # wantedBy = [ "pre-sleep.service" ];
-
-    #  environment = {
-    #    DISPLAY = ":0";
-    #    XAUTHORITY = "/home/${username}/.Xauthority";
-    #  };
-    # };
 
     # Prefetch updates, Improves Update Efficiency
     update-prefetch = {
@@ -175,51 +155,22 @@ in
         ExecStart = "${pkgs.bash}/bin/bash -c 'if id -u ${name} >/dev/null 2>&1 && id -g ${name} >/dev/null 2>&1; then mkdir -p /Universal && chown ${name}:${name} /Universal; fi'";
         RemainAfterExit = true;
       };
-    };
-
-    # Custom I/O scheduler
-    # "io-scheduler" = {
-    #  description = "Set I/O Scheduler on boot - Tolga Erok";
-    #  wantedBy = [ "multi-user.target" ];
-    #  serviceConfig = {
-    #    Type = "oneshot";
-    #    ExecStart = "${pkgs.bash}/bin/bash -c 'echo -e \"Configuring I/O Scheduler to: \"; echo \"none\" | ${pkgs.coreutils}/bin/tee /sys/block/sda/queue/scheduler; printf \"I/O Scheduler has been set to ==>  \"; cat /sys/block/sda/queue/scheduler; echo \"\"'";
-    #  };
-    #  enable = true;
-    # };
-
-    # Create missing home directories and set ownership
-    # check-create-user-home-dirs = {
-    #  description = "Ensure user home directories are created and owned by the user";
-    #  after = [ "network.target" ];
-    #  wantedBy = [ "default.target" ];
-    #  serviceConfig = {
-    #    Type = "oneshot";
-    #    ExecStart = ''
-    #      ${pkgs.bash}/bin/bash -c 'if id -u ${name} >/dev/null 2>&1 && id -g ${name} >/dev/null 2>&1; then \
-    #        for dir in Documents Downloads Music Pictures Videos MyGit DLNA Applications Universal .icons .ssh; do \
-    #          mkdir -p /home/${name}/$dir && chown ${name}:${name} /home/${name}/$dir; \
-    #        done; \
-    #      fi'
-    #    '';
-    #  };
-    #  enable = true;
-    # };
+    };    
 
     # Disable specific systemd services
     "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
     "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
     "getty@tty1".enable = false;                  # Disable the getty@tty1 service
-    "systemd-udev-settle".enable = true;         # Disable the systemd-udev-settle service
+    "systemd-udev-settle".enable = true;          # Disable the systemd-udev-settle service
 
     # Configure the flathub remote
     configure-flathub-repo = {
-      enable = true;
-      after = [
-        "multi-user.target"
-        "network.target"
-      ];
-      wantedBy = [ "multi-user.target" ];
+      # enable = true;
+      # after = [
+       # "multi-user.target"
+       # "network.target"
+      #];
+      # wantedBy = [ "multi-user.target" ];
       path = [ pkgs.flatpak ];
       script = ''
         if flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; then
@@ -229,16 +180,7 @@ in
           exit 1  # Exit with an error code to indicate failure
         fi
       '';
-    };
-
-    # customInfoScript = {
-    #  description = "Custom Info Script";
-    #  after = [ "multi-user.target" ];
-    #  wantedBy = [ "multi-user.target" ];
-    #  serviceConfig = {
-    #    ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/core/system/systemd/custom-info-script.sh";
-    #  };
-    # };
+    };    
 
     # Modify autoconnect priority of the connection to tolgas home network
     modify-autoconnect-priority = {

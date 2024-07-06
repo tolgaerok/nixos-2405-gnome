@@ -41,7 +41,28 @@ in
 
     };
 
-    kernelParams = [ "mem_sleep_default=deep" ];
+    kernelParams = [ 
+      "mem_sleep_default=deep" 
+      "elevator=kyber" # Change IO scheduler to Kyber
+      "io_delay=none" # Disable I/O delay accounting
+      "iomem=relaxed" # Allow more relaxed I/O memory access
+      "iommu=pt"
+      "irqaffinity=0-3" # Set IRQ affinity to CPUs 0-3 (Intel Core i7-3667U specific)
+      "loglevel=3" # Set kernel log level to 3 (default)
+      "mitigations=off" # Disable CPU mitigations for security vulnerabilities
+      "noirqdebug" # Disable IRQ debugging
+      "pti=off" # Disable Kernel Page Table Isolation (PTI)
+      "quiet" # Suppress verbose kernel messages during boot
+      "rd.systemd.show_status=false" # Disable systemd boot status display
+      "rd.udev.log_level=3" # Set udev logging level to 3
+      "rootdelay=0" # No delay when mounting root filesystem
+      "splash" # Enable graphical boot splash screen
+      "threadirqs" # Enable threaded interrupt handling
+      "udev.log_level=3" # Set udev logging level to 3
+      "vt.global_cursor_default=0" # Disable blinking cursor in text mode
+      # "systemd.show_status=auto"   # Commented out, not used in this configuration
+    
+    ];
 
     kernelModules = [
       "i965"                      # Kernel module for Intel integrated graphics.
@@ -75,7 +96,7 @@ in
       "vm.max_map_count" = 1000000;
       "vm.swappiness" = 10;                           # Reduces the tendency of the kernel to swap out inactive memory pages.
       "vm.vfs_cache_pressure" = 50;                   # Controls the tendency of the kernel to reclaim the memory which is used for caching of directory and inode objects.
-      # "net.core.default_qdisc" = "cake";            # Sets the default queuing discipline (qdisc) for network interfaces to CAKE for improved network fairness and latency.
+      "net.core.default_qdisc" = "cake";            # Sets the default queuing discipline (qdisc) for network interfaces to CAKE for improved network fairness and latency.
       # "vm.page-cluster" = 1;                        # Controls the number of pages read in a single attempt, impacting swap read-ahead. 
 
     };
@@ -106,27 +127,6 @@ in
       fsType = "vfat";
       options = [ "nofail" ];
     };
-
-    # Add a file system entry for the "DLNA" directory bind mount
-    "/mnt/DLNA" = {
-      device = "/home/${name}/DLNA";
-      fsType = "none";
-      options = [
-        "bind"
-        "rw"
-      ]; # Read-write access
-    };
-
-    # Add a file system entry for the "MyGit" directory bind mount
-    "/mnt/MyGit" = {
-      device = "/home/${name}/MyGit";
-      fsType = "none";
-      options = [
-        "bind"
-        "rw"
-      ]; # Read-write access
-    };
-
   };
 
   powerManagement = {
@@ -167,6 +167,8 @@ in
     enableAllFirmware = true;
     pulseaudio.enable = false; 
     usb-modeswitch.enable = true;
+    logitech.wireless.enable = true;
+    logitech.wireless.enableGraphical = true;
 
     sane = {
       enable = true;                    #   Scanner and printing drivers

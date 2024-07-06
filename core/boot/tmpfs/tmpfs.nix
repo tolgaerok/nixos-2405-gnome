@@ -15,7 +15,7 @@ with lib;
   boot.tmp.useTmpfs = true;
 
   # NEW: set to auto to dynamically grow    OLD:Allocate 35% of RAM for tmpfs. You can adjust this percentage to your needs.
-  boot.tmp.tmpfsSize = "35%";
+  boot.tmp.tmpfsSize = "30%";
 
   fileSystems."/run" = {
     device = "tmpfs";

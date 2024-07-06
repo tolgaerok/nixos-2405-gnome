@@ -41,10 +41,10 @@ in
     };
     
     # Enable and configure NextDNS service
-    nextdns = {
-      enable = true;
-      arguments = ["-config" "nixfolio-48b246.dns.nextdns.io"];
-    };    
+    #nextdns = {
+    #  enable = true;
+    #  arguments = ["-config" "nixfolio-48b246.dns.nextdns.io"];
+    #};    
 
     # Timesyncd: Synchronizes system time with network time servers
     timesyncd.enable = true;

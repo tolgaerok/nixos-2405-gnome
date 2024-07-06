@@ -19,11 +19,11 @@
 
       # NextDns config
       appendNameservers = [
-        "DNS=45.90.28.0#48b246.dns.nextdns.io"
-        "DNS=2a07:a8c0::#48b246.dns.nextdns.io"
-        "DNS=45.90.30.0#48b246.dns.nextdns.io"
-        "DNS=2a07:a8c1::#48b246.dns.nextdns.io"
-        "DNSOverTLS=yes"
+        #"DNS=45.90.28.0#48b246.dns.nextdns.io"
+        #"DNS=2a07:a8c0::#48b246.dns.nextdns.io"
+        #"DNS=45.90.30.0#48b246.dns.nextdns.io"
+        #"DNS=2a07:a8c1::#48b246.dns.nextdns.io"
+        #"DNSOverTLS=yes"
       ];
       connectionConfig = {
         "ethernet.mtu" = 1462;

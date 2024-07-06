@@ -57,6 +57,7 @@ in
       "elevator=kyber" # Change IO scheduler to Kyber
       "io_delay=none" # Disable I/O delay accounting
       "iomem=relaxed" # Allow more relaxed I/O memory access
+      "iommu=pt"
       "irqaffinity=0-3" # Set IRQ affinity to CPUs 0-3 (Intel Core i7-3667U specific)
       "loglevel=3" # Set kernel log level to 3 (default)
       "mitigations=off" # Disable CPU mitigations for security vulnerabilities

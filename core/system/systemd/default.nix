@@ -71,7 +71,7 @@ in
       # Define resource limits and management settings for systemd services
       MemoryHigh = "2G";                      # Set the high memory limit to 2GB
       MemoryMax = "3G";                       # Set the maximum memory limit to 3GB
-      CPUQuota = "50%";                       # Limit the CPU usage to 50%
+      CPUQuota = "80%";                       # Limit the CPU usage to 50%
       ManagedOOMMemoryPressure = "kill";      # Configure OOM management to kill the service under high memory pressure
       ManagedOOMMemoryPressureLimit = "95%";  # Trigger OOM management when memory pressure reaches 95%
     };
@@ -119,7 +119,7 @@ in
 
     # Prefetch updates, Improves Update Efficiency
     update-prefetch = {
-      enable = false;
+      enable = true;
     };
 
     # Enables Multi-Gen LRU and sets minimum TTL for memory management
@@ -210,7 +210,7 @@ in
     "NetworkManager-wait-online".enable = false;  # Disable the NetworkManager-wait-online service
     "autovt@tty1".enable = false;                 # Disable the autovt@tty1 service
     "getty@tty1".enable = false;                  # Disable the getty@tty1 service
-    "systemd-udev-settle".enable = false;         # Disable the systemd-udev-settle service
+    "systemd-udev-settle".enable = true;         # Disable the systemd-udev-settle service
 
     # Configure the flathub remote
     configure-flathub-repo = {

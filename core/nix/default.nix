@@ -57,7 +57,7 @@ in
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       ];
 
-      cores = 0;               # Number of CPU cores allocated for the task (0 means all available cores)
+      cores = 4;               # Number of CPU cores allocated for the task (0 means all available cores)
       sandbox = "relaxed";     # Sandbox mode for running tasks, allowing broader system access for flexibility
 
       # Accelerate package building (optimized for 8GB RAM and dual-core processor with Hyper-Threading)

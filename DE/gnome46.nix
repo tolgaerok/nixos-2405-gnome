@@ -30,7 +30,7 @@ in
           };
         };
       };
-      videoDrivers = [ "modesetting" ];
+      videoDrivers = [ "i965" ];
       desktopManager.gnome.enable = true;
       xkb.layout = "au";
       xkb.variant = "";

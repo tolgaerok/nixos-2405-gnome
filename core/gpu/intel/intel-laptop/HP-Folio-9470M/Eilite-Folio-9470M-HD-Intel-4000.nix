@@ -13,7 +13,7 @@ let
 in
 
 #---------------------------------------------------------------------
-# Works Well on various Intel Mesa HD GPUs.
+# Works Well on various Intel Mesa HD GPUs..
 #---------------------------------------------------------------------
 
 {  

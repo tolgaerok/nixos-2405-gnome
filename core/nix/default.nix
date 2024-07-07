@@ -87,5 +87,18 @@ in
       options = "--delete-older-than 10d";  # Specify options for the task: delete files older than 10 days
       randomizedDelaySec = "14m";        # Introduce a randomized delay of up to 14 minutes before executing the task
     };
+
+    # Opinionated: enable channels
+    channel.enable = true;
   };
+
+  # This will additionally add your inputs to the system's legacy channels
+  # Making legacy nix commands consistent as well, awesome!
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 }

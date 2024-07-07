@@ -89,12 +89,14 @@ in
     # XDG_SESSION_TYPE = "wayland";         # Defines the session type as Wayland.
     # __GLX_VENDOR_LIBRARY_NAME = "mesa";         # Specifies the GLX vendor library to use, ensuring Mesa's library is used
     CLUTTER_BACKEND = "wayland";                # Specifies Wayland as the backend for Clutter.
-    LIBVA_DRIVER_NAME = "i965";                 # Force Intel i965 driver
+    LIBVA_DRIVER_NAME = "intel";                 # Force Intel i965 driver
     MOZ_ENABLE_WAYLAND = "1";                   # Enables Wayland support in Mozilla applications (e.g., Firefox).
     NIXOS_OZONE_WL = "1";                       # Enables the Ozone Wayland backend for Chromium-based browsers.
     NIXPKGS_ALLOW_UNFREE = "1";                 # Allows the installation of packages with unfree licenses in Nixpkgs.
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";  # Disables window decorations in Qt applications when using Wayland.
     SDL_VIDEODRIVER = "wayland";                # Sets the video driver for SDL applications to Wayland.
+    TOLGAOS_VERSION = "2.2";
+    TOLGAOS = "true";
   };
 
   # -----------------------------------------------
@@ -201,6 +203,7 @@ in
         google-chrome
 
         # Personal
+
         acpi
         bcachefs-tools
         clementine
@@ -211,6 +214,7 @@ in
         gimp-with-plugins
         git
         git-up
+        gnome.file-roller
         gnome.gvfs
         gnome.rygel
         gupnp-tools         # UPNP tools USAGE: gupnp-universal-cp
@@ -218,16 +222,19 @@ in
         keyutils
         libnotify
         libwps
+        lm_sensors
         lolcat        
         mesa
+        mpv
         neofetch
         nix-prefetch-git
         notify
         notify-desktop
+        unrar
+        unzip
         variety
         wpsoffice
         zstd
-
         # Gnome related / extensions
         # gnomeExtensions.emoji-copy
         # unstable.gnomeExtensions.workspace-switcher-manager

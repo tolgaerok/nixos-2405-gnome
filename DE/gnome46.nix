@@ -17,10 +17,20 @@ in
 
   # Enable the X11 windowing system and keymap.
   services = {
+    fstrim.enable = true;
+    gvfs.enable = true;
+    openssh.enable = true;
+    ipp-usb.enable = true;
+
+    smartd = {
+      enable = true;
+      autodetect = true;
+    };
+
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-    
+
       displayManager.gdm = {
         enable = true;
         wayland = true; # Enable Wayland for GDM
@@ -30,7 +40,7 @@ in
           };
         };
       };
-      videoDrivers = [ "i965" ];
+      videoDrivers = [ "intel" ];
       desktopManager.gnome.enable = true;
       xkb.layout = "au";
       xkb.variant = "";
@@ -68,10 +78,9 @@ in
       pkgs.xdg-desktop-portal
     ];
     configPackages = [
-      pkgs.xdg-desktop-portal-gtk      
+      pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
     ];
 
-    
   };
 }

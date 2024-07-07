@@ -40,7 +40,7 @@ in
       upower.enable = true;                 # Enable UPower, a daemon for power management and battery monitoring
 
     xserver = {
-      videoDrivers = [ "i965" ];            # Use the modesetting driver for X server, which is often used with Intel GPUs
+      videoDrivers = [ "intel" ];            # Use the modesetting driver for X server, which is often used with Intel GPUs
       exportConfiguration = true;           # Export the X server configuration, making it available to other components
   };
 };
@@ -71,7 +71,7 @@ in
 };
 
     # environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
-    environment.sessionVariables = { LIBVA_DRIVER_NAME = "i965"; }; # Force Intel i965 driver
+    environment.sessionVariables = { LIBVA_DRIVER_NAME = "intel"; }; # Force Intel i965 driver
 
     #---------------------------------------------------------------------
     # Power management & Analyze power consumption on Intel-based laptops

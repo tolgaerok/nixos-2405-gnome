@@ -16,6 +16,7 @@
     ./iphone/iphone.nix
     ./my-fonts
     ./openRGB
+    ./security
     ./smart-drv-mon
     ./vm
   ];

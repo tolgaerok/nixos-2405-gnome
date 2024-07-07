@@ -34,11 +34,13 @@ in
 
     samba = {
       enable = true;
-      package = pkgs.samba4Full;
       openFirewall = true;
+      package = pkgs.samba4Full;
       securityType = "user";
       extraConfig = ''
+        # General Settings
         workgroup = WORKGROUP
+        bind interfaces only = yes
         dns proxy = no
         name resolve order = lmhosts wins bcast host
         netbios name = ${config.networking.hostName}
@@ -46,47 +48,57 @@ in
         security = user
         server role = standalone
         server string = Samba server (version: %v, protocol: %R)
-        bind interfaces only = yes
-        # hosts allow = 127.0.0. 10. 172.16.0.0/255.240.0.0 192.168. 169.254. fd00::/8 fe80::/10 localhost
-        hosts allow = 127.0.0.1 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 169.254.0.0/16 ::1 fd00::/8 fe80::/10
-        hosts deny = allow
+
+        # Access Control        
         deadtime = 30
         guest account = nobody
+        hosts allow = 127.0.0.1 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 169.254.0.0/16 ::1 fd00::/8 fe80::/10
+        hosts deny = allow
         inherit permissions = yes
         map to guest = bad user
         pam password change = yes
-        use sendfile = yes
-        socket options = SO_KEEPALIVE SO_REUSEADDR SO_BROADCAST TCP_NODELAY IPTOS_LOWDELAY IPTOS_THROUGHPUT SO_SNDBUF=262144 SO_RCVBUF=131072
-        wins support = true
-        read raw = yes
-        write raw = yes
-        max xmit = 65535
+
+        # Performance Tuning
         large readwrite = yes
-        client min protocol = COREPLUS
-        server min protocol = COREPLUS
-        aio read size = 1
-        aio write size = 1
-        vfs objects = acl_xattr catia streams_xattr
-        vfs objects = catia streams_xattr
+        max xmit = 65535
+        read raw = yes
+        socket options = SO_KEEPALIVE SO_REUSEADDR SO_BROADCAST TCP_NODELAY IPTOS_LOWDELAY IPTOS_THROUGHPUT SO_SNDBUF=262144 SO_RCVBUF=131072
+        use sendfile = yes
+        wins support = true
+        write raw = yes
+
+        # Protocol Settings
         client ipc max protocol = SMB3
         client ipc min protocol = COREPLUS
         client max protocol = SMB3
+        client min protocol = COREPLUS
         server max protocol = SMB3
-        log file = /var/log/samba/log.%m
-        max log size = 500
-        log level = 1 auth:3 smb:3 smb2:3
+        server min protocol = COREPLUS
+        vfs objects = acl_xattr catia streams_xattr
+        vfs objects = catia streams_xattr
+
+        # Larger Asynchronous I/O sizes
+        aio read size = 256
+        aio write size = 256
+
+        # Logging
         ea support = yes
-        fruit:metadata = stream
-        fruit:model = Macmini
-        fruit:veto_appledouble = no
-        fruit:posix_rename = yes
-        fruit:zero_file_id = yes
-        fruit:wipe_intentionally_left_blank_rfork = yes
-        fruit:delete_empty_adfiles = yes
-        printcap name = cups
-        load printers = yes
+        log file = /var/log/samba/log.%m
+        log level = 1 auth:3 smb:3 smb2:3
+        max log size = 500
+
+        # Extended Attributes and Apple-specific Settings
         cups options = raw
         disable spoolss = yes
+        fruit:delete_empty_adfiles = yes
+        fruit:metadata = stream
+        fruit:model = Macmini
+        fruit:posix_rename = yes
+        fruit:veto_appledouble = no
+        fruit:wipe_intentionally_left_blank_rfork = yes
+        fruit:zero_file_id = yes
+        load printers = yes
+        printcap name = cups
       '';
 
       shares = {

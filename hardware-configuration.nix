@@ -60,6 +60,10 @@ in
       "threadirqs" # Enable threaded interrupt handling
       "udev.log_level=3" # Set udev logging level to 3
       "vt.global_cursor_default=0" # Disable blinking cursor in text mode
+        "zswap.enabled=1"
+        "pcie_aspm=off"
+         "nmi_watchdog=0"
+         "video.allow_duplicates=1"  
       # "systemd.show_status=auto"   # Commented out, not used in this configuration
     
     ];
@@ -146,7 +150,15 @@ in
     '';
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/909cd58a-d4f1-422a-a054-f8e096efdd23"; } ];
+  swapDevices = [
+  { device = "/dev/disk/by-uuid/909cd58a-d4f1-422a-a054-f8e096efdd23"; }
+  {
+    device = "/var/lib/swapfile";
+    size = (1024 * 8) + (1024 * 2); # 8GB + 2GB
+    priority = 10;
+  }
+];
+
 
   networking = {
     useDHCP = lib.mkDefault true;
@@ -176,4 +188,8 @@ in
     };
      
   };
+
+  # Earlyoom killer
+  systemd.oomd.enable = false;
+  services.earlyoom.enable = true;
 }

@@ -66,23 +66,23 @@ in
     # If a kernel-level OOM event does occur anyway,
     # strongly prefer killing nix-daemon child processes
     # Define resource limits and OOM handling for the nix-daemon process group
-    slices."nix-daemon".sliceConfig = {
+    #slices."nix-daemon".sliceConfig = {
 
       # Define resource limits and management settings for systemd services
-      MemoryHigh = "2G";                      # Set the high memory limit to 2GB
-      MemoryMax = "3G";                       # Set the maximum memory limit to 3GB
-      CPUQuota = "95%";                       # Limit the CPU usage to 50%
-      ManagedOOMMemoryPressure = "kill";      # Configure OOM management to kill the service under high memory pressure
-      ManagedOOMMemoryPressureLimit = "95%";  # Trigger OOM management when memory pressure reaches 95%
-    };
+     # MemoryHigh = "2G";                      # Set the high memory limit to 2GB
+     # MemoryMax = "3G";                       # Set the maximum memory limit to 3GB
+     # CPUQuota = "95%";                       # Limit the CPU usage to 50%
+     # ManagedOOMMemoryPressure = "kill";      # Configure OOM management to kill the service under high memory pressure
+     # ManagedOOMMemoryPressureLimit = "95%";  # Trigger OOM management when memory pressure reaches 95%
+    #};
 
     # Associate nix-daemon systemd service with resource constraints and OOM settings
-    services."nix-daemon".serviceConfig = {
+    #services."nix-daemon".serviceConfig = {
 
       # Define slice and OOM score adjustment for systemd services
-      Slice = "nix-daemon.slice"; # Assign the service to the nix-daemon.slice
-      OOMScoreAdjust = 1000;      # Set the OOM (Out of Memory) score adjustment to 1000
-    };
+     # Slice = "nix-daemon.slice"; # Assign the service to the nix-daemon.slice
+     # OOMScoreAdjust = 1000;      # Set the OOM (Out of Memory) score adjustment to 1000
+    #};
   };
 
   systemd.services = {

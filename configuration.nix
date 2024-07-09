@@ -39,6 +39,18 @@
 with lib;
 
 let
+# Determine if the system has an NVIDIA or Intel GPU
+isNvidiaSystem = builtins.pathExists "/proc/driver/nvidia/version";
+isIntelSystem = builtins.pathExists "/sys/bus/pci/devices/0000:00:02.0/vendor";
+
+# Choose GPU configuration
+gpuConfig = if isIntelSystem then  
+    ./core/gpu/intel/intel-laptop/HP-Folio-9470M/Eilite-Folio-9470M-HD-Intel-4000.nix
+else if isNvidiaSystem then
+    ./core/gpu/nvidia/nvidia-stable-opengl.nix
+else
+    ./core/gpu/error.nix;
+
   latest-std-kernel = pkgs.linuxPackages_latest;
   latest-xanmod-kernel = pkgs.linuxPackages_xanmod_latest;
   zen-std-kernel = pkgs.linuxPackages_zen;
@@ -58,6 +70,7 @@ in
     # ./core/gpu/intel/intel-laptop/generic.nix
     # ./core/modules/system-tweaks/kernel-tweaks/8GB-SYSTEM/8GB-SYSTEM.nix     
     # ./user/tolga/home-network/mnt-samba.nix 
+    gpuConfig
     ./DE/gnome46.nix
     ./cachix.nix
     ./core/boot/efi/efi.nix     
